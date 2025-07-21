@@ -7,7 +7,6 @@ const path = require('path');
 
 const app = express();
 
-const PORT = 3000;
 
 // ✅ Move app.use(cors()) here, before any routes or other middleware
 app.use(cors());
@@ -19,8 +18,9 @@ app.get('/', (req, res) => {
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Servidor escuchando en http://localhost:${PORT}`);
+  console.log(`Servidor escuchando en el puerto ${PORT}`);
 });
 
 app.get('/blog', (req, res) => {
