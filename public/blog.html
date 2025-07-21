@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="blog.css">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Inter&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="blog.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Inter&display=swap" rel="stylesheet">
+    <!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+</head>
+
+<body>
+
+<div id="app">
+
+  <!-- estas son todas las secciones que se ven en la pagina pricipal 
+   NOTA : se crea por separado igual pero en vuelto en un mismo div para que todas se vean en el inicio -->
+  <div v-if="seccion === 'inicio'">
+    
+    <header class="menu">
+      <h1 class="menu-little">Mi Diario</h1>
+      <div>
+        <a href="#proposito" @click.prevent="cambiarSeccion('proposito')">Propósito</a>
+        <a href="#miEspacio" @click.prevent="cambiarSeccion('miEspacio')">Mi Espacio</a>
+        <a href="#comunidad" @click.prevent="cambiarSeccion ('comunidad')">Comunidad</a>
+        <a href="#inspiracion" @click.prevent="cambiarSeccion('inspiracion')">Inspiración</a>
+        <a href="#categorias" @click.prevent="cambiarSeccion('categorias')">Categorías</a>
+        <a href="#creativo" @click.prevent="cambiarSeccion('creativo')">Creativo</a>
+        <div v-if="usuarioAutenticado" class="volver-a-perfil">
+          <button @click="cambiarSeccion('perfil')">Ir a mi perfil</button>
+        </div>
+    
+      </div>
+      <div class="login">
+        <a @click="seccion = 'login'">Iniciar sesión</a>
+      </div>
+    </header>
+
+    <main class="main">
+      <div class="hero">
+        <img src="https://i.pinimg.com/736x/82/59/2d/82592d5d237ab44570d65a40acd9e9b4.jpg" alt="fondo">
+        <div class="texto-sobre-imagen">
+          <h2>escribir ya es un abrazo, el dulce refugio de la escritura</h2>
+          <p>conciente tu mente, ven a liberarte de lo que sientes, encuentra el refugio y la tranquilidad que las letras nos brinda</p>
+        </div>
+      </div>
+    </main>
+
+    <section class="enfoque">
+      <div class="enfoque-box">
+        <h2>el descanso de las letras</h2>
+        <p>
+          He creado este espacio con la intención de que la mente pueda hablar a través de las manos,
+          para que todo eso que no se dice en voz alta, encuentre un lugar donde soltarse sin miedo.
+          Las letras tienen esa manera sutil de liberarnos de la prisión del sonido.
+          Aquí, cada palabra escrita es una puerta abierta hacia ti misma,
+          una forma íntima y amorosa de escucharte y empezar a sanar.
+          te invito a sentir la paz despues de liberarte de la ansiedad a través de la escritura
+        </p>
+        <a href="#" @click.prevent="cambiarSeccion ('proposito')" class="btn-mas-info">Leer más</a>
+      </div>
+    </section>
+
+    <section class="momentos">
+      <h2>Momentos para escribir</h2>
+      <div class="contenedor-momentos">
+        <div class="momento">
+          <img src="https://i.pinimg.com/736x/0d/af/4a/0daf4a69b78694de21b5052fc80d7a56.jpg" alt="Gratitud">
+          <h3>Cuando sientas gratitud</h3>
+          <p>esb✎</p>
+        </div>
+        <div class="momento">
+          <img src="https://i.pinimg.com/736x/c3/38/2f/c3382ff52c2f5955461dc75943dddbdc.jpg" alt="Sanar">
+          <h3>Cuando algo te duela</h3>
+          <p>esb✎</p>
+        </div>
+        <div class="momento">
+          <img src="https://i.pinimg.com/736x/8f/1b/fc/8f1bfcd2dc7be8d1d1b54cfc6ee23e14.jpg" alt="Reflexionar">
+          <h3>Cuando quieras volver a ti</h3>
+          <p>esb✎</p>
+        </div>
+        <div class="momento">
+          <img src="https://i.pinimg.com/736x/81/dd/c0/81ddc0295d7ed4613c073069bf7a07f1.jpg" alt="ansiedad">
+          <h3>cuando la ansiedad toca a tu cuerpo y alma</h3>
+          <p>esb✎</p>
+        </div>
+      </div>
+      <a href="#" @click.prevent="cambiarSeccion ('categorias')" class="btn-ver-todo">Ver todo</a>
+    </section>
+
+    <section class="invitacion-escritura">
+      <div class="titulo-movil">
+        <span>"El Lenguaje del Silencio"</span>
+      </div>
+      <div class="contenido-invitacion">
+        <div class="video-invitacion">
+          <iframe width="720" height="405" src="https://www.youtube.com/embed/I6mSNMZ0LT8" frameborder="0" allowfullscreen class="video-embed"></iframe>
+        </div>
+        <div class="texto-invitacion">
+          <p>
+            “Este es un refugio sagrado para tu voz interior. Aquí no importa el estilo ni la forma, solo el latido que te impulsa a escribir. Puedes soltar memorias, ficciones, heridas o sueños —todo lo que nazca desde el alma encuentra cobijo en estas páginas. No necesitas experiencia, solo el valor de sentir y la ternura de volver a ti. Cada palabra será recibida con silencio respetuoso, con presencia, con alma.”
+          </p>
+          <a @click="cambiarSeccion('login')" class="btn-escribe">Quiero empezar a escribir</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer-blog">
+      <div class="footer-contenido">
+        <h2>Querido Diario</h2>
+        <p>Un refugio para lo que callas, una casa para lo que escribes.</p>
+        <div class="footer-enlaces">
+          <a href="#" @click.prevent="cambiarSeccion ('inicio')">Inicio</a>
+          <a href="#" @click.prevent="cambiarSeccion ('comunidad')">Comunidad</a>
+          <a href="#" @click.prevent="cambiarSeccion ('sobreMi')">Sobre mí</a>
+          <a href="#" @click.prevent="cambiarSeccion ('contacto')">Contacto</a>
+        </div>
+        <div class="footer-redes">
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-pinterest"></i></a>
+          <a href="#"><i class="fa-brands fa-twitter"></i></a>
+        </div>
+        <p class="footer-frase">“Que siempre encuentres palabras donde el alma necesite descanso.”</p>
+        <p class="footer-copy">© 2025 Querido Diario — Todos los derechos reservados</p>
+      </div>
+    </footer>
+  </div>
+<!---->
+
+<!-- aca son cada una de la secciones del header "quiero decir " aca cree el contenido por separado de cada uno del menu -->
+ <!-- bueno aca van todas las secciones del menu principal NOTA como ya lo hemos dicho aunque se vea el menu y podamos hacer click debemos de rellenar el enlace
+ es como una casa con habitaciones hay que amueblar cada habitacion (cada link )-->
+
+  <section v-if = "seccion === 'sobreMi'" class = "seccion-sobre-mi">
+    <div class="contenedor-sobre-mi">
+      <h2>Sobre mí</h2>
+      <p>
+        Soy Laura Rosas, desarrolladora web enfocada en crear interfaces intuitivas y funcionales. Vengo del mundo administrativo, donde aprendí a optimizar procesos, y ahora transformo esa lógica en código que mejora la experiencia de los usuarios.
+      </p>
+      <p>
+        En el área de <strong>frontend</strong>, utilizo <strong>HTML</strong>, <strong>CSS</strong>, <strong>JavaScript</strong> y <strong>Vue.js</strong> para construir sitios visualmente atractivos, rápidos y adaptables. Gracias a esto, tu empresa puede ofrecer a sus clientes una experiencia moderna y eficiente que mejora la conversión y fidelidad.
+      </p>
+      <p>
+        En el <strong>backend</strong>, manejo tecnologías como <strong>Node.js</strong> y <strong>Express</strong>, además de bases de datos como <strong>MongoDB</strong>. Esto permite que las aplicaciones sean escalables, seguras y eficientes, generando ahorros operativos y crecimiento para tu empresa.
+      </p>
+      <p class="frase-impacto">
+        ¿Por qué contactarme? Porque aplico una visión integral que une creatividad + lógica + resultados. Mi meta es que tu empresa <strong>gane valor real con cada línea de código que desarrollo</strong>.
+      </p>
+      <a href="#contacto" @click.prevent="seccion = 'contacto'" class="boton-contacto">Contáctame y hagamos crecer tu proyecto</a>
+    </div>
+  </section>
+
+  <section v-if="seccion === 'contacto'" class="seccion-contacto">
+    <div class="contenedor-contacto">
+      <h2>Contacto</h2>
+      <p>
+        Si estás buscando una desarrolladora comprometida, con visión creativa y habilidades técnicas sólidas en frontend y backend, me encantaría saber de ti. Estoy lista para aportar soluciones reales que beneficien a tu empresa, optimicen tu presencia digital y conecten mejor con tus usuarios. Hablemos y creemos juntas algo que genere impacto.
+      </p>
+
+      <form @submit.prevent="enviarMensaje" class="formulario-contacto">
+        <input type="text" v-model="form.nombre" placeholder="Tu nombre" required>
+        <input type="email" v-model="form.email" placeholder="Tu correo electrónico" required>
+        <textarea v-model="form.mensaje" placeholder="Escribe tu mensaje..." rows="5" required></textarea>
+        <button type="submit">Enviar mensaje</button>
+      </form>
+      
+    </div>
+  </section>
+
+  <div v-if="seccion === 'proposito'" class="pagina-proposito">
+    <section class="proposito-hero">
+      <img src="https://i.pinimg.com/736x/4b/71/50/4b7150d758d6ca97ae805d3043273f49.jpg" alt="cielo poético">
+      <div class="texto-hero">
+        <h2>El Propósito</h2>
+        <p>
+          Este espacio es un santuario para las personas que sienten profundamente conectados con el universo interior.
+          <br>  
+          Nació del silencio, del dolor que pide vuelo, de las ganas de escribir para no romperse.  
+          Aquí escribes para recordar que estás viva, que lo que llevas dentro es valioso y merece expresarse.
+        </p>
+      </div>
+    </section>
+  
+    <section class="proposito-contenido">
+      <h3>🌙 Escribir es un acto sagrado</h3>
+      <p>
+        Cada palabra que nace desde tu alma es una forma de volver a ti.  
+        Aquí no hay juicios, solo el suspiro de quien elige sanar desde adentro.  
+        Deja que el papel escuche lo que no has podido decir.
+      </p>
+  
+      <h3>🕊 Este blog es un refugio</h3>
+      <p>
+        No tienes que ser escritora.  
+        Este es tu diario, tu altar, tu abrazo en forma de página.  
+        Ven cuando lo necesites: con tu rabia, tu ternura o tus sueños.
+      </p>
+  
+      <h3>🔥 Deja que la escritura te transforme</h3>
+      <p>
+        Escribimos para soltar lo que pesa, para liberar el cuerpo,  
+        para vaciar el alma y volverla a llenar de belleza.  
+        La escritura no cura todo, pero sí lo calma todo.
+      </p>
+
+      <h3>👩‍💻 Soy Laura Rosas</h3>
+      Este sitio no es solo una plataforma creativa e interactiva, también es mi portafolio personal como desarrolladora web. he incorporado varios lenguajes de programación,
+      en el backend y frontend. 
+      Mi objetivo es mostrar mis habilidades en diseño web, programación y experiencia de usuario.
+      <p>Al integrarme a tu equipo, aporto soluciones creativas, interfaces modernas y código limpio que mejoran la experiencia del usuario y elevan el valor digital de tu empresa.</p>
+      <a href="#contacto" @click.prevent="seccion = 'contacto'" class="boton-contacto">Contáctame</a>
+
+      
+    </section>
+    <div class="proposito-transicion">
+      <h3>📜 Del papel al teclado: un ritual de transformación</h3>
+      <p>
+        El papel es íntimo. Es crudo. Es donde se llora, se garabatea, se rompe.  
+        Es el primer testigo, la tinta que no juzga, la página que acoge sin filtros.  
+        Pero hay un momento sagrado en el que ese susurro escrito a mano  
+        merece ser elevado, reescrito, compartido… y allí, aparece la laptop.
+      </p>
+    
+      <p>
+        Teclado no significa frialdad.  
+        Significa **pulso**, estructura, intención.  
+        Es cuando decides que lo que escribiste en lo íntimo  
+        también tiene el derecho de llegar al mundo.  
+        No como un grito, sino como una ofrenda.
+      </p>
+    
+      <p class="proposito-destacado">
+        Aquí celebramos ambos espacios:  
+        la página en blanco que escucha,  
+        y la pantalla que proyecta tu verdad.
+      </p>
+    </div>
+    
+    <section class="cta-proposito">
+      <p>¿Lista para comenzar a escribir tu verdad?</p>
+      <button class="btn-volver" @click="seccion = 'inicio'">Volver al Inicio</button>
+    </section>
+  </div>
+
+  <div v-if="seccion === 'categorias'" class="pagina-categorias">
+    <section class="categorias-hero">
+      <h2>Explora tu forma de escribir</h2>
+      <p>
+        La escritura tiene infinitas formas. Aquí puedes elegir cómo quieres expresarte:  
+        Este es tu espacio para descubrirte. inicia sesion para empezar a escribir 
+      </p>
+    </section>
+
+    <section class="categorias-lista">
+      <div class="tarjeta">
+        <h3>🪄 Cuento corto</h3>
+        <p><strong>¿Qué es?</strong> Una historia breve con emoción, personajes y cierre.</p>
+        <p><strong>¿Cuándo escribirlo?</strong> Cuando tienes una idea intensa o simbólica.</p>
+        <p><em>Te permite decir mucho… con pocas páginas.</em></p>
+        <button v-if="usuarioAutenticado" @click="seccion = 'cuento'">Escribir cuento</button>
+      </div>
+
+      <div class="tarjeta">
+        <h3>📖 Mini libro</h3>
+        <p><strong>¿Qué es?</strong> Un proyecto más largo y constante, de hasta 200 páginas.</p>
+        <p><strong>¿Cuándo escribirlo?</strong> Cuando tienes algo profundo que merece desarrollarse.</p>
+        <p><em>Un libro pequeño puede contener un alma grande.</em></p>
+        <button v-if="usuarioAutenticado" @click="seccion = 'mini-libro'">escribir</button>
+      </div>
+
+      <div class="tarjeta">
+        <h3>📓 Diario personal</h3>
+        <p><strong>¿Qué es?</strong> Un espacio íntimo para desahogar y reflexionar.</p>
+        <p><strong>¿Cuándo escribirlo?</strong> Cuando necesitas soltar lo que llevas dentro.</p>
+        <p><em>El diario es una conversación contigo misma.</em></p>
+        <button v-if="usuarioAutenticado" @click="seccion ='diario-personal'">querido diario</button>
+      </div>
+
+      <div class="tarjeta">
+        <h3>✨ Poemas</h3>
+        <p><strong>¿Qué es?</strong> Emociones en forma de verso, libres o estructurados.</p>
+        <p><strong>¿Cuándo escribirlo?</strong> Cuando algo te sacude, inspira o quiebra.</p>
+        <p><em>No se escribe para rimar, se escribe para vibrar.</em></p>
+        <button v-if="usuarioAutenticado" @click="seccion ='poemas'" >poema </button>
+      </div>
+
+      <div class="tarjeta">
+        <h3>🗣 Opinión</h3>
+        <p><strong>¿Qué es?</strong> Textos con tu visión sobre temas que te importan.</p>
+        <p><strong>¿Cuándo escribirlo?</strong> Cuando necesitas expresar tu postura.</p>
+        <p><em>Tu pensamiento escrito puede sembrar preguntas en otros.</em></p>
+        <button v-if="usuarioAutenticado" @click="seccion ='opinion'" >quiero opinar </button>
+      </div>
+
+      <div class="tarjeta">
+        <h3>🎓 Enseñar algo</h3>
+        <p><strong>¿Qué es?</strong> Compartir conocimiento o experiencia desde tu voz.</p>
+        <p><strong>¿Cuándo escribirlo?</strong> Cuando deseas ayudar desde lo que sabes.</p>
+        <p><em>Enseñar también es una forma de sanar y conectar.</em></p>
+        <button v-if="usuarioAutenticado" @click="seccion ='enseñar-algo' ">quiero que aprendas</button>
+      </div>
+
+      <div class="boton-volver">
+        <button @click="seccion = 'inicio'">← Regresar al inicio</button>
+      </div>
+    </section>
+  </div>
+
+ <section v-if="seccion === 'inspiracion'" class="pagina-inspiracion">
+  <div class="inspiracion-hero">
+    <h2>Inspírate</h2>
+    <p class="frase">
+      “Hay palabras que no se dicen, pero pesan. Este espacio es para soltarlas y convertirlas en arte.”
+    </p>
+    <p class="texto">
+      Este vlog nació desde la necesidad de liberar. De transformar lo que duele, lo que inspira y lo que callamos, en palabras. Aquí puedes escribir un cuento, soltar una emoción, compartir un pensamiento o simplemente dejar una huella.
+    </p>
+    <div class="botones-inspiracion">
+      <button @click="seccion = 'categorias'">Explorar categorías</button>
+      <button @click="seccion = 'login'">Iniciar mi viaje</button>
+    </div>
+  </div>
+  <div class="boton-volver">
+    <button @click="seccion = 'inicio'">← Regresar al inicio</button>
+  </div>
+</section>
+
+<section v-if="seccion === 'miEspacio'" class="pagina-mi-espacio">
+  <div class="mi-espacio-hero">
+    <h2>Tu Espacio Creativo</h2>
+    <p>
+      Este es tu rincón. Aquí puedes soltar, crear, explorar y ver cómo florece tu voz. Todo lo que escribas vive aquí. A continuación te mostramos todo lo que puedes hacer dentro de tu perfil.
+    </p>
+  </div>
+
+  <div class="cards-contenedor"> 
+    <div class="card">
+      <h3>📓 Mis Escritos</h3>
+      <p>
+        Aquí encontrarás todo lo que has escrito: entradas de tu diario personal, cuentos, poemas, pensamientos sueltos y cualquier publicación que hayas creado.
+        Puedes regresar, leerlos, editarlos o simplemente recordarte por qué escribiste eso.
+      </p>
+      <button v-if="usuarioAutenticado" @click="seccion = 'misEscritos'">Ver escritos</button>
+    </div>
+
+    <div class="card">
+      <h3>📝 Nueva Entrada</h3>
+      <p>
+        Comienza una nueva página. Puedes escribir lo que quieras: desde una idea espontánea hasta un cuento completo. Si no sabes por dónde empezar, tendrás acceso a plantillas por categorías (cuento, diario, poema, opinión).
+      </p>
+      <button v-if="usuarioAutenticado" @click="seccion = 'categorias'">Escribir</button>
+    </div>
+
+    <div class="card">
+      <h3>💖 Favoritos</h3>
+      <p>
+        Aquí se guardan tus entradas favoritas o aquellas que marcaste porque te inspiraron o te tocaron. Puedes volver a ellas cuando quieras, como una biblioteca emocional y personal.
+      </p>
+      <button v-if="usuarioAutenticado" @click="seccion = 'favoritos'">Ver favoritos</button>
+    </div>
+
+    <div class="card">
+      <h3>🧠 Inspiración diaria</h3>
+      <p>
+        Si no sabes qué escribir o te sientes bloqueada/o, este espacio te dará una frase, una imagen o una pregunta creativa cada día para ayudarte a fluir con las palabras.
+      </p>
+      <button v-if="usuarioAutenticado" @click="seccion = 'creativo'">Ver inspiración</button>
+    </div>
+
+    <div class="card">
+      <h3>🧍 Mi perfil</h3>
+      <p>
+        Aquí puedes personalizar tu espacio: poner un seudónimo, subir una foto de perfil o escribir una breve bio sobre ti como escritora o escritor. Haz que tu espacio tenga tu esencia.
+      </p>
+      <button v-if="usuarioAutenticado" @click="seccion = 'perfil'">Editar perfil</button>
+    </div>
+
+    <div class="card">
+      <h3>🏅 Progreso</h3>
+      <p>
+        Revisa tu camino como escritora/or. Aquí verás cuántas palabras has escrito, cuántos días has escrito seguido, y si has completado alguno de los retos mensuales o logros personales.
+      </p>
+      <button v-if="usuarioAutenticado" @click="seccion = 'progreso'">Ver progreso</button>
+    </div>
+  </div>
+  <!-- ✅ Lista de escritos guardados -->
+  <div v-if="escritosGuardados.length > 0" class="lista-escritos-mi-espacio">
+<h3>📝 Mis escritos guardados:</h3>
+<ul>
+  <li v-for="(item, index) in escritosGuardados" :key="item.id">
+    <strong>#{{ index + 1 }}</strong> 
+    ({{ item.tipo }} – {{ item.fecha }}):<br>
+    {{ item.contenido }}
+  </li>
+</ul>
+  </div>
+
+  <div class="boton-volver">
+    <button @click="seccion = 'inicio'">← Regresar al inicio</button>
+  </div>
+</section>
+
+<section v-if="seccion === 'comunidad'" class="pagina-comunidad">
+  <div class="comunidad-hero">
+    <h2>La Comunidad</h2>
+    <p>
+      Este es un espacio para leer, compartir y conectar con otras personas que también escriben desde el alma.
+      Aquí puedes descubrir publicaciones públicas, participar en retos, comentar o simplemente inspirarte.
+    </p>
+  </div>
+
+  <div class="comunidad-grid">
+    <div class="comunidad-card">
+      <h3>📝 Publicaciones públicas</h3>
+      <p>
+        Explora lo que otros usuarios han compartido con el mundo: cuentos, reflexiones, poemas, ideas.
+        Puedes ordenarlas por más recientes, más leídas o por categoría.
+      </p>
+      <button v-if="usuarioAutenticado" @click="seccion = 'publicaciones'">Ver publicaciones</button>
+    </div>
+
+    <div class="comunidad-card">
+      <h3>💬 Interactúa con otros</h3>
+      <p>
+        Deja un comentario en lo que leas, marca tus textos favoritos con un ❤️ o guarda publicaciones que te inspiren.
+        Esta comunidad crece cuando nos escuchamos.
+      </p>
+      <button v-if="usuarioAutenticado"  @click="seccion = 'interacciones'">Explorar interacciones</button>
+    </div>
+
+    <div class="comunidad-card">
+      <h3>🏁 Retos de escritura</h3>
+      <p>
+        Participa en nuestros retos creativos mensuales. Desde microcuentos hasta reflexiones profundas, cada desafío es una excusa para escribir.
+      </p>
+      <button v-if="usuarioAutenticado" @click="seccion = 'retos'">Ver retos</button>
+    </div>
+
+    <div class="comunidad-card">
+      <h3>📚 Club de escritura</h3>
+      <p>
+        Comparte ideas sobre el tema o libro del mes. Comenta frases que te marcaron, escribe microcríticas o súmate a los debates.
+      </p>
+      <button v-if="usuarioAutenticado"  @click="seccion = 'club' ">Unirme al club</button>
+    </div>
+    
+    <div class="comunidad-card">
+      <h3>📣 Muro comunitario</h3>
+      <p>
+        Escribe cómo te sientes hoy, lanza una pregunta, comparte un pensamiento breve. Este muro es libre y tu voz importa.
+      </p>
+      <button v-if="usuarioAutenticado"  @click="seccion = 'muro'">Ir al muro</button>
+    </div>
+
+    <div class="comunidad-card">
+      <h3>🌍 Mapa de escritores</h3>
+      <p>
+        Mira desde dónde escriben otras personas en el mundo. Deja tu marca y un mensaje al planeta desde tu rincón.
+      </p>
+      <button v-if="usuarioAutenticado" @click="seccion = 'mapa'">Ver el mapa</button>
+    </div>
+
+    <div class="boton-volver">
+    </div>
+  </div>
+</section>
+
+<div v-if="seccion === 'creativo'" class="pagina-creativo">
+      <div class="creativo-hero">
+        <h2>Espacio Creativo</h2>
+        <p>
+          Aquí no hay reglas ni estructuras. Solo tu imaginación. Juega, experimenta, desbloquea ideas o simplemente escribe sin pensar. Puedes probar cualquiera de estos ejercicios aunque no tengas cuenta. Si quieres guardar tus escritos, crea tu perfil.
+        </p>
+      </div>
+    
+      <div class="creativo-grid">
+    
+        <!-- Palabras aleatorias -->
+        <div class="creativo-card">
+          <h3>Palabras aleatorias</h3>
+          <p>Te damos tres palabras al azar. Créa una historia, poema o lo que sea con ellas.</p>
+          <button  v-if="usuarioAutenticado"  @click="abrirEspacioCreativo('palabras')">Probar ahora</button>
+          <p v-if="mensajeUsuario && tipoRespuesta === 'palabras'" class="respuesta-ia">{{ mensajeUsuario }}</p>
+        </div>
+    
+        <!-- Continuar historia -->
+        <div class="creativo-card">
+          <h3>Continúa la historia</h3>
+          <p>Empieza con una frase y deja que tu imaginación tome el control. Sin límites, sin finales predefinidos.</p>
+          <button v-if="usuarioAutenticado" @click="abrirEspacioCreativo ('continuar')">Continuar historia</button>
+          <p v-if="mensajeUsuario && tipoRespuesta === 'continuar'" class="respuesta-ia">{{ mensajeUsuario }}</p>
+        </div>
+    
+        <!-- Imagen creativa -->
+        <div class="creativo-card">
+          <h3>Escribe desde una imagen</h3>
+          <p>Te mostramos una imagen. ¿Qué historia esconde? Describe, imagina o recuerda.</p>
+          <button v-if="usuarioAutenticado" @click="abrirEspacioCreativo ('imagen')">Ver imagen</button>
+          <p v-if="mensajeUsuario && tipoRespuesta === 'imagen'" class="respuesta-ia">{{ mensajeUsuario }}</p>
+        </div>
+    
+        <!-- Pregunta profunda -->
+        <div class="creativo-card">
+          <h3>Pregunta profunda</h3>
+          <p>Responde a una pregunta que no se responde con la mente, sino con el alma.</p>
+          <button v-if="usuarioAutenticado"  @click="abrirEspacioCreativo ('pregunta')">Responder</button>
+          <p v-if="mensajeUsuario && tipoRespuesta === 'pregunta'" class="respuesta-ia">{{ mensajeUsuario }}</p>
+        </div>
+    
+        <!-- Escribir sin borrar -->
+        <div class="creativo-card">
+          <h3>Escribir sin borrar</h3>
+          <p>Tienes 5 minutos. Solo escribe. No borres. Solo fluye.</p>
+          <button v-if="usuarioAutenticado" @click="abrirEspacioCreativo ('palabras')">Comenzar reto</button>
+          <p v-if="mensajeUsuario && tipoRespuesta === 'palabras'" class="respuesta-ia">{{ mensajeUsuario }}</p>
+        </div>
+    
+      </div>
+</div>
+<!---->
+
+
+<!-- estas son todas las opciones que hay  dentro de la seccion "categorias" de la pagina principal 
+ NOTA : son enlances independientes de debe de crear el contenido que va dentro de cada opcion / enlace -->
+  <section v-if="seccion === 'cuento' && usuarioAutenticado" class="pagina-escritura">
+    <div class="intro-escritura">
+      <h2>🪄 CUENTO CORTO 🌹</h2>
+      <p class="frase-destacada">"Escribe una historia breve que diga mucho en pocas páginas."</p>
+      <p class="instruccion-suave">Imagina, crea y suelta tu cuento aquí.</p>
+    </div>
+
+    <div class="area-escritura">
+      <textarea v-model="contenidoEscrito" placeholder="Empieza tu cuento aquí..."></textarea>
+    </div>
+
+    <div class="botones-escritura">
+      <button @click="guardarEscrito('cuento')">Publish</button>
+      <button @click="seccion = 'categorias'; categoriaSeleccionada = null">Cancel</button>
+    </div>
+
+    <div v-if="escritosGuardados.length > 0">
+      <h3>📚 Tus cuentos publicados:</h3>
+      <ul>
+        <li v-for="(item, index) in escritosGuardados" :key="item.id">
+          <strong>#{{ index + 1 }}</strong>: {{ item.contenido }}
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section v-if="seccion === 'mini-libro'&& usuarioAutenticado" class="pagina-escritura">
+    <div class="intro-escritura">
+      <h2>🪄 MINI LIBRO 🌹</h2>
+      <p class="frase-destacada">"Escribe una historia que merezca tiempo. No importa si hoy solo tienes una página, lo importante es que empiece."</p>
+      <p class="instruccion-suave">"Escribe lo que vibra, no lo que rima. Aquí puedes soltar tu emoción sin estructura, sin reglas, solo sentir."</p>
+    </div>
+
+    <div class="area-escritura">
+      <textarea v-model="contenidoEscrito" placeholder="adelante no hay reglas fluye..."></textarea>
+    </div>
+
+    <div class="botones-escritura">
+      <button @click="guardarEscrito('mini-libro')">Publish</button>
+      <button @click="seccion = 'categorias'; categoriaSeleccionada = null">Cancel</button>
+    </div>
+
+    <div v-if="escritosGuardados.length > 0" class="lista-escritos">
+      <h3>📚 Tus cuentos publicados:</h3>
+      <ul>
+        <li v-for="(item, index) in escritosGuardados" :key="item.id">
+          <strong>#{{ index + 1 }}</strong>: {{ item.contenido }}
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section v-if="seccion === 'diario-personal'&& usuarioAutenticado" class="pagina-escritura">
+    <div class="intro-escritura">
+      <h2>🪄 QUERIDO DIARIO 🌹</h2>
+      <p class="frase-destacada">"Escribe una historia breve que diga mucho en pocas páginas."</p>
+      <p class="instruccion-suave">Imagina, crea y suelta tu cuento aquí.</p>
+    </div>
+
+    <div class="area-escritura">
+      <textarea v-model="contenidoEscrito" placeholder="abre la mente"></textarea>
+    </div>
+
+    <div class="botones-escritura">
+      <button @click="guardarEscrito('diario-personal')">Publish</button>
+      <button @click="seccion = 'categorias'; categoriaSeleccionada = null">Cancel</button>
+    </div>
+
+    <div v-if="escritosGuardados.length > 0" class="lista-escritos">
+      <h3>📚 Tus cuentos publicados:</h3>
+      <ul>
+        <li v-for="(item, index) in escritosGuardados" :key="item.id">
+          <strong>#{{ index + 1 }}</strong>: {{ item.contenido }}
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section v-if="seccion === 'poemas'&& usuarioAutenticado" class="pagina-escritura">
+    <div class="intro-escritura">
+      <h2>🪄 POEMAS 🌹</h2>
+      <p class="frase-destacada">"Transforma tus emociones en versos. Aquí puedes escribir poemas que hablen por ti cuando las palabras no bastan."</p>
+      <p class="instruccion-suave">“Versa tu alma. Escribe aquí lo que tu corazón calla.”</p>
+    </div>
+
+    <div class="area-escritura">
+      <textarea v-model="contenidoEscrito" placeholder="abre la mente"></textarea>
+    </div>
+
+    <div class="botones-escritura">
+      <button @click="guardarEscrito('poemas')">Publicar</button>
+      <button @click="seccion = 'categorias'; categoriaSeleccionada = null">Cancel</button>
+    </div>
+
+    <div v-if="escritosGuardados.length > 0" class="lista-escritos">
+      <h3>📚 Tus cuentos publicados:</h3>
+      <ul>
+        <li v-for="(item, index) in escritosGuardados" :key="item.id">
+          <strong>#{{ index + 1 }}</strong>: {{ item.contenido }}
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section v-if="seccion === 'opinion'&& usuarioAutenticado" class="pagina-escritura">
+    <div class="intro-escritura">
+      <h2>🪄 OPINION 🌹 </h2>
+      <p>no es defecto opinar los mundos diversos construyen nuestra realidad ! </p>
+      <p>"transforma el universo desde tu propio mundo, y aceptando el de los demas"  </p>
+    </div>
+    
+    <div class="area-escritura">
+      <textarea v-model="contenidoEscrito"  placeholder="acepta la opinion y transforma tu mundo"></textarea>
+    </div>
+
+    <div class="botones-escritura">
+      <button @click="guardarEscrito('opinion')">publicar</button>
+      <button @click="seccion ='categorias';categoriasSeleccionada = null">Cancel</button>
+    </div>
+
+    <div v-if="escritosGuardados.length > 0">
+      <h3>📚 Tus opiniones publicadas:</h3>
+      <ul>
+        <li v-for="(item, index) in escritosGuardados" :key="item.id">
+          <strong>#{{ index + 1 }}</strong>: {{ item.contenido }}
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section v-if="seccion === 'enseñar-algo'&& usuarioAutenticado" class="pagina-escritura">
+    <div class="intro-escritura">
+      <h2>🪄 ENSEÑAR ALGO 🌹</h2>
+      <p>"ensenar algo es ensenar algo"</p>
+      <p>"ensenar algo es ensenar algo"</p>
+    </div>
+
+    <div class="area-escritura">
+      <textarea v-model="contenidoEscrito" placeholder="ensenar algo"></textarea>
+    </div>
+
+    <div class="botones-escritura">
+      <button @click="guardarEscrito('enseñar-algo')">Publicar</button>
+      <button @click="seccion = 'categorias'; categoriaSeleccionada = null">Cancel</button>
+    </div>
+
+    <div v-if="escritosGuardados.length > 0" class="lista-escritos">
+      <h3>📚 Tus cuentos publicados:</h3>
+      <ul>
+        <li v-for="(item, index) in escritosGuardados" :key="item.id">
+          <strong>#{{ index + 1 }}</strong>: {{ item.contenido }}
+        </li>
+      </ul>
+    </div>
+  </section>
+<!---->
+
+<!-- "mis escritos"-->
+<section v-if="seccion === 'misEscritos'" class="pagina-mis-escritos">
+  <div class="contenedor-mis-escritos">
+    <h2>📚 Mis escritos</h2>
+    <p>Estos son todos los textos que has escrito y guardado:</p>
+
+    <ul v-if="escritosGuardados.length > 0">
+      <li v-for="(item, index) in escritosGuardados" :key="item.id">
+        <strong>#{{ index + 1 }}</strong> 
+        ({{ item.tipo }} – {{ item.fecha }}):<br>
+        {{ item.contenido }}
+      </li>
+    </ul>
+
+    <p v-else>Aún no has escrito nada. Empieza desde la sección "Categorías".</p>
+
+    <button class="btn-volver" @click="seccion = 'miEspacio'">← Volver a Mi Espacio</button>
+  </div>
+</section>
+
+<!-- Espacio Creativo -->
+<section v-if="seccion === 'espacio-creativo-detalle' && usuarioAutenticado" class="pagina-creativa-detalle">
+
+  <div class="creativo-retorno">
+
+    <button @click="seccion = 'creativo'">← Volver</button>
+  </div>
+
+  <h2>Resultado del reto: {{ tipoRespuesta }}</h2>
+
+  <!-- 🌟 Nueva fila de botones -->
+<div class="barra-creativa-opciones">
+  <label for="selectorTipo">Cambiar reto:</label>
+  <select id="selectorTipo" v-model="tipoRespuesta" @change="actualizarReto()">
+    <option value="palabras">Palabras aleatorias</option>
+    <option value="imagen">Escribir desde imagen</option>
+    <option value="continuar">Continuar historia</option>
+    <option value="pregunta">Pregunta profunda</option>
+    <option value="sin-borrar">Escribir sin borrar</option>
+  </select>
+
+  <button @click="pedirAyudaIA(tipoRespuesta)">🔄 Nuevo contenido</button>
+</div>
+
+
+  <div v-if="mensajeUsuario" class="respuesta-ia-generada">
+    <p>{{ mensajeUsuario }}</p>
+  </div>
+
+  <div class="area-escritura">
+    <div class="campo-categoria">
+      <label for="categoria">Selecciona la categoría:</label>
+      <select v-model="categoriaSeleccionada" id="categoria" required>
+        <option disabled value="">-- Elige una opción --</option>
+        <option value="cuento">Cuento</option>
+        <option value="poema">Poema</option>
+        <option value="reflexion">Reflexión</option>
+      </select>
+    </div>
+    
+    <textarea v-model="contenidoEscrito" placeholder="Escribe tu texto aquí..."></textarea>
+  </div>
+
+  <div class="botones-escritura">
+    <button @click="guardarEscrito(tipoRespuesta)">Guardar</button>
+    <button @click="seccion = 'creativo'; contenidoEscrito = ''">Cancelar</button>
+    <button @click="publicarComoPublico">Publicar en Comunidad</button>
+
+  </div>
+</section>
+<!----->
+
+<!-- Progreso -->
+<section v-if="seccion === 'progreso' && usuarioAutenticado" class="pagina-progreso">
+  <div class="contenedor-progreso">
+    <h2>📈 Tu progreso como escritora/or</h2>
+
+    <p v-if="escritosGuardados.length === 0">Aún no has guardado ningún escrito.</p>
+
+    <ul v-else>
+      <li v-for="(item, index) in escritosGuardados" :key="item.id">
+        <strong>#{{ index + 1 }}</strong> 
+        ({{ item.tipo }} – {{ item.fecha }}):<br>
+        {{ item.contenido }}
+      </li>
+    </ul>
+
+    <button class="btn-volver" @click="seccion = 'miEspacio'">← Volver a Mi Espacio</button>
+  </div>
+</section>
+
+
+
+<!--seccion por separados de "comunidad"-->
+<!-- publicaciones publicas-->
+<section v-if="seccion === 'publicaciones'" class="pagina-publicaciones">
+  <h2>📚 Publicaciones públicas</h2>
+
+  <div v-if="publicaciones.length === 0">Aún no hay publicaciones.</div>
+
+  <div v-else>
+    <div v-for="pub in publicaciones" :key="pub.id" class="tarjeta-publicacion">
+      
+      <p><strong>{{ pub.autor }}</strong> — {{ pub.fecha }}</p>
+      <p><em>{{ pub.tipo }}</em></p>
+      <p>{{ pub.contenido }}</p>
+    </div>
+  </div>
+
+  <button @click="seccion = 'comunidad'">← Volver</button>
+</section>
+<!-- interactua con otros-->
+<section v-if="seccion === 'interacciones'" class="pagina-interacciones">
+  <h2>💬 Interacciones</h2>
+
+  <div v-if="publicaciones.length === 0">Aún no hay publicaciones para comentar.</div>
+
+  <div v-else>
+    <div v-for="pub in publicaciones" :key="pub.id" class="tarjeta-interaccion">
+      <p><strong>{{ pub.autor }}</strong> — {{ pub.fecha }}</p>
+      <p><em>{{ pub.tipo }}</em></p>
+      <p>{{ pub.contenido }}</p>
+
+      <!-- Campo de comentario -->
+      <div v-if="usuarioAutenticado">
+        
+        <input v-model="pub.nuevoComentario" placeholder="Escribe un comentario..." />
+        <button @click="comentarPublicacion(pub)">Comentar</button>
+      </div>
+
+      <!-- Mostrar comentarios -->
+      <div v-if="pub.comentarios && pub.comentarios.length > 0" class="comentarios">
+        <p><strong>Comentarios:</strong></p>
+        <ul>
+          <li v-for="(comentario, index) in pub.comentarios" :key="index">
+            🗨️ {{ comentario }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <button @click="seccion = 'comunidad'">← Volver</button>
+</section>
+<!--pagina de retos -->
+<section v-if="seccion === 'retos'" class="retos-escritura">
+  <h2>Retos de escritura</h2>
+
+  <button @click="mostrarRetoAleatorio">🎲 Desafiarme ahora</button>
+
+  <div v-if="retoActual && !escribiendoReto">
+    <h3>{{ retoActual.titulo }}</h3>
+    <p>{{ retoActual.descripcion }}</p>
+    <img v-if="retoActual.imagen" :src="retoActual.imagen" alt="Imagen del reto" />
+    <button @click="aceptarReto">Aceptar</button>
+  </div>
+
+  <div v-if="escribiendoReto">
+    <h3>Tu respuesta</h3>
+    <textarea v-model="respuestaReto" placeholder="Escribe aquí tu respuesta..."></textarea>
+    <button @click="guardarReto('privado')">Guardar como privado</button>
+    <button @click="guardarReto('público')">Compartir con la comunidad</button>
+  </div>
+
+  <hr />
+
+  <div>
+    <h3>Retos completados</h3>
+    <div v-if="retosCompletados.length === 0">Aún no has completado retos</div>
+    <ul v-else>
+      <li v-for="(reto, index) in retosCompletados" :key="index">
+        <strong>{{ reto.titulo }}</strong> - {{ reto.fecha }}
+        <button @click="verDetalleReto(index)">Ver</button>
+      </li>
+    </ul>
+  </div>
+
+  <div v-if="detalleReto">
+    <h3>Detalle del reto</h3>
+    <p><strong>{{ detalleReto.titulo }}</strong></p>
+    <textarea v-model="detalleReto.respuesta"></textarea>
+    <button @click="guardarEdicionReto">Guardar cambios</button>
+    <button @click="eliminarReto">Eliminar</button>
+  </div>
+</section>
+
+
+<!-- club de escritura -->
+<section v-if="seccion === 'club'" class="club-escritura">
+  <h2>📚 Club de Escritura</h2>
+  <p>Comparte ideas, frases, críticas y participa en debates literarios.</p>
+
+  <!-- Tema del mes -->
+  <div class="club-tema">
+    <h3>📌 Tema del mes</h3>
+    <p><strong>{{ temaDelMes.titulo }}</strong></p>
+    <p>{{ temaDelMes.descripcion }}</p>
+    <blockquote>{{ temaDelMes.frase }}</blockquote>
+  </div>
+
+  <!-- Publicar microcrítica -->
+  <div class="publicar-critica">
+    <h3>📝 Compartir microcrítica</h3>
+    <textarea v-model="nuevaCritica" placeholder="Escribe tu microcrítica..."></textarea>
+    <button @click="publicarCritica">Publicar</button>
+  </div>
+  
+
+  <div class="club-filtro">
+    <label for="filtro">Filtrar por tipo:</label>
+    <select v-model="filtroTipo" id="filtro">
+      <option value="todos">Todos</option>
+      <option value="microcritica">Microcríticas</option>
+      <option value="frase">Frases</option>
+      <option value="debate">Debates</option>
+    </select>
+  </div>
+  
+  <!-- Lista de críticas -->
+  <div v-for="c in criticasClub" :key="c.id">
+    <p><strong>{{ c.usuario }}:</strong> {{ c.texto }}</p>
+  </div>
+  
+  <div class="club-listado">
+    <h4>💬 Aportes del club</h4>
+    <div v-for="critica in filteredCriticas" :key="critica.id" class="club-critica">
+      <p>
+        <strong>{{ critica.usuario }}</strong> 
+        <span v-if="insigniasUsuarios[critica.usuario]">– {{ insigniasUsuarios[critica.usuario] }}</span>
+        — {{ critica.fecha }}
+      </p>
+    
+      <div class="reacciones">
+        <button @click="darLike(critica)">❤️ {{ critica.likes || 0 }}</button>
+        <button @click="critica.mostrarRespuestas = !critica.mostrarRespuestas">💬 Comentar</button>
+      </div>
+    
+      <!-- Campo de respuesta -->
+      <div v-if="critica.mostrarRespuestas" class="responder">
+        <input v-model="critica.nuevaRespuesta" placeholder="Escribe una respuesta..." />
+        <button @click="enviarRespuesta(critica)">Enviar</button>
+      </div>
+    
+      <!-- Lista de respuestas -->
+      <div class="respuestas" v-if="critica.respuestas && critica.respuestas.length">
+        <p v-for="(respuesta, i) in critica.respuestas" :key="i">
+          <strong>{{ respuesta.usuario }}:</strong> {{ respuesta.texto }}
+        </p>
+      </div>
+    </div>
+      </div>
+</section>
+
+<!-- muro comunitario -->
+
+<section v-if="seccion === 'muro'" class="muro-comunitario">
+  <div class="muro-formulario">
+    <h2>💬 Comparte algo con la comunidad</h2>
+    <textarea v-model="nuevaPublicacionMuro" placeholder="Escribe una reflexión breve..."></textarea>
+    <button @click="publicarEnMuro">Publicar</button>
+  </div>
+
+  <div class="muro-publicaciones">
+    <h3>📚 Publicaciones recientes</h3>
+    <div v-for="pub in muro" :key="pub.id" class="muro-card">
+      <p class="muro-texto"><strong>{{ pub.usuario }}</strong>: {{ pub.texto }}</p>
+
+      <div class="muro-reacciones">
+        <button @click="reaccionarMuro(pub, 'corazon')">❤️ {{ pub.reacciones?.corazon || 0 }}</button>
+        <button @click="reaccionarMuro(pub, 'pensamiento')">💭 {{ pub.reacciones?.pensamiento || 0 }}</button>
+        <button @click="reaccionarMuro(pub, 'compartido')">🔁 {{ pub.reacciones?.compartido || 0 }}</button>
+      </div>
+
+      <div class="muro-respuestas">
+        <div v-for="res in pub.respuestas" class="respuesta">
+          <p><strong>{{ res.usuario }}</strong>: {{ res.texto }}</p>
+        </div>
+        <input v-model="pub.nuevaRespuesta" placeholder="Responder..." />
+        <button @click="responderMuro(pub)">Responder</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--muro comunitario -->
+<section v-if="seccion === 'mapa'" class="mapa-escritores">
+
+  <div v-if="seccion === 'mapa'" class="mapa-contenido">
+    <h2>🌍 Mapa de escritores</h2>
+    <p>Mira desde dónde escriben otras personas en el mundo. Deja tu marca y un mensaje al planeta desde tu rincón.</p>
+    <li v-for="m in mensajesMapa" :key="m.id">
+      📍 {{ m.usuario }} desde {{ m.ciudad }}, {{ m.pais }}: <em>"{{ m.mensaje }}"</em>
+    </li>
+  </div>
+  <div class="mapa-container">
+    <div id="mapa" class="mapa-mundo"></div>
+  </div>
+  
+  <div class="formulario-marca">
+    <h3>📍 Deja tu marca</h3>
+    <input type="text" v-model="usuario.nombre" placeholder="Tu nombre" />
+    <textarea v-model="mensajeMapa" placeholder="Escribe un mensaje desde tu ciudad..."></textarea>
+    <button @click="guardarMarca">Dejar mi marca</button>
+  </div>
+
+  <div class="filtros-mapa">
+    <label for="filtroPais">Filtrar por país:</label>
+    <input type="text" id="filtroPais" v-model="filtroPais" placeholder="Ej. México">
+  
+    <label for="filtroCiudad">Filtrar por ciudad:</label>
+    <input type="text" id="filtroCiudad" v-model="filtroCiudad" placeholder="Ej. Guadalajara">
+  
+    <button @click="aplicarFiltroMapa">Aplicar filtros</button>
+    <button @click="limpiarFiltroMapa">Limpiar</button>
+  </div>
+  
+  
+  <p class="frase-destacada">
+    ✨ "Todos tenemos algo que contar desde donde estamos." ✨
+  </p>
+  
+  
+  <div class="publicaciones-muro">
+    <h3>📚 Publicaciones recientes</h3>
+  
+    <div v-for="pub in publicacionesMuro" :key="pub.id" class="tarjeta-muro">
+      <p><strong>{{ pub.usuario }}</strong>: {{ pub.texto }}</p>
+  
+      <div class="reacciones">
+        <button @click="darReaccion(pub.id, 'corazon')">❤️ {{ pub.reacciones.corazon || 0 }}</button>
+        <button @click="darReaccion(pub.id, 'comentario')">💭 {{ pub.reacciones.comentario || 0 }}</button>
+        <button @click="darReaccion(pub.id, 'compartido')">🔁 {{ pub.reacciones.compartido || 0 }}</button>
+      </div>
+  
+      <div class="respuestas">
+        <div v-for="(resp, idx) in pub.respuestas" :key="idx" class="respuesta">
+          <p><strong>{{ resp.usuario }}</strong>: {{ resp.texto }}</p>
+        </div>
+      </div>
+  
+      <input v-model="nuevasRespuestas[pub.id]" placeholder="Responder..." />
+      <button @click="responderPublicacion(pub.id)">Responder</button>
+    </div>
+  </div>
+  
+  
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- esta ya es independiente es para el registro iniciar seccion y todas las habitaciones apartes
+ es como un nuevo departamento con nuevas habitaciones que llenar -->
+  <section v-if="seccion === 'registro'" class="pagina-auth">
+    <h2>Crea tu cuenta</h2>
+    <form @submit.prevent="registrarUsuario">
+      <input type="text" v-model="registro.nombre" placeholder="Nombre de usuario" required>
+      <input type="email" v-model="registro.email" placeholder="Correo electrónico" required>
+      <input type="password" v-model="registro.password" placeholder="Contraseña" required>
+      <button type="submit">Registrarme</button>
+      <p v-if="registro.error" class="error">{{ registro.error }}</p>
+    </form>
+    <p>¿Ya tienes cuenta? <a href="#" @click="cambiarSeccion ('login')">Iniciar sesión</a></p>
+  </section>
+
+  <section v-if="seccion === 'login'" class="pagina-auth">
+    <h2>Inicia sesión</h2>
+    <form @submit.prevent="iniciarSesion">
+      <input type="email" v-model="login.email" placeholder="Correo electrónico" required>
+      <input type="password" v-model="login.password" placeholder="Contraseña" required>
+      <button type="submit">Entrar</button>
+      <p v-if="login.error" class="error">{{ login.error }}</p>
+    </form>
+    <p>¿No tienes cuenta? <a href="#" @click="cambiarSeccion ('registro')">Crear una cuenta</a></p>
+  </section>
+
+
+  <div v-if="usuarioAutenticado">
+   <!-- 🔐 Menú superior para usuarios autenticados -->
+    <nav v-if="usuarioAutenticado && seccion === 'perfil'" class="perfil-nav">
+      <a href="#miEspacio" @click.prevent="seccion = 'miEspacio'"> 🌹Mi Espacio</a>
+      <a href="#comunidad" @click.prevent="cambiarSeccion ('comunidad')">🫂 Comunidad</a>
+      <a href="#categorias" @click.prevent="seccion = 'categorias'">✍️  Nueva Entrada</a>
+      <a href="#categorias" @click.prevent="seccion = 'creativo'">🏁 Retos</a>
+      <a href="#favoritos" @click.prevent="seccion = 'favoritos'">💖 Favoritos</a>
+      <a href="#progreso" @click.prevent="seccion = 'progreso'">📈 Progreso</a>
+      <a href="#inicio" @click="seccion = 'inicio'"> 🏠 inicio</a>
+      <a href="#" @click.prevent="cerrarSesion">🚪 Cerrar sesión</a>
+    </nav>
+    <!---->
+
+    <!-- ✅ Sección Mi Espacio -->
+   <section v-if="usuarioAutenticado && seccion === 'miEspacio'" class="dashboard-usuario">
+     <main class="bienvenida-usuario">
+       <h2>Bienvenida, {{ usuario.nombre }}</h2>
+       <p>Este es tu espacio personal. Aquí puedes escribir, revisar, conectar y crecer.</p>
+     </main>
+   </section>
+   <!---->
+   
+   <!-- ✅ Sección Perfil del Usuario -->
+   <section v-if="usuarioAutenticado && seccion === 'perfil'" class="pagina-perfil">
+     <div class="perfil-container">
+       <h2>🌿 Mi Perfil</h2>
+       
+       <div class="perfil-info">
+         <p><strong>Nombre:</strong> {{ usuario.nombre }}</p>
+         <p><strong>Correo:</strong> {{ usuario.email }}</p>
+       </div>
+   
+       <div class="perfil-bio">
+         <h3>📝 Sobre mí</h3>
+         <textarea placeholder="Escribe una breve biografía sobre ti..." v-model="usuario.bio"></textarea>
+         <button @click="guardarBio">Guardar bio</button>
+       </div>
+       <div class="perfil-estadisticas">
+        <p>🔥 Racha actual: <strong>{{ rachaEscritura }}</strong> días seguidos escribiendo</p>
+        <p>✍️ Retos completados: <strong>{{ retosCompletados.length }}</strong></p>
+      </div>
+    
+      <div class="perfil-insignias" v-if="insignias.length">
+        <h3>🎖 Insignias obtenidas</h3>
+        <ul>
+          <li v-for="(insignia, index) in insignias" :key="index">🏅 {{ insignia }}</li>
+        </ul>
+      </div>
+
+
+     </div>
+
+   </section>
+   <!---->
+
+
+   </div>
+
+</div>
+
+<script src="https://unpkg.com/vue@3" ></script>
+<script src="blog.js"></script>
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+[
+  {
+    "autor": "laura rosas",
+    "contenido": "j",
+    "tipo": "Creativo",
+    "fecha": "2025-07-18T20:00:14.371Z",
+    "favorito": false,
+    "likes": 0,
+    "comentarios": [],
+    "id": 1752868814379
+  },
+  {
+    "autor": "laura rosas",
+    "contenido": "hola como estas ",
+    "tipo": "EnseñarAlgo",
+    "fecha": "2025-07-18T19:55:07.409Z",
+    "favorito": false,
+    "likes": 0,
+    "comentarios": [],
+    "id": 1752868507415
+  },
+  {
+    "autor": "laura rosas",
+    "contenido": "estoy feliz ",
+    "tipo": "MuroComunitario",
+    "fecha": "2025-07-18T19:47:37.786Z",
+    "favorito": false,
+    "likes": 0,
+    "comentarios": [],
+    "id": 1752868057793
+  },
+  {
+    "autor": "laura rosas",
+    "contenido": "ffaaffa",
+    "tipo": "critica",
+    "fecha": "2025-07-18T19:47:11.930Z",
+    "favorito": false,
+    "likes": 0,
+    "comentarios": [],
+    "id": 1752868031941
+  },
+  {
+    "autor": "laura rosas",
+    "contenido": "estoy feliz ",
+    "tipo": "Reto",
+    "fecha": "2025-07-18T19:46:41.487Z",
+    "favorito": false,
+    "likes": 0,
+    "comentarios": [],
+    "id": 1752868001495
+  }
+]

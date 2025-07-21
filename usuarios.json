@@ -1,0 +1,33 @@
+[
+  {
+    "nombre": "laura rosas",
+    "email": "rosas4087564@gmail.com",
+    "password": "Luciernaga.45"
+  },
+  {
+    "id": 1,
+    "nombre": "laura rosas",
+    "email": "rosas4087564@gmail.com",
+    "password": "123456",
+    "bio": "hola soy laura",
+    "escritos": {
+      "cuento": [],
+      "poema": [],
+      "diario": [],
+      "opinion": [],
+      "postal": [],
+      "miniLibro": [],
+      "enseñanza": []
+    }
+  },
+  {
+    "nombre": "Laura Test",
+    "email": "lauratest@example.com",
+    "password": "123456"
+  },
+  {
+    "nombre": "laura rosas",
+    "email": "laura.rosas.durrani@gmail.com",
+    "password": "Luciernaga.45"
+  }
+]

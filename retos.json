@@ -1,0 +1,36 @@
+[
+  {
+    "id": 1,
+    "tipo": "emocional",
+    "nivel": "profundo",
+    "titulo": "Carta sin destinatario",
+    "descripcion": "Escribe una carta que nunca planeas enviar.",
+    "imagen": null,
+    "respuesta": "esta es una carta sin destinatario de prueba ",
+    "fecha": "15/7/2025",
+    "tipoGuardado": "privado",
+    "contenido": "hola"
+  },
+  {
+    "id": 1,
+    "tipo": "emocional",
+    "nivel": "profundo",
+    "titulo": "Carta sin destinatario",
+    "descripcion": "Escribe una carta que nunca planeas enviar.",
+    "imagen": null,
+    "respuesta": "holll",
+    "fecha": "15/7/2025",
+    "tipoGuardado": "privado"
+  },
+  {
+    "id": 3,
+    "tipo": "flujo",
+    "nivel": "experimental",
+    "titulo": "Escribe sin borrar",
+    "descripcion": "Durante 5 minutos, escribe sin editar ni borrar nada.",
+    "imagen": null,
+    "respuesta": "pruebita",
+    "fecha": "18/7/2025",
+    "tipoGuardado": "público"
+  }
+]
