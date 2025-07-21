@@ -13,7 +13,7 @@ app.use(cors());
 app.use(express.json()); // Keep this here as well, good practice to have it early
 
 app.get('/', (req, res) => {
-  res.send('¡Bienvenida a tu backend de Querido Diario!');
+  res.sendFile(path.join(__dirname, 'public', 'blog.html'));
 });
 
 app.use(express.static(path.join(__dirname, 'public')));
