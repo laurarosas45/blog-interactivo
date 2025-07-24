@@ -2386,302 +2386,97 @@ background-color: #fbeaea;
 }
 
 
-/* ============================= */
-/* ✅ RESPONSIVE GLOBAL CLEANUP */
-/* ============================= */
-
-/* Pantallas medianas: tablet */
-@media (max-width: 768px) {
+/* ============================== */
+/* ✅ MENU RESPONSIVE CORREGIDO  */
+/* ============================== */
 .menu {
+  width: 100%;
+  padding: 20px;
+  background-color: white;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 1rem 1.5rem;
-  gap: 10px;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  border-bottom: 1px solid #ddd;
 }
 
-.menu-logo {
-  font-size: 1.5rem;
+.menu h1 {
+  font-size: 1.6rem;
+  color: #222;
+  margin: 0;
 }
 
 .menu-links {
   display: flex;
-  flex-direction: column;
-  gap: 8px;
-  width: 100%;
+  gap: 20px;
 }
 
 .menu-links a {
+  text-decoration: none;
+  color: #222;
   font-size: 1rem;
-  padding: 4px 0;
+  transition: color 0.2s;
 }
 
-.volver-a-perfil {
-  width: 100%;
-}
-
-.volver-a-perfil button {
-  width: 100%;
-  font-size: 0.95rem;
-  padding: 8px 12px;
-}
-
-.login {
-  align-self: flex-end;
+.menu-links a:hover {
+  color: #b3562f;
 }
 
 .login a {
-  font-size: 0.95rem;
-  padding: 6px 10px;
-}
+  font-size: 1rem;
+  padding: 8px 14px;
+  border: 2px solid #b3562f;
+  border-radius: 4px;
+  color: #b3562f;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
 }
 
+.login a:hover {
+  background-color: #b3562f;
+  color: white;
+}
 
-/* Pantallas pequeñas: celulares */
-/* ======================= */
-/* CELULARES PEQUEÑOS */
-/* ======================= */
-@media (max-width: 600px) {
+/* ============================= */
+/* ✅ RESPONSIVE: Tablets y menos */
+/* ============================= */
+@media (max-width: 1024px) {
   .menu {
-    display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: center;
-    width: 100%;
-    padding: 1rem;
-    background-color: white; /* Cambia según tu diseño */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* sombra opcional para contraste */
-    position: relative;
-    z-index: 100;
-  }
-
-  .menu h1 {
-    font-size: 1.4rem;
-    margin-bottom: 10px;
+    gap: 12px;
   }
 
   .menu-links {
-    width: 100%;
-    display: flex;
     flex-direction: column;
-    gap: 10px;
+    width: 100%;
   }
 
   .menu-links a {
-    font-size: 1rem;
     padding: 6px 0;
-    color: #333;
-    text-decoration: none;
   }
 
   .login {
     align-self: flex-start;
-    margin-top: 10px;
+  }
+}
+
+/* ============================= */
+/* ✅ RESPONSIVE: Celulares      */
+/* ============================= */
+@media (max-width: 600px) {
+  .menu h1 {
+    font-size: 1.4rem;
+  }
+
+  .menu-links a {
+    font-size: 0.95rem;
   }
 
   .login a {
     font-size: 0.95rem;
-    padding: 6px 10px;
-  }
-
-  .btn-outline {
-    font-size: 0.9rem;
-    padding: 8px 14px;
+    padding: 6px 12px;
   }
 }
-
-
-/* =========================== */
-/* TABLETS Y CELULARES GRANDES */
-/* =========================== */
-@media (max-width: 1024px) {
-.menu {
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 1rem 1.5rem;
-  gap: 10px;
-}
-
-.menu-logo {
-  font-size: 1.5rem;
-}
-
-.menu-links {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  width: 100%;
-}
-
-.menu-links a {
-  font-size: 0.95rem;
-  padding: 4px 0;
-}
-
-.volver-a-perfil {
-  width: 100%;
-}
-
-.volver-a-perfil button {
-  width: 100%;
-  font-size: 0.95rem;
-  padding: 8px 12px;
-}
-
-.login {
-  align-self: flex-end;
-}
-
-.login a {
-  font-size: 0.95rem;
-  padding: 6px 10px;
-}
-
-.btn-outline {
-  padding: 10px 16px;
-  font-size: 0.9rem;
-}
-
-.texto-sobre-imagen {
-  left: 5%;
-  bottom: 10%;
-  width: 90%;
-}
-
-.texto-sobre-imagen h2 {
-  font-size: 1.8rem;
-}
-
-.texto-sobre-imagen p {
-  font-size: 1rem;
-}
-
-.contenido-invitacion {
-  flex-direction: column;
-  gap: 40px;
-  padding: 0 10px;
-}
-
-.video-invitacion video {
-  width: 100%;
-  height: auto;
-}
-
-.contenedor-momentos {
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-}
-
-.momento img {
-  width: 150px;
-  height: 150px;
-}
-
-.texto-invitacion {
-  padding: 0 15px;
-  text-align: center;
-}
-
-.texto-invitacion h3 {
-  font-size: 1.6rem;
-}
-
-.texto-invitacion p {
-  font-size: 1rem;
-}
-
-.btn-escribe {
-  font-size: 0.9rem;
-  padding: 12px 20px;
-}
-
-.formulario-contacto input,
-.formulario-contacto textarea {
-  font-size: 0.95rem;
-}
-
-.footer-enlaces,
-.perfil-nav {
-  flex-direction: column;
-  gap: 12px;
-  align-items: center;
-  padding: 20px;
-}
-
-.enfoque-box {
-  padding: 40px 20px;
-}
-
-.enfoque-box h2 {
-  font-size: 1.8rem;
-}
-}
-
-/* ======================= */
-/* CELULARES PEQUEÑOS */
-/* ======================= */
-@media (max-width: 480px) {
-.menu-logo {
-  font-size: 1.3rem;
-}
-
-.menu-links a {
-  font-size: 0.9rem;
-}
-
-.btn-outline,
-.btn-ver-todo,
-.btn-mas-info {
-  font-size: 0.85rem;
-  padding: 8px 14px;
-}
-
-.texto-sobre-imagen {
-  left: 4%;
-  bottom: 5%;
-}
-
-.texto-sobre-imagen h2 {
-  font-size: 1.4rem;
-}
-
-.texto-sobre-imagen p {
-  font-size: 0.95rem;
-}
-
-.momento img {
-  width: 120px;
-  height: 120px;
-}
-
-.seccion-sobre-mi h2,
-.seccion-contacto h2 {
-  font-size: 1.6rem;
-}
-
-.seccion-sobre-mi p,
-.seccion-contacto p {
-  font-size: 1rem;
-}
-
-.perfil-nav {
-  flex-direction: column;
-  gap: 10px;
-}
-
-.footer-enlaces {
-  flex-direction: column;
-  gap: 10px;
-}
-
-.contenido-invitacion {
-  padding: 0 10px;
-}
-
-.video-invitacion video {
-  max-width: 100%;
-}
-}
-
-/* prueba para forzar git */
