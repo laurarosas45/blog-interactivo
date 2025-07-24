@@ -2436,6 +2436,75 @@ background-color: #fbeaea;
 }
 }
 
+/* Responsive para pantallas de hasta 768px */
+@media (max-width: 768px) {
+  /* NAV / HEADER */
+  .menu {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    align-items: center;
+    text-align: center;
+  }
+
+  .menu h1 {
+    font-size: 1.4rem;
+  }
+
+  .menu a {
+    font-size: 0.95rem;
+  }
+
+  /* HERO */
+  .hero img {
+    width: 100%;
+    height: auto;
+    margin-top: 0;
+  }
+
+  .texto-sobre-imagen {
+    top: 50%;
+    left: 5%;
+    transform: translateY(-50%);
+    text-align: center;
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+
+  /* SECCIONES CON GRID */
+  .grid-distribuidores,
+  .imagenes-section2,
+  .imagenes-section5,
+  .productos-grid {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1rem;
+    padding: 0 1rem;
+  }
+
+  /* NEWSLETTER */
+  .newsletter-container {
+    flex-direction: column;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .newsletter-container input,
+  .newsletter-container button {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  /* TEXTO GENERAL */
+  p, h2, h3 {
+    font-size: 1rem;
+  }
+
+  /* BOTONES */
+  .btn-outline {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+  }
+}
 
 /* Pantallas pequeñas: celulares */
 @media (max-width: 600px) {
