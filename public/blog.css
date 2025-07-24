@@ -2435,6 +2435,30 @@ background-color: #fbeaea;
   padding: 6px 10px;
 }
 }
+@media (max-width: 768px) {
+  .categoria-tarjeta {
+    width: 100%;
+    max-width: 90%;
+    margin: auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .categoria-tarjeta p,
+  .categoria-tarjeta h2,
+  .categoria-tarjeta span {
+    text-align: center;
+    line-height: 1.4;
+    font-size: 1rem;
+  }
+
+  .categoria-tarjeta button {
+    margin-top: 1rem;
+    font-size: 1rem;
+  }
+}
 
 /* Responsive para pantallas de hasta 768px */
 /* Pantallas pequeñas: celulares */
