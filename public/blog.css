@@ -319,38 +319,6 @@ margin: 1rem 3rem 00;
 }
 
 
-@media (min-width: 1024px) {
-  .contenido-invitacion {
-    flex-wrap: nowrap;
-    align-items: flex-start;
-  }
-
-  .video-invitacion {
-    justify-content: flex-start;
-  }
-
-  .texto-invitacion {
-    padding-left: 60px;
-  }
-}
-@media (max-width: 1023px) {
-  .video-invitacion {
-    margin-bottom: 40px;
-    justify-content: center;
-  }
-
-  .texto-invitacion {
-    padding-left: 0;
-    text-align: center;
-  }
-}
-.video-embed {
-  width: 100%;
-  max-width: 720px;
-  aspect-ratio: 16 / 9;
-  border-radius: 12px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-}
 /* footer pie de pagina */
 .footer-blog {
 background-color: #f7f1ee;
@@ -452,15 +420,6 @@ transition: background-color 0.3s ease;
 background-color: #8c412c;
 }
 
-@media screen and (max-width: 600px) {
-.seccion-sobre-mi h2 {
-  font-size: 2rem;
-}
-
-.seccion-sobre-mi p {
-  font-size: 1rem;
-}
-}
 
 /* seccion footer "contacto" */
 .seccion-contacto {
@@ -2387,121 +2346,146 @@ background-color: #fbeaea;
 
 
 /* ============================= */
-/* ✅ RESPONSIVE GLOBAL CLEANUP */
+/* ✅ RESPONSIVE MEDIA QUERIES  */
 /* ============================= */
 
-/* Pantallas medianas: tablet */
-@media (max-width: 768px) {
-.menu {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 1rem 1.5rem;
-  gap: 10px;
+/* Tablets y celulares grandes (<= 1024px) */
+@media (max-width: 1024px) {
+  .menu {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem 1.5rem;
+    gap: 10px;
+  }
+
+  .menu-logo {
+    font-size: 1.5rem;
+  }
+
+  .menu-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .menu-links a {
+    font-size: 0.95rem;
+    padding: 4px 0;
+  }
+
+  .volver-a-perfil {
+    width: 100%;
+  }
+
+  .volver-a-perfil button {
+    width: 100%;
+    font-size: 0.95rem;
+    padding: 8px 12px;
+  }
+
+  .login {
+    align-self: flex-end;
+  }
+
+  .login a {
+    font-size: 0.95rem;
+    padding: 6px 10px;
+  }
+
+  .btn-outline {
+    padding: 10px 16px;
+    font-size: 0.9rem;
+  }
+
+  .texto-sobre-imagen {
+    left: 5%;
+    bottom: 10%;
+    width: 90%;
+  }
+
+  .texto-sobre-imagen h2 {
+    font-size: 1.8rem;
+  }
+
+  .texto-sobre-imagen p {
+    font-size: 1rem;
+  }
+
+  .contenido-invitacion {
+    flex-direction: column;
+    gap: 40px;
+    padding: 0 10px;
+  }
+
+  .video-invitacion video {
+    width: 100%;
+    height: auto;
+  }
+
+  .contenedor-momentos {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .momento img {
+    width: 150px;
+    height: 150px;
+  }
+
+  .texto-invitacion {
+    padding: 0 15px;
+    text-align: center;
+  }
+
+  .texto-invitacion h3 {
+    font-size: 1.6rem;
+  }
+
+  .texto-invitacion p {
+    font-size: 1rem;
+  }
+
+  .btn-escribe {
+    font-size: 0.9rem;
+    padding: 12px 20px;
+  }
+
+  .formulario-contacto input,
+  .formulario-contacto textarea {
+    font-size: 0.95rem;
+  }
+
+  .footer-enlaces,
+  .perfil-nav {
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .enfoque-box {
+    padding: 40px 20px;
+  }
+
+  .enfoque-box h2 {
+    font-size: 1.8rem;
+  }
+
+  .video-invitacion {
+    margin-bottom: 40px;
+    justify-content: center;
+  }
+
+  .texto-invitacion {
+    padding-left: 0;
+    text-align: center;
+  }
 }
 
-.menu-logo {
-  font-size: 1.5rem;
-}
 
-.menu-links {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  width: 100%;
-}
-
-.menu-links a {
-  font-size: 1rem;
-  padding: 4px 0;
-}
-
-.volver-a-perfil {
-  width: 100%;
-}
-
-.volver-a-perfil button {
-  width: 100%;
-  font-size: 0.95rem;
-  padding: 8px 12px;
-}
-
-.login {
-  align-self: flex-end;
-}
-
-.login a {
-  font-size: 0.95rem;
-  padding: 6px 10px;
-}
-}
-
-
-/* Pantallas pequeñas: celulares */
-@media (max-width: 600px) {
-.menu h1 {
-  font-size: 1.3rem;
-}
-
-.menu-links a {
-  font-size: 0.9rem;
-}
-
-.btn-outline,
-.btn-ver-todo,
-.btn-mas-info {
-  font-size: 0.85rem;
-  padding: 8px 14px;
-}
-
-.texto-sobre-imagen {
-  left: 4%;
-  bottom: 5%;
-}
-
-.texto-sobre-imagen h2 {
-  font-size: 1.4rem;
-}
-
-.texto-sobre-imagen p {
-  font-size: 0.95rem;
-}
-
-.momento img {
-  width: 120px;
-  height: 120px;
-}
-
-.seccion-sobre-mi h2,
-.seccion-contacto h2 {
-  font-size: 1.6rem;
-}
-
-.seccion-sobre-mi p,
-.seccion-contacto p {
-  font-size: 1rem;
-}
-
-.perfil-nav {
-  flex-direction: column;
-  gap: 10px;
-}
-
-.footer-enlaces {
-  flex-direction: column;
-  gap: 10px;
-}
-
-.contenido-invitacion {
-  padding: 0 10px;
-}
-
-.video-invitacion video {
-  max-width: 100%;
-}
-/* ======================= */
-/* CELULARES PEQUEÑOS */
-/* ======================= */
+/* Celulares medianos y pequeños (<= 600px) */
 @media (max-width: 600px) {
   .menu {
     display: flex;
@@ -2510,8 +2494,8 @@ background-color: #fbeaea;
     justify-content: center;
     width: 100%;
     padding: 1rem;
-    background-color: white; /* Cambia según tu diseño */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* sombra opcional para contraste */
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     position: relative;
     z-index: 100;
   }
@@ -2529,7 +2513,7 @@ background-color: #fbeaea;
   }
 
   .menu-links a {
-    font-size: 1rem;
+    font-size: 0.95rem;
     padding: 6px 0;
     color: #333;
     text-decoration: none;
@@ -2549,202 +2533,86 @@ background-color: #fbeaea;
     font-size: 0.9rem;
     padding: 8px 14px;
   }
+
+  .texto-sobre-imagen {
+    left: 4%;
+    bottom: 5%;
+  }
+
+  .texto-sobre-imagen h2 {
+    font-size: 1.4rem;
+  }
+
+  .texto-sobre-imagen p {
+    font-size: 0.95rem;
+  }
+
+  .momento img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .seccion-sobre-mi h2,
+  .seccion-contacto h2 {
+    font-size: 1.6rem;
+  }
+
+  .seccion-sobre-mi p,
+  .seccion-contacto p {
+    font-size: 1rem;
+  }
+
+  .perfil-nav,
+  .footer-enlaces {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .contenido-invitacion {
+    padding: 0 10px;
+  }
+
+  .video-invitacion video {
+    max-width: 100%;
+  }
+
+  .seccion-sobre-mi h2 {
+    font-size: 2rem;
+  }
 }
 
-}
 
-
-/* =========================== */
-/* TABLETS Y CELULARES GRANDES */
-/* =========================== */
-@media (max-width: 1024px) {
-.menu {
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 1rem 1.5rem;
-  gap: 10px;
-}
-
-.menu-logo {
-  font-size: 1.5rem;
-}
-
-.menu-links {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  width: 100%;
-}
-
-.menu-links a {
-  font-size: 0.95rem;
-  padding: 4px 0;
-}
-
-.volver-a-perfil {
-  width: 100%;
-}
-
-.volver-a-perfil button {
-  width: 100%;
-  font-size: 0.95rem;
-  padding: 8px 12px;
-}
-
-.login {
-  align-self: flex-end;
-}
-
-.login a {
-  font-size: 0.95rem;
-  padding: 6px 10px;
-}
-
-.btn-outline {
-  padding: 10px 16px;
-  font-size: 0.9rem;
-}
-
-.texto-sobre-imagen {
-  left: 5%;
-  bottom: 10%;
-  width: 90%;
-}
-
-.texto-sobre-imagen h2 {
-  font-size: 1.8rem;
-}
-
-.texto-sobre-imagen p {
-  font-size: 1rem;
-}
-
-.contenido-invitacion {
-  flex-direction: column;
-  gap: 40px;
-  padding: 0 10px;
-}
-
-.video-invitacion video {
-  width: 100%;
-  height: auto;
-}
-
-.contenedor-momentos {
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-}
-
-.momento img {
-  width: 150px;
-  height: 150px;
-}
-
-.texto-invitacion {
-  padding: 0 15px;
-  text-align: center;
-}
-
-.texto-invitacion h3 {
-  font-size: 1.6rem;
-}
-
-.texto-invitacion p {
-  font-size: 1rem;
-}
-
-.btn-escribe {
-  font-size: 0.9rem;
-  padding: 12px 20px;
-}
-
-.formulario-contacto input,
-.formulario-contacto textarea {
-  font-size: 0.95rem;
-}
-
-.footer-enlaces,
-.perfil-nav {
-  flex-direction: column;
-  gap: 12px;
-  align-items: center;
-  padding: 20px;
-}
-
-.enfoque-box {
-  padding: 40px 20px;
-}
-
-.enfoque-box h2 {
-  font-size: 1.8rem;
-}
-}
-
-/* ======================= */
-/* CELULARES PEQUEÑOS */
-/* ======================= */
+/* Celulares muy pequeños (<= 480px) */
 @media (max-width: 480px) {
-.menu-logo {
-  font-size: 1.3rem;
+  .menu-logo {
+    font-size: 1.3rem;
+  }
+
+  .menu-links a {
+    font-size: 0.9rem;
+  }
+
+  .btn-outline,
+  .btn-ver-todo,
+  .btn-mas-info {
+    font-size: 0.85rem;
+    padding: 8px 14px;
+  }
 }
 
-.menu-links a {
-  font-size: 0.9rem;
-}
 
-.btn-outline,
-.btn-ver-todo,
-.btn-mas-info {
-  font-size: 0.85rem;
-  padding: 8px 14px;
-}
+/* Escritorio ancho (>= 1024px) */
+@media (min-width: 1024px) {
+  .contenido-invitacion {
+    flex-wrap: nowrap;
+    align-items: flex-start;
+  }
 
-.texto-sobre-imagen {
-  left: 4%;
-  bottom: 5%;
-}
+  .video-invitacion {
+    justify-content: flex-start;
+  }
 
-.texto-sobre-imagen h2 {
-  font-size: 1.4rem;
+  .texto-invitacion {
+    padding-left: 60px;
+  }
 }
-
-.texto-sobre-imagen p {
-  font-size: 0.95rem;
-}
-
-.momento img {
-  width: 120px;
-  height: 120px;
-}
-
-.seccion-sobre-mi h2,
-.seccion-contacto h2 {
-  font-size: 1.6rem;
-}
-
-.seccion-sobre-mi p,
-.seccion-contacto p {
-  font-size: 1rem;
-}
-
-.perfil-nav {
-  flex-direction: column;
-  gap: 10px;
-}
-
-.footer-enlaces {
-  flex-direction: column;
-  gap: 10px;
-}
-
-.contenido-invitacion {
-  padding: 0 10px;
-}
-
-.video-invitacion video {
-  max-width: 100%;
-}
-}
-
-/* prueba para forzar git */
