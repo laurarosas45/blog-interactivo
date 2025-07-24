@@ -106,3 +106,8 @@ app.post('/api/login', (req, res) => {
 
   res.json({ mensaje: 'Inicio de sesión exitoso', nombre: usuario.nombre, token: 'fake-token' });
 });
+
+app.use((err, req, res, next) => {
+  console.error('❌ Error en el servidor:', err);
+  res.status(500).json({ error: 'Error interno del servidor' });
+});

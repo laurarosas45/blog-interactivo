@@ -1,5 +1,23 @@
 [
   {
+    "id": 1753387508309,
+    "usuario": "laura rosas",
+    "texto": "esto es una microcritica",
+    "tipo": "critica",
+    "fecha": "24/7/2025",
+    "hora": "2:05:08 p.m.",
+    "favorito": false,
+    "likes": 0,
+    "respuestas": [
+      {
+        "usuario": "laura rosas",
+        "texto": "hola como estas"
+      }
+    ],
+    "nuevaRespuesta": "",
+    "mostrarRespuestas": false
+  },
+  {
     "id": 1752868031923,
     "usuario": "laura rosas",
     "texto": "ffaaffa",

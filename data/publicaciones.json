@@ -1,6 +1,46 @@
 [
   {
     "autor": "laura rosas",
+    "contenido": "esto es una microcritica",
+    "tipo": "critica",
+    "fecha": "2025-07-24T20:05:08.313Z",
+    "favorito": false,
+    "likes": 0,
+    "comentarios": [],
+    "id": 1753387508320
+  },
+  {
+    "autor": "laura rosas",
+    "contenido": "las mariposas traen la melancolia del amanecer ",
+    "tipo": "Creativo",
+    "fecha": "2025-07-24T20:04:28.250Z",
+    "favorito": false,
+    "likes": 0,
+    "comentarios": [],
+    "id": 1753387468254
+  },
+  {
+    "autor": "laura rosas",
+    "contenido": "hola ",
+    "tipo": "Reto",
+    "fecha": "2025-07-24T20:03:21.286Z",
+    "favorito": false,
+    "likes": 0,
+    "comentarios": [],
+    "id": 1753387401291
+  },
+  {
+    "autor": "laura rosas",
+    "contenido": "hola como estas ",
+    "tipo": "Mini Libro",
+    "fecha": "2025-07-24T20:02:42.520Z",
+    "favorito": false,
+    "likes": 0,
+    "comentarios": [],
+    "id": 1753387362529
+  },
+  {
+    "autor": "laura rosas",
     "contenido": "j",
     "tipo": "Creativo",
     "fecha": "2025-07-18T20:00:14.371Z",
