@@ -2438,67 +2438,6 @@ background-color: #fbeaea;
 
 
 /* Pantallas pequeñas: celulares */
-@media (max-width: 600px) {
-.menu h1 {
-  font-size: 1.3rem;
-}
-
-.menu-links a {
-  font-size: 0.9rem;
-}
-
-.btn-outline,
-.btn-ver-todo,
-.btn-mas-info {
-  font-size: 0.85rem;
-  padding: 8px 14px;
-}
-
-.texto-sobre-imagen {
-  left: 4%;
-  bottom: 5%;
-}
-
-.texto-sobre-imagen h2 {
-  font-size: 1.4rem;
-}
-
-.texto-sobre-imagen p {
-  font-size: 0.95rem;
-}
-
-.momento img {
-  width: 120px;
-  height: 120px;
-}
-
-.seccion-sobre-mi h2,
-.seccion-contacto h2 {
-  font-size: 1.6rem;
-}
-
-.seccion-sobre-mi p,
-.seccion-contacto p {
-  font-size: 1rem;
-}
-
-.perfil-nav {
-  flex-direction: column;
-  gap: 10px;
-}
-
-.footer-enlaces {
-  flex-direction: column;
-  gap: 10px;
-}
-
-.contenido-invitacion {
-  padding: 0 10px;
-}
-
-.video-invitacion video {
-  max-width: 100%;
-}
 /* ======================= */
 /* CELULARES PEQUEÑOS */
 /* ======================= */
@@ -2549,8 +2488,6 @@ background-color: #fbeaea;
     font-size: 0.9rem;
     padding: 8px 14px;
   }
-}
-
 }
 
 
