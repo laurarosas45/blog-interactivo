@@ -2695,4 +2695,41 @@ background-color: #fbeaea;
 }
 }
 
+@media (max-width: 397px) {
+  /* Estilos específicos para celulares de 397px o menos */
+
+  .menu h1 {
+    font-size: 1.2rem;
+  }
+
+  .menu-links a {
+    font-size: 0.85rem;
+    padding: 4px 0;
+  }
+
+  .btn-outline {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+  }
+
+  .texto-sobre-imagen h2 {
+    font-size: 1.3rem;
+  }
+
+  .texto-sobre-imagen p {
+    font-size: 0.9rem;
+  }
+
+  .momento img {
+    width: 110px;
+    height: 110px;
+  }
+
+  .seccion-sobre-mi p,
+  .seccion-contacto p {
+    font-size: 0.95rem;
+  }
+}
+
+
 /* prueba para forzar git */
