@@ -91,7 +91,7 @@ app.post('/api/register', (req, res) => {
   const nuevoUsuario = { nombre, email, password };
   usuarios.push(nuevoUsuario);
   guardarUsuarios(usuarios);
-  res.json({ nombre: nuevoUsuario.nombre, token: 'fake-token' });
+  res.json({ mensaje: 'Registro exitoso' });
 });
 
 // Login
