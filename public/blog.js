@@ -198,7 +198,6 @@ createApp({
       window.location.hash = nueva;
     },
 
-    // interactua con otros 
     darLikeInteracciones(pub) {
       pub.likes++;
       fetch(`http://localhost:3000/api/publicaciones/${pub.id}`, {
@@ -989,7 +988,14 @@ const res = await fetch('https://blog-interactivo.onrender.com/api/publicaciones
           localStorage.setItem('token', data.token);
           localStorage.setItem('nombre', data.nombre || 'Mi Usuario');
           localStorage.setItem('email', this.registro.email); // Use registro.email for the new user
-
+          console.log('📦 Datos guardados:', {
+            nombre: data.nombre,
+            token: data.token,
+            email: this.registro.email
+          });
+          console.log('✅ Usuario autenticado:', this.usuarioAutenticado);
+          console.log('➡️ Sección actual:', this.seccion);
+          
           this.usuario = {
             nombre: data.nombre || 'Mi Usuario',
             email: this.registro.email, // Corrected
@@ -1009,6 +1015,26 @@ const res = await fetch('https://blog-interactivo.onrender.com/api/publicaciones
       }
     },
 
+    verificarAutenticacion() {
+      const token = localStorage.getItem('token');
+      const userEmail = localStorage.getItem('email');
+      const userName = localStorage.getItem('nombre');
+      const userBio = localStorage.getItem('bio');
+      const userEstado = localStorage.getItem('estadoEmocional');
+    
+      if (token && userEmail && userName) {
+        this.usuarioAutenticado = true;
+        this.usuario = {
+          nombre: userName,
+          email: userEmail,
+          bio: userBio || '',
+          estadoEmocional: userEstado || ''
+        };
+      } else {
+        this.usuarioAutenticado = false;
+      }
+    },
+    
     async iniciarSesion() {
       try {
         const response = await fetch('https://blog-interactivo.onrender.com/api/login', {
@@ -1198,64 +1224,50 @@ const res = await fetch('https://blog-interactivo.onrender.com/api/publicaciones
   },  
 
   mounted() {
-        // Verificación de token y datos guardados
-        const token = localStorage.getItem('token');
-        const userEmail = localStorage.getItem('email');
-        const userName = localStorage.getItem('nombre');
-        const userBio = localStorage.getItem('bio');
-        const userEstado = localStorage.getItem('estadoEmocional');
-
-        if (token && userEmail && userName) {
-          this.usuarioAutenticado = true;
+    // ✅ Revisión centralizada
+    this.verificarAutenticacion();
+  
+    console.log('🚀 mounted():', {
+      token: localStorage.getItem('token'),
+      usuarioAutenticado: this.usuarioAutenticado,
+    });
+  
+    if (this.usuarioAutenticado) {
+      this.cargarPerfil();
+    }
+  
+    fetch('https://blog-interactivo.onrender.com/api/perfil')
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.email) {
           this.usuario = {
-            nombre: userName,
-            email: userEmail,
-            bio: userBio || '',
-            estadoEmocional: userEstado || ''
+            nombre: data.nombre,
+            email: data.email,
+            bio: data.bio,
+            estadoEmocional: data.estadoEmocional
           };
-          this.cargarPerfil();
-        } else {
-          this.usuarioAutenticado = false;
+          localStorage.setItem('nombre', data.nombre);
+          localStorage.setItem('email', data.email);
+          localStorage.setItem('bio', data.bio);
+          localStorage.setItem('estadoEmocional', data.estadoEmocional);
         }
-    
-    
-        fetch('https://blog-interactivo.onrender.com/api/perfil')
-        .then(res => res.json())
-        .then(data => {
-          if (data && data.email) {
-            this.usuario = {
-              nombre: data.nombre,
-              email: data.email,
-              bio: data.bio,
-              estadoEmocional: data.estadoEmocional
-            };
-            localStorage.setItem('nombre', data.nombre);
-            localStorage.setItem('email', data.email);
-            localStorage.setItem('bio', data.bio);
-            localStorage.setItem('estadoEmocional', data.estadoEmocional);
-          }
-        })
-        .catch(err => {
-          console.error('❌ Error al cargar perfil:', err);
-        });
+      })
+      .catch(err => {
+        console.error('❌ Error al cargar perfil:', err);
+      });
   
-  
-    // Leer hash
     let hash = window.location.hash.replace('#', '');
-
-    // Solo cambiar de sección si NO estás autenticada
     if (!this.usuarioAutenticado) {
       this.seccion = (hash === '' || hash === '/') ? 'inicio' : hash;
     }
-      
-    // Escuchar cambios de hash
+  
     window.addEventListener('hashchange', () => {
       let nuevaSeccion = window.location.hash.replace('#', '');
       this.seccion = (nuevaSeccion === '' || nuevaSeccion === '/') ? 'inicio' : nuevaSeccion;
       console.log('Sección actualizada por hashchange:', this.seccion);
   
       fetch('https://blog-interactivo.onrender.com/api/retos')
-      .then(res => res.json())
+        .then(res => res.json())
         .then(data => {
           this.publicaciones = data.map(pub => ({
             ...pub,
@@ -1272,19 +1284,17 @@ const res = await fetch('https://blog-interactivo.onrender.com/api/publicaciones
       if (this.seccion === 'interacciones') this.cargarPublicaciones();
     });
   
-    // Cargar mapa si existe
     this.$nextTick(() => {
       if (document.getElementById('mapa')) this.iniciarMapa();
     });
   
     this.cargarMensajesMapa();
   
-    // Retos (por si se accede sin cambiar hash)
     if (this.usuarioAutenticado) {
       this.cargarRetosCompletados();
     }
   }
-  
+    
   
 
 }).mount('#app');
