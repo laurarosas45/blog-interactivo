@@ -1242,8 +1242,12 @@ const res = await fetch('https://blog-interactivo.onrender.com/api/publicaciones
   
     // Leer hash
     let hash = window.location.hash.replace('#', '');
-    this.seccion = (hash === '' || hash === '/') ? 'inicio' : hash;
-  
+
+    // Solo cambiar de sección si NO estás autenticada
+    if (!this.usuarioAutenticado) {
+      this.seccion = (hash === '' || hash === '/') ? 'inicio' : hash;
+    }
+      
     // Escuchar cambios de hash
     window.addEventListener('hashchange', () => {
       let nuevaSeccion = window.location.hash.replace('#', '');
