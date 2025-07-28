@@ -13,8 +13,6 @@ createApp({
       tipoSeleccionado: 'Todos',
 
 
-      muro: [],
-      nuevaPublicacionMuro: '',
       marcas: [], // Aquí se guardan las marcas de todos los escritores
       coordenadasUsuario: null,
       mensajeMapa: '',
@@ -53,11 +51,6 @@ createApp({
 
       publicacionesInteracciones: [],
       publicaciones: [], // las publicaciones vendrán del backend
-
-
-
-
-
 
       metas: [
         { texto: 'Escribir al menos 3 veces por semana', completado: 1, total: 3 },
@@ -136,15 +129,6 @@ createApp({
   },
 
   computed: {
-    tituloAporteClub() {
-      switch (this.tipoAporteClub) {
-        case 'frase': return '📖 Compartir frase';
-        case 'debate': return '📢 Abrir debate';
-        case 'opinion': return '🧠 Compartir opinión sobre el tema del mes';
-        case 'critica': return '📝 Compartir microcrítica';
-        default: return '📝 Compartir aporte';
-      }
-    },
     
     filteredCriticas() {
       if (this.filtroTipo === 'todos') return this.criticasClub;
@@ -204,7 +188,6 @@ createApp({
         this.cargarRetosCompletados();
       } else if (nueva === 'club') {
         this.obtenerCriticasClub();
-      } else if (nueva === 'muro') {
         this.cargarMuro();
       } else if (nueva === 'mapa') {
         this.initMapa();
@@ -227,10 +210,6 @@ createApp({
           if (!res.ok) throw new Error("No se pudo actualizar el like");
         })
         .catch(err => console.error("Error al actualizar like:", err));
-    },
-        toggleFavorito(pub) {
-      pub.favorito = !pub.favorito;
-      this.actualizarPublicacion(pub);
     },
     actualizarPublicacion(pub) {
       fetch(`/api/publicaciones/${pub.id}`, {
@@ -733,30 +712,7 @@ const res = await fetch('https://blog-interactivo.onrender.com/api/publicaciones
         }
       });
     },
-    async cargarMuro() {
-      try {
-        const res = await fetch('http://localhost:3000/api/muro');
-        const data = await res.json();
-        this.publicacionesMuro = data;
-      } catch (err) {
-        console.error('❌ Error al cargar el muro:', err);
-      }
-    },
-  
 
-    // Reaccionar (❤️ 💭 🔁)
-    async darReaccion(id, tipo) {
-      try {
-        await fetch(`https://blog-interactivo.onrender.com/api/muro/${id}/reaccion`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ tipo })
-        });
-        this.cargarMuro();
-      } catch (err) {
-        console.error('❌ Error al dar reacción:', err);
-      }
-    },
   
     // Responder a una publicación
     async responderPublicacion(id) {
@@ -778,81 +734,6 @@ const res = await fetch('https://blog-interactivo.onrender.com/api/publicaciones
         console.error('❌ Error al responder publicación:', err);
       }
     },
-    
-        
-    
-    
-    // 📥 Cargar muro
-    async cargarMuro() {
-  try {
-    const res = await fetch('https://blog-interactivo.onrender.com/api/muro');
-    const data = await res.json();
-    this.muro = data;
-  } catch (err) {
-    console.error('❌ Error al cargar muro:', err);
-  }
-    },
-
-    async publicarEnMuro() {
-  if (!this.nuevaPublicacionMuro.trim()) return;
-
-  const nueva = {
-    usuario: this.usuario.nombre || 'Anónimo',
-    texto: this.nuevaPublicacionMuro.trim()
-  };
-
-  try {
-    const res = await fetch('https://blog-interactivo.onrender.com/api/muro', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(nueva)
-    });
-    const pub = await res.json();
-    this.muro.unshift(pub);
-    this.nuevaPublicacionMuro = '';
-  } catch (err) {
-    console.error('❌ Error al publicar en muro:', err);
-  }
-    },
-
-    async reaccionarMuro(pub, tipo) {
-  try {
-    const res = await fetch(`https://blog-interactivo.onrender.com/api/muro/${pub.id}/reaccion`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ tipo })
-    });
-    const actualizada = await res.json();
-    pub.reacciones = actualizada.reacciones;
-  } catch (err) {
-    console.error('❌ Error al reaccionar:', err);
-  }
-    },
-
-    async responderMuro(pub) {
-  if (!pub.nuevaRespuesta || !pub.nuevaRespuesta.trim()) return;
-
-  const respuesta = {
-    usuario: this.usuario.nombre || 'Anónimo',
-    texto: pub.nuevaRespuesta.trim()
-  };
-
-  try {
-    const res = await fetch(`https://blog-interactivo.onrender.com/api/muro/${pub.id}/responder`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(respuesta)
-    });
-    const actualizado = await res.json();
-    pub.respuestas = actualizado.respuestas;
-    pub.nuevaRespuesta = '';
-  } catch (err) {
-    console.error('❌ Error al responder:', err);
-  }
-    },
-
-
-
 
     // --- Club de Escritura Methods ---
     darLikeClub(id) {
@@ -935,9 +816,6 @@ const res = await fetch('https://blog-interactivo.onrender.com/api/publicaciones
       .catch(err => console.error(err));
     },
     
-    
-    
-
     // --- Retos de Escritura Methods ---
     verDetalleReto(index) {
       // Se crea una copia del reto para edición sin modificar el original aún
@@ -1386,7 +1264,6 @@ const res = await fetch('https://blog-interactivo.onrender.com/api/publicaciones
       if (this.seccion === 'publicaciones') this.cargarPublicaciones();
       if (this.seccion === 'retos') this.cargarRetosCompletados();
       if (this.seccion === 'misEscritos') this.cargarMisEscritos();
-      if (this.seccion === 'muro') this.cargarMuro();
       if (this.seccion === 'club') this.obtenerCriticasClub();
       if (this.seccion === 'interacciones') this.cargarPublicaciones();
     });
