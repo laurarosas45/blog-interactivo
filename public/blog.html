@@ -409,14 +409,6 @@
   </div>
 
   <div class="comunidad-grid">
-    <div class="comunidad-card">
-      <h3>📝 Publicaciones públicas</h3>
-      <p>
-        Explora lo que otros usuarios han compartido con el mundo: cuentos, reflexiones, poemas, ideas.
-        Puedes ordenarlas por más recientes, más leídas o por categoría.
-      </p>
-      <button v-if="usuarioAutenticado" @click="seccion = 'publicaciones'">Ver publicaciones</button>
-    </div>
 
     <div class="comunidad-card">
       <h3>💬 Interactúa con otros</h3>
@@ -443,14 +435,6 @@
       <button v-if="usuarioAutenticado"  @click="seccion = 'club' ">Unirme al club</button>
     </div>
     
-    <div class="comunidad-card">
-      <h3>📣 Muro comunitario</h3>
-      <p>
-        Escribe cómo te sientes hoy, lanza una pregunta, comparte un pensamiento breve. Este muro es libre y tu voz importa.
-      </p>
-      <button v-if="usuarioAutenticado"  @click="seccion = 'muro'">Ir al muro</button>
-    </div>
-
     <div class="comunidad-card">
       <h3>🌍 Mapa de escritores</h3>
       <p>
