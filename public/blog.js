@@ -198,6 +198,7 @@ createApp({
       window.location.hash = nueva;
     },
 
+    // interactua con otros 
     darLikeInteracciones(pub) {
       pub.likes++;
       fetch(`http://localhost:3000/api/publicaciones/${pub.id}`, {
@@ -733,6 +734,72 @@ const res = await fetch('https://blog-interactivo.onrender.com/api/publicaciones
         console.error('❌ Error al responder publicación:', err);
       }
     },
+    
+        
+    
+    
+    // 📥 Cargar muro
+
+    async publicarEnMuro() {
+  if (!this.nuevaPublicacionMuro.trim()) return;
+
+  const nueva = {
+    usuario: this.usuario.nombre || 'Anónimo',
+    texto: this.nuevaPublicacionMuro.trim()
+  };
+
+  try {
+    const res = await fetch('https://blog-interactivo.onrender.com/api/muro', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(nueva)
+    });
+    const pub = await res.json();
+    this.muro.unshift(pub);
+    this.nuevaPublicacionMuro = '';
+  } catch (err) {
+    console.error('❌ Error al publicar en muro:', err);
+  }
+    },
+
+    async reaccionarMuro(pub, tipo) {
+  try {
+    const res = await fetch(`https://blog-interactivo.onrender.com/api/muro/${pub.id}/reaccion`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ tipo })
+    });
+    const actualizada = await res.json();
+    pub.reacciones = actualizada.reacciones;
+  } catch (err) {
+    console.error('❌ Error al reaccionar:', err);
+  }
+    },
+
+    async responderMuro(pub) {
+  if (!pub.nuevaRespuesta || !pub.nuevaRespuesta.trim()) return;
+
+  const respuesta = {
+    usuario: this.usuario.nombre || 'Anónimo',
+    texto: pub.nuevaRespuesta.trim()
+  };
+
+  try {
+    const res = await fetch(`https://blog-interactivo.onrender.com/api/muro/${pub.id}/responder`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(respuesta)
+    });
+    const actualizado = await res.json();
+    pub.respuestas = actualizado.respuestas;
+    pub.nuevaRespuesta = '';
+  } catch (err) {
+    console.error('❌ Error al responder:', err);
+  }
+    },
+
+
+
 
     // --- Club de Escritura Methods ---
     darLikeClub(id) {
@@ -815,6 +882,9 @@ const res = await fetch('https://blog-interactivo.onrender.com/api/publicaciones
       .catch(err => console.error(err));
     },
     
+    
+    
+
     // --- Retos de Escritura Methods ---
     verDetalleReto(index) {
       // Se crea una copia del reto para edición sin modificar el original aún
@@ -983,56 +1053,31 @@ const res = await fetch('https://blog-interactivo.onrender.com/api/publicaciones
           body: JSON.stringify(this.registro)
         });
         const data = await response.json();
-    
+
         if (response.ok) {
-          localStorage.setItem('token', data.token || 'fake-token');
-          localStorage.setItem('nombre', data.nombre || this.registro.nombre);
-          localStorage.setItem('email', this.registro.email);
-    
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('nombre', data.nombre || 'Mi Usuario');
+          localStorage.setItem('email', this.registro.email); // Use registro.email for the new user
+
           this.usuario = {
-            nombre: data.nombre || this.registro.nombre,
-            email: this.registro.email,
-            bio: '',
-            estadoEmocional: ''
+            nombre: data.nombre || 'Mi Usuario',
+            email: this.registro.email, // Corrected
+            bio: localStorage.getItem('bio') || ''
           };
-    
+
           this.usuarioAutenticado = true;
-          this.seccion = 'perfil'; // ✅ ir a sección deseada
-          window.location.hash = 'perfil';
-    
-          // limpiar formularios
-          this.login = { email: '', password: '', error: '' };
-          this.registro = { nombre: '', email: '', password: '', error: '' };
-    
+          this.seccion = 'perfil';
+          this.login = { email: '', password: '', error: '' }; // Clear login form
+          this.registro = { nombre: '', email: '', password: '', error: '' }; // Clear registration form
         } else {
-          this.registro.error = data.error || 'Error al registrar usuario.';
+          this.registro.error = data.error || 'Error al registrar';
         }
       } catch (err) {
-        console.error('❌ Error al registrar:', err);
+        console.error('Error de conexión al registrar:', err);
         this.registro.error = 'Error de conexión con el servidor.';
       }
     },
-    
-    verificarAutenticacion() {
-      const token = localStorage.getItem('token');
-      const userEmail = localStorage.getItem('email');
-      const userName = localStorage.getItem('nombre');
-      const userBio = localStorage.getItem('bio');
-      const userEstado = localStorage.getItem('estadoEmocional');
-    
-      if (token && userEmail && userName) {
-        this.usuarioAutenticado = true;
-        this.usuario = {
-          nombre: userName,
-          email: userEmail,
-          bio: userBio || '',
-          estadoEmocional: userEstado || ''
-        };
-      } else {
-        this.usuarioAutenticado = false;
-      }
-    },
-    
+
     async iniciarSesion() {
       try {
         const response = await fetch('https://blog-interactivo.onrender.com/api/login', {
@@ -1222,54 +1267,60 @@ const res = await fetch('https://blog-interactivo.onrender.com/api/publicaciones
   },  
 
   mounted() {
-    // ✅ Revisión centralizada
-    this.verificarAutenticacion();
-  
-    console.log('🚀 mounted():', {
-      token: localStorage.getItem('token'),
-      usuarioAutenticado: this.usuarioAutenticado,
-    });
-  
-    if (this.usuarioAutenticado) {
-      this.cargarPerfil();
-    }
-  
-    fetch('https://blog-interactivo.onrender.com/api/perfil')
-      .then(res => res.json())
-      .then(data => {
-        if (data && data.email) {
-          this.usuario = {
-            nombre: data.nombre,
-            email: data.email,
-            bio: data.bio,
-            estadoEmocional: data.estadoEmocional
-          };
-          localStorage.setItem('nombre', data.nombre);
-          localStorage.setItem('email', data.email);
-          localStorage.setItem('bio', data.bio);
-          localStorage.setItem('estadoEmocional', data.estadoEmocional);
-        }
-      })
-      .catch(err => {
-        console.error('❌ Error al cargar perfil:', err);
-      });
-  
-      let hash = window.location.hash.replace('#', '');
+        // Verificación de token y datos guardados
+        const token = localStorage.getItem('token');
+        const userEmail = localStorage.getItem('email');
+        const userName = localStorage.getItem('nombre');
+        const userBio = localStorage.getItem('bio');
+        const userEstado = localStorage.getItem('estadoEmocional');
 
-      // 🔒 Si estás en registro o login, no te devuelve al inicio
-      if (['registro', 'login'].includes(hash)) {
-        this.seccion = hash;
-      } else if (!this.usuarioAutenticado) {
-        this.seccion = (hash === '' || hash === '/') ? 'inicio' : hash;
-      }
-              
+        if (token && userEmail && userName) {
+          this.usuarioAutenticado = true;
+          this.usuario = {
+            nombre: userName,
+            email: userEmail,
+            bio: userBio || '',
+            estadoEmocional: userEstado || ''
+          };
+          this.cargarPerfil();
+        } else {
+          this.usuarioAutenticado = false;
+        }
+    
+    
+        fetch('https://blog-interactivo.onrender.com/api/perfil')
+        .then(res => res.json())
+        .then(data => {
+          if (data && data.email) {
+            this.usuario = {
+              nombre: data.nombre,
+              email: data.email,
+              bio: data.bio,
+              estadoEmocional: data.estadoEmocional
+            };
+            localStorage.setItem('nombre', data.nombre);
+            localStorage.setItem('email', data.email);
+            localStorage.setItem('bio', data.bio);
+            localStorage.setItem('estadoEmocional', data.estadoEmocional);
+          }
+        })
+        .catch(err => {
+          console.error('❌ Error al cargar perfil:', err);
+        });
+  
+  
+    // Leer hash
+    let hash = window.location.hash.replace('#', '');
+    this.seccion = (hash === '' || hash === '/') ? 'inicio' : hash;
+  
+    // Escuchar cambios de hash
     window.addEventListener('hashchange', () => {
       let nuevaSeccion = window.location.hash.replace('#', '');
       this.seccion = (nuevaSeccion === '' || nuevaSeccion === '/') ? 'inicio' : nuevaSeccion;
       console.log('Sección actualizada por hashchange:', this.seccion);
   
       fetch('https://blog-interactivo.onrender.com/api/retos')
-        .then(res => res.json())
+      .then(res => res.json())
         .then(data => {
           this.publicaciones = data.map(pub => ({
             ...pub,
@@ -1282,21 +1333,24 @@ const res = await fetch('https://blog-interactivo.onrender.com/api/publicaciones
       if (this.seccion === 'publicaciones') this.cargarPublicaciones();
       if (this.seccion === 'retos') this.cargarRetosCompletados();
       if (this.seccion === 'misEscritos') this.cargarMisEscritos();
+      if (this.seccion === 'muro') this.cargarMuro();
       if (this.seccion === 'club') this.obtenerCriticasClub();
       if (this.seccion === 'interacciones') this.cargarPublicaciones();
     });
   
+    // Cargar mapa si existe
     this.$nextTick(() => {
       if (document.getElementById('mapa')) this.iniciarMapa();
     });
   
     this.cargarMensajesMapa();
   
+    // Retos (por si se accede sin cambiar hash)
     if (this.usuarioAutenticado) {
       this.cargarRetosCompletados();
     }
   }
-    
+  
   
 
 }).mount('#app');
