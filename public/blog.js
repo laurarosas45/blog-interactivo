@@ -1013,6 +1013,10 @@ const res = await fetch('https://blog-interactivo.onrender.com/api/publicaciones
         console.error('Error de conexión al registrar:', err);
         this.registro.error = 'Error de conexión con el servidor.';
       }
+
+      this.seccion = 'perfil';
+window.location.hash = 'perfil'; // ✅ Forzar hash manualmente
+
     },
 
     verificarAutenticacion() {
@@ -1256,11 +1260,15 @@ const res = await fetch('https://blog-interactivo.onrender.com/api/publicaciones
         console.error('❌ Error al cargar perfil:', err);
       });
   
-    let hash = window.location.hash.replace('#', '');
-    if (!this.usuarioAutenticado) {
-      this.seccion = (hash === '' || hash === '/') ? 'inicio' : hash;
-    }
-  
+      let hash = window.location.hash.replace('#', '');
+
+      // 🔒 Si estás en registro o login, no te devuelve al inicio
+      if (['registro', 'login'].includes(hash)) {
+        this.seccion = hash;
+      } else if (!this.usuarioAutenticado) {
+        this.seccion = (hash === '' || hash === '/') ? 'inicio' : hash;
+      }
+              
     window.addEventListener('hashchange', () => {
       let nuevaSeccion = window.location.hash.replace('#', '');
       this.seccion = (nuevaSeccion === '' || nuevaSeccion === '/') ? 'inicio' : nuevaSeccion;
