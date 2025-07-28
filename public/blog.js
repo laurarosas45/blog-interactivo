@@ -983,42 +983,36 @@ const res = await fetch('https://blog-interactivo.onrender.com/api/publicaciones
           body: JSON.stringify(this.registro)
         });
         const data = await response.json();
-
+    
         if (response.ok) {
-          localStorage.setItem('token', data.token);
-          localStorage.setItem('nombre', data.nombre || 'Mi Usuario');
-          localStorage.setItem('email', this.registro.email); // Use registro.email for the new user
-          console.log('📦 Datos guardados:', {
-            nombre: data.nombre,
-            token: data.token,
-            email: this.registro.email
-          });
-          console.log('✅ Usuario autenticado:', this.usuarioAutenticado);
-          console.log('➡️ Sección actual:', this.seccion);
-          
+          localStorage.setItem('token', data.token || 'fake-token');
+          localStorage.setItem('nombre', data.nombre || this.registro.nombre);
+          localStorage.setItem('email', this.registro.email);
+    
           this.usuario = {
-            nombre: data.nombre || 'Mi Usuario',
-            email: this.registro.email, // Corrected
-            bio: localStorage.getItem('bio') || ''
+            nombre: data.nombre || this.registro.nombre,
+            email: this.registro.email,
+            bio: '',
+            estadoEmocional: ''
           };
-
+    
           this.usuarioAutenticado = true;
-          this.seccion = 'perfil';
-          this.login = { email: '', password: '', error: '' }; // Clear login form
-          this.registro = { nombre: '', email: '', password: '', error: '' }; // Clear registration form
+          this.seccion = 'perfil'; // ✅ ir a sección deseada
+          window.location.hash = 'perfil';
+    
+          // limpiar formularios
+          this.login = { email: '', password: '', error: '' };
+          this.registro = { nombre: '', email: '', password: '', error: '' };
+    
         } else {
-          this.registro.error = data.error || 'Error al registrar';
+          this.registro.error = data.error || 'Error al registrar usuario.';
         }
       } catch (err) {
-        console.error('Error de conexión al registrar:', err);
+        console.error('❌ Error al registrar:', err);
         this.registro.error = 'Error de conexión con el servidor.';
       }
-
-      this.seccion = 'perfil';
-window.location.hash = 'perfil'; // ✅ Forzar hash manualmente
-
     },
-
+    
     verificarAutenticacion() {
       const token = localStorage.getItem('token');
       const userEmail = localStorage.getItem('email');
