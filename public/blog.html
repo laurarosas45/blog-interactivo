@@ -772,23 +772,7 @@
 
 
 <!--seccion por separados de "comunidad"-->
-<!-- publicaciones publicas-->
-<section v-if="seccion === 'publicaciones'" class="pagina-publicaciones">
-  <h2>📚 Publicaciones públicas</h2>
 
-  <div v-if="publicaciones.length === 0">Aún no hay publicaciones.</div>
-
-  <div v-else>
-    <div v-for="pub in publicaciones" :key="pub.id" class="tarjeta-publicacion">
-      
-      <p><strong>{{ pub.autor }}</strong> — {{ pub.fecha }}</p>
-      <p><em>{{ pub.tipo }}</em></p>
-      <p>{{ pub.contenido }}</p>
-    </div>
-  </div>
-
-  <button @click="seccion = 'comunidad'">← Volver</button>
-</section>
 <!-- interactua con otros-->
 <section v-if="seccion === 'interacciones'" class="pagina-interacciones">
   <h2>💬 Interacciones</h2>
@@ -822,6 +806,7 @@
 
   <button @click="seccion = 'comunidad'">← Volver</button>
 </section>
+
 <!--pagina de retos -->
 <section v-if="seccion === 'retos'" class="retos-escritura">
   <h2>Retos de escritura</h2>
@@ -931,36 +916,6 @@
       </div>
 </section>
 
-<!-- muro comunitario -->
-
-<section v-if="seccion === 'muro'" class="muro-comunitario">
-  <div class="muro-formulario">
-    <h2>💬 Comparte algo con la comunidad</h2>
-    <textarea v-model="nuevaPublicacionMuro" placeholder="Escribe una reflexión breve..."></textarea>
-    <button @click="publicarEnMuro">Publicar</button>
-  </div>
-
-  <div class="muro-publicaciones">
-    <h3>📚 Publicaciones recientes</h3>
-    <div v-for="pub in muro" :key="pub.id" class="muro-card">
-      <p class="muro-texto"><strong>{{ pub.usuario }}</strong>: {{ pub.texto }}</p>
-
-      <div class="muro-reacciones">
-        <button @click="reaccionarMuro(pub, 'corazon')">❤️ {{ pub.reacciones?.corazon || 0 }}</button>
-        <button @click="reaccionarMuro(pub, 'pensamiento')">💭 {{ pub.reacciones?.pensamiento || 0 }}</button>
-        <button @click="reaccionarMuro(pub, 'compartido')">🔁 {{ pub.reacciones?.compartido || 0 }}</button>
-      </div>
-
-      <div class="muro-respuestas">
-        <div v-for="res in pub.respuestas" class="respuesta">
-          <p><strong>{{ res.usuario }}</strong>: {{ res.texto }}</p>
-        </div>
-        <input v-model="pub.nuevaRespuesta" placeholder="Responder..." />
-        <button @click="responderMuro(pub)">Responder</button>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!--muro comunitario -->
 <section v-if="seccion === 'mapa'" class="mapa-escritores">
