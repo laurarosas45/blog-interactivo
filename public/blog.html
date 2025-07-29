@@ -6,11 +6,12 @@
     <link rel="stylesheet" href="blog.css">
     <title>Document</title>
 
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Inter&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="blog.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Inter&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
 </head>
 
@@ -452,7 +453,7 @@
       <p>
         Mira desde dónde escriben otras personas en el mundo. Deja tu marca y un mensaje al planeta desde tu rincón.
       </p>
-      <button v-if="usuarioAutenticado" @click="seccion = 'mapa'">Ver el mapa</button>
+      <button v-if="usuarioAutenticado" @click="cambiarSeccion('mapa')">Ver el mapa</button>
     </div>
 
     <button @click="seccion = 'inicio'">← Regresar al inicio</button>
@@ -1062,7 +1063,7 @@
     <h3>📍 Deja tu marca</h3>
     <input type="text" v-model="usuario.nombre" placeholder="Tu nombre" />
     <textarea v-model="mensajeMapa" placeholder="Escribe un mensaje desde tu ciudad..."></textarea>
-    <button @click="guardarMarca">Dejar mi marca</button>
+    <button @click="publicarMensajeMapa">Dejar mi marca</button>
   </div>
 
   <div class="filtros-mapa">
