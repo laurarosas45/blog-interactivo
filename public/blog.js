@@ -1187,17 +1187,13 @@ createApp({
 
     async guardarBio() {
       const token = localStorage.getItem('token');
-      const email = localStorage.getItem('email'); // ✅ Agregado
+      const email = localStorage.getItem('email'); // Asegúrate de tenerlo guardado
       const hoy = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
     
       const nuevaEntrada = {
         fecha: hoy,
         texto: this.bioActual
       };
-      console.log('🧠 Datos a enviar:', {
-        entrada: nuevaEntrada,
-        email: email
-      });      
     
       try {
         const res = await fetch('https://blog-interactivo.onrender.com/api/perfil', {
@@ -1206,17 +1202,14 @@ createApp({
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
           },
-          body: JSON.stringify({
-            entrada: nuevaEntrada,
-            email: email               // ✅ Enviar email al backend
-          })
+          body: JSON.stringify({ entrada: nuevaEntrada, email })  // ⬅️ AÑADIDO email
         });
     
         const data = await res.json();
     
         if (res.ok) {
-          this.historialBios.push(nuevaEntrada);
-          this.bioActual = '';
+          this.historialBios.push(nuevaEntrada); // agregar al historial local
+          this.bioActual = ''; // limpiar para escribir algo nuevo
           alert('✅ Entrada guardada');
         } else {
           alert('❌ Error al guardar: ' + data.error);
@@ -1227,7 +1220,7 @@ createApp({
         alert('❌ No se pudo conectar con el servidor.');
       }
     },
-                            
+                                
 
     async guardarEstadoEmocional() {
       const token = localStorage.getItem('token');
