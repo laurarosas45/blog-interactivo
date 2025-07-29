@@ -1187,7 +1187,7 @@ createApp({
 
     async guardarBio() {
       const token = localStorage.getItem('token');
-      const email = localStorage.getItem('email');
+      const email = localStorage.getItem('email'); // ✅ Agregado
       const hoy = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
     
       const nuevaEntrada = {
@@ -1203,16 +1203,16 @@ createApp({
             'Authorization': `Bearer ${token}`
           },
           body: JSON.stringify({
-            email: email,
-            entrada: nuevaEntrada
+            entrada: nuevaEntrada,
+            email: email               // ✅ Enviar email al backend
           })
         });
     
         const data = await res.json();
     
         if (res.ok) {
-          this.historialBios.push(nuevaEntrada); // agregar al historial local
-          this.bioActual = ''; // limpiar campo
+          this.historialBios.push(nuevaEntrada);
+          this.bioActual = '';
           alert('✅ Entrada guardada');
         } else {
           alert('❌ Error al guardar: ' + data.error);
@@ -1223,7 +1223,7 @@ createApp({
         alert('❌ No se pudo conectar con el servidor.');
       }
     },
-                        
+                            
 
     async guardarEstadoEmocional() {
       const token = localStorage.getItem('token');
