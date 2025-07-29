@@ -766,7 +766,7 @@ createApp({
       if (!texto) return;
   
       try {
-        await fetch(`http://localhost:3000/api/muro/${id}/responder`, {
+        await fetch(`https://blog-interactivo.onrender.com/api/muro/${id}/responder`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -787,7 +787,7 @@ createApp({
     // 📥 Cargar muro
     async cargarMuro() {
   try {
-    const res = await fetch('http://localhost:3000/api/muro');
+    const res = await fetch('https://blog-interactivo.onrender.com/api/muro');
     const data = await res.json();
     this.muro = data;
   } catch (err) {
@@ -804,7 +804,7 @@ createApp({
   };
 
   try {
-    const res = await fetch('http://localhost:3000/api/muro', {
+    const res = await fetch('https://blog-interactivo.onrender.com/api/muro', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(nueva)
@@ -819,7 +819,7 @@ createApp({
 
     async reaccionarMuro(pub, tipo) {
   try {
-    const res = await fetch(`http://localhost:3000/api/muro/${pub.id}/reaccion`, {
+    const res = await fetch(`https://blog-interactivo.onrender.com/api/muro/${pub.id}/reaccion`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ tipo })
@@ -840,7 +840,7 @@ createApp({
   };
 
   try {
-    const res = await fetch(`http://localhost:3000/api/muro/${pub.id}/responder`, {
+    const res = await fetch(`https://blog-interactivo.onrender.com/api/muro/${pub.id}/responder`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(respuesta)
@@ -858,8 +858,8 @@ createApp({
 
     // --- Club de Escritura Methods ---
     darLikeClub(id) {
-  fetch(`/api/club/${id}/like`, {
-    method: 'POST'
+      fetch(`https://blog-interactivo.onrender.com/api/club/${critica.id}/like`, {
+        method: 'POST'
   })
     .then(res => res.json())
     .then(data => {
@@ -880,7 +880,7 @@ createApp({
         texto: critica.nuevaRespuesta.trim()
       };
     
-      fetch(`http://127.0.0.1:3000/api/club/${critica.id}/responder`, {
+      fetch(`https://blog-interactivo.onrender.com/api/club/${critica.id}/responder`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(nueva)
@@ -1001,7 +1001,7 @@ createApp({
 
       // Guardar también en backend
       try {
-        const res = await fetch('http://localhost:3000/api/retos', {
+        const res = await fetch('https://blog-interactivo.onrender.com/api/retos', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(retoGuardado)
@@ -1070,7 +1070,7 @@ createApp({
 
       // Save to backend
       try {
-        await fetch(`http://localhost:3000/api/comentar/${pub.id}`, {
+        await fetch(`https://blog-interactivo.onrender.com/api/comentar/${pub.id}`, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ comentario })
@@ -1083,7 +1083,7 @@ createApp({
 
     async cargarRetosCompletados() {
       try {
-        const res = await fetch('http://localhost:3000/api/retos');
+        const res = await fetch('https://blog-interactivo.onrender.com/api/retos');
         const data = await res.json();
         this.retosCompletados = data;
         console.log('✅ Retos cargados del backend:', data);
@@ -1146,7 +1146,7 @@ createApp({
     
     async iniciarSesion() {
       try {
-        const response = await fetch('http://localhost:3000/api/login', {
+        const response = await fetch('https://blog-interactivo.onrender.com/api/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(this.login)
@@ -1247,7 +1247,7 @@ createApp({
         
     async cargarPerfil() {
       try {
-        const res = await fetch('http://localhost:3000/api/perfil');
+        const res = await fetch('https://blog-interactivo.onrender.com/api/perfil');
         const data = await res.json();
         if (data) {
           this.usuario = {
@@ -1301,7 +1301,7 @@ createApp({
 
         console.log({ autor, contenido, tipo, fecha });
 
-        const response = await fetch('http://localhost:3000/api/publicar', {
+        const response = await fetch('https://blog-interactivo.onrender.com/api/publicar', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ autor, contenido, tipo, fecha })
@@ -1324,7 +1324,7 @@ createApp({
 
     async pedirAyudaIA(tipo, entrada = '') {
       try {
-        const response = await fetch('http://localhost:3000/api/openai/generar', {
+        const response = await fetch('https://blog-interactivo.onrender.com/api/openai/generar', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ tipo, entrada })
@@ -1363,7 +1363,7 @@ createApp({
         }
     
     
-        fetch('http://localhost:3000/api/perfil')
+        fetch('https://blog-interactivo.onrender.com/api/perfil')
         .then(res => res.json())
         .then(data => {
           if (data && data.email) {
@@ -1394,7 +1394,7 @@ createApp({
       this.seccion = (nuevaSeccion === '' || nuevaSeccion === '/') ? 'inicio' : nuevaSeccion;
       console.log('Sección actualizada por hashchange:', this.seccion);
   
-      fetch('http://localhost:3000/api/retos')
+      fetch('https://blog-interactivo.onrender.com/api/retos')
       .then(res => res.json())
         .then(data => {
           this.publicaciones = data.map(pub => ({
