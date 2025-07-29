@@ -71,6 +71,8 @@ createApp({
 
 
 
+
+
       metas: [
         { texto: 'Escribir al menos 3 veces por semana', completado: 1, total: 3 },
         { texto: 'Completar 5 retos de escritura', completado: 2, total: 5 },
@@ -1247,23 +1249,28 @@ createApp({
         
     async cargarPerfil() {
       try {
+        const email = localStorage.getItem('email');
         const res = await fetch('https://blog-interactivo.onrender.com/api/perfil');
         const data = await res.json();
-        if (data) {
+    
+        if (data[email]) {
+          const usuarioData = data[email];
           this.usuario = {
-            nombre: data.nombre || '',
-            email: data.email || '',
-            bio: data.bio || '',
-            estadoEmocional: data.estadoEmocional || ''
+            nombre: usuarioData.nombre || '',
+            email: usuarioData.email || '',
+            bio: usuarioData.bio || '',
+            estadoEmocional: usuarioData.estadoEmocional || ''
           };
+    
+          this.historialBio = usuarioData.bios || [];
+        } else {
+          this.historialBio = [];
         }
       } catch (err) {
         console.error('❌ Error al cargar perfil:', err);
       }
-
-      
     },
-    
+        
 
 
     // --- General Writing Methods ---

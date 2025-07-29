@@ -17,21 +17,39 @@ router.get('/', (req, res) => {
 
 // Guardar perfil (bio + estado emocional)
 router.post('/', (req, res) => {
-  const { nombre, email, bio, estadoEmocional } = req.body;
-  
+  const { entrada, email } = req.body; // { fecha, texto }, email
 
-  if (!nombre || !email) {
-    return res.status(400).json({ error: 'Faltan datos del usuario' });
+  if (!entrada || !entrada.texto || !entrada.fecha || !email) {
+    return res.status(400).json({ error: 'Faltan datos del usuario o de la entrada' });
   }
 
-  const nuevoPerfil = { nombre, email, bio, estadoEmocional };
-  try {
-    fs.writeFileSync(archivoPerfil, JSON.stringify(nuevoPerfil, null, 2));
-    res.json({ mensaje: 'Perfil guardado', perfil: nuevoPerfil });
-  } catch (error) {
-    console.error('Error al guardar perfil:', error);
-    res.status(500).json({ error: 'Error al guardar datos' });
+  let datos = {};
+  if (fs.existsSync(archivoPerfil)) {
+    datos = JSON.parse(fs.readFileSync(archivoPerfil, 'utf-8'));
   }
-  });
+
+  // Si no existe el usuario aún
+  if (!datos[email]) {
+    datos[email] = {
+      bios: []
+    };
+  }
+
+  const historial = datos[email].bios;
+
+  // Verificar si ya existe entrada para la misma fecha
+  const existente = historial.find(b => b.fecha === entrada.fecha);
+  if (existente) {
+    // Reemplazar texto
+    existente.texto = entrada.texto;
+  } else {
+    historial.push(entrada);
+  }
+
+  // Guardar de nuevo
+  fs.writeFileSync(archivoPerfil, JSON.stringify(datos, null, 2));
+
+  res.json({ mensaje: 'Entrada guardada correctamente', bios: historial });
+});
 
 module.exports = router;
