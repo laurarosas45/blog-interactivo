@@ -1194,6 +1194,10 @@ createApp({
         fecha: hoy,
         texto: this.bioActual
       };
+      console.log('🧠 Datos a enviar:', {
+        entrada: nuevaEntrada,
+        email: email
+      });      
     
       try {
         const res = await fetch('https://blog-interactivo.onrender.com/api/perfil', {
