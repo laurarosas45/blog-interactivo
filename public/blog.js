@@ -175,7 +175,6 @@ createApp({
     
   },
 
-  
   methods: {
     
     enviarMensaje() {
@@ -668,42 +667,27 @@ createApp({
       });
     },
     obtenerUbicacion() {
-      if (!navigator.geolocation) {
-        alert('La geolocalización no es compatible con este navegador.');
-        return;
-      }
-    
-      navigator.geolocation.getCurrentPosition(
-        position => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(async (position) => {
           const lat = position.coords.latitude;
           const lng = position.coords.longitude;
-          this.coordenadasUsuario = { lat, lng };
+          this.coordenadasUsuario = [lat, lng];
     
-          // 🌍 Inicializar el mapa en ese punto
           if (!this.mapa) {
-            this.mapa = L.map('mapa').setView([lat, lng], 5);
-    
+            this.mapa = L.map('mapa').setView([lat, lng], 10);
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-              attribution: '&copy; OpenStreetMap contributors'
+              attribution: '© OpenStreetMap contributors'
             }).addTo(this.mapa);
           }
     
-          // 🔴 Mostrar todas las marcas existentes
-          this.mensajesMapa.forEach(m => {
-            if (m.lat && m.lng) {
-              L.marker([m.lat, m.lng])
-                .addTo(this.mapa)
-                .bindPopup(`${m.usuario}: "${m.mensaje}"`);
-            }
-          });
-        },
-        error => {
-          alert('No se pudo obtener tu ubicación.');
-          console.error(error);
-        }
-      );
+          L.marker([lat, lng]).addTo(this.mapa)
+            .bindPopup("📍 Tu ubicación actual").openPopup();
+        });
+      } else {
+        alert("Tu navegador no soporta geolocalización.");
+      }
     },
-            
+    
     async publicarMensajeMapa() {
       if (!this.mensajeMapa.trim() || !this.ubicacionMapa) {
         alert('Escribe un mensaje y permite acceder a tu ubicación.');
