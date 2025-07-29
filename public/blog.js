@@ -215,9 +215,11 @@ createApp({
       } else if (nueva === 'muro') {
         this.cargarMuro();
       } else if (nueva === 'mapa') {
-        this.initMapa();
-        this.cargarMensajesMapa();
-        this.obtenerUbicacion();
+        this.$nextTick(() => {
+          this.inicializarMapa();
+          this.cargarMensajesMapa();
+          this.obtenerUbicacion();
+        });
       }
     
       window.location.hash = nueva;
