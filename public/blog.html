@@ -969,36 +969,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!-- esta ya es independiente es para el registro iniciar seccion y todas las habitaciones apartes
  es como un nuevo departamento con nuevas habitaciones que llenar -->
   <section v-if="seccion === 'registro'" class="pagina-auth">
@@ -1021,7 +991,7 @@
       <button type="submit">Entrar</button>
       <p v-if="login.error" class="error">{{ login.error }}</p>
     </form>
-    <p>¿No tienes cuenta? <a href="#" @click="cambiarSeccion ('registro')">Crear una cuenta</a></p>
+    <a href="#" @click="changeSection('registro')">Crear una cuenta</a>
   </section>
 
 
