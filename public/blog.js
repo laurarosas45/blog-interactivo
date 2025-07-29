@@ -1097,11 +1097,39 @@ createApp({
 
 
     // --- perfil ---
-    guardarEstadoEmocional() {
-      localStorage.setItem('estadoEmocional', this.usuario.estadoEmocional);
-      alert('Estado emocional actualizado.');
+    async guardarEstadoEmocional() {
+      const token = localStorage.getItem('token');
+      const email = localStorage.getItem('email');
+      const hoy = new Date().toISOString().slice(0, 10);
+    
+      const entrada = {
+        fecha: hoy,
+        texto: this.usuario.estadoEmocional || 'No definido'
+      };
+    
+      try {
+        const res = await fetch('https://blog-interactivo.onrender.com/api/perfil', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({ entrada, email }) // ✅ aquí lo corregiste
+        });
+    
+        const data = await res.json();
+    
+        if (res.ok) {
+          alert('✅ Estado emocional actualizado en servidor');
+        } else {
+          alert('❌ Error: ' + data.error);
+        }
+      } catch (err) {
+        console.error('❌ Error al guardar estado emocional:', err);
+        alert('❌ Error al guardar estado emocional');
+      }
     },
-
+    
     async registrarUsuario() {
       try {
         const response = await fetch('https://blog-interactivo.onrender.com/api/register', {
@@ -1118,7 +1146,7 @@ createApp({
           // Guardar datos en localStorage
           localStorage.setItem('token', data.token);
           localStorage.setItem('nombre', data.nombre || this.registro.nombre);
-          localStorage.setItem('email', this.registro.email);
+          localStorage.setItem('email', this.registro.email);  // ✅ AQUI
     
           // Establecer usuario actual
           this.usuario = {
@@ -1187,8 +1215,8 @@ createApp({
 
     async guardarBio() {
       const token = localStorage.getItem('token');
-      const email = localStorage.getItem('email'); // Asegúrate de tenerlo guardado
-      const hoy = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+      const email = localStorage.getItem('email'); // <-- AÑADE ESTO
+      const hoy = new Date().toISOString().slice(0, 10);
     
       const nuevaEntrada = {
         fecha: hoy,
@@ -1202,14 +1230,17 @@ createApp({
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
           },
-          body: JSON.stringify({ entrada: nuevaEntrada, email })  // ⬅️ AÑADIDO email
+          body: JSON.stringify({
+            entrada: nuevaEntrada,
+            email: email     // <-- AÑADE ESTO
+          })
         });
     
         const data = await res.json();
     
         if (res.ok) {
-          this.historialBios.push(nuevaEntrada); // agregar al historial local
-          this.bioActual = ''; // limpiar para escribir algo nuevo
+          this.historialBios.push(nuevaEntrada);
+          this.bioActual = '';
           alert('✅ Entrada guardada');
         } else {
           alert('❌ Error al guardar: ' + data.error);
@@ -1220,33 +1251,8 @@ createApp({
         alert('❌ No se pudo conectar con el servidor.');
       }
     },
-                                
+                                    
 
-    async guardarEstadoEmocional() {
-      const token = localStorage.getItem('token');
-    
-      try {
-        const res = await fetch('https://blog-interactivo.onrender.com/api/perfil', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-          },
-          body: JSON.stringify(this.usuario)
-        });
-    
-        const data = await res.json();
-    
-        if (res.ok) {
-          alert('✅ Estado emocional actualizado en servidor');
-        } else {
-          alert('❌ Error: ' + data.error);
-        }
-      } catch (err) {
-        console.error('❌ Error al guardar estado emocional:', err);
-        alert('❌ Error al guardar estado emocional');
-      }
-    },
         
     async cargarPerfil() {
       try {
