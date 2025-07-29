@@ -679,26 +679,23 @@ createApp({
     },
     obtenerUbicacion() {
       if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(async (position) => {
-          const lat = position.coords.latitude;
-          const lng = position.coords.longitude;
-          this.coordenadasUsuario = [lat, lng];
-    
-          if (!this.mapa) {
-            this.mapa = L.map('mapa').setView([lat, lng], 10);
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-              attribution: '© OpenStreetMap contributors'
-            }).addTo(this.mapa);
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            this.coordenadasUsuario = {
+              lat: pos.coords.latitude,
+              lng: pos.coords.longitude,
+            };
+            this.cargarMapa();
+          },
+          (error) => {
+            alert("No se pudo obtener tu ubicación.");
+            console.error("Geolocalización falló:", error);
           }
-    
-          L.marker([lat, lng]).addTo(this.mapa)
-            .bindPopup("📍 Tu ubicación actual").openPopup();
-        });
+        );
       } else {
         alert("Tu navegador no soporta geolocalización.");
       }
-    },
-    
+    },        
     async publicarMensajeMapa() {
       if (!this.mensajeMapa.trim() || !this.ubicacionMapa) {
         alert('Escribe un mensaje y permite acceder a tu ubicación.');
