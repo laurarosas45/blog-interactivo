@@ -168,13 +168,19 @@
         Si estás buscando una desarrolladora comprometida, con visión creativa y habilidades técnicas sólidas en frontend y backend, me encantaría saber de ti. Estoy lista para aportar soluciones reales que beneficien a tu empresa, optimicen tu presencia digital y conecten mejor con tus usuarios. Hablemos y creemos juntas algo que genere impacto.
       </p>
 
-      <form @submit.prevent="enviarMensaje" class="formulario-contacto">
-        <input type="text" v-model="form.nombre" placeholder="Tu nombre" required>
-        <input type="email" v-model="form.email" placeholder="Tu correo electrónico" required>
-        <textarea v-model="form.mensaje" placeholder="Escribe tu mensaje..." rows="5" required></textarea>
-        <button type="submit">Enviar mensaje</button>
-      </form>
-      
+      <div class="contacto-links">
+        <p><strong>📩 Escríbeme directamente a:</strong><br>
+          <a href="mailto:laura.rosas.durrani@gmail.com" class="contacto-link">laura.rosas.durrani@gmail.com</a>
+          <a href="mailto:rosas4087564@gmail.com" class="contacto-link">rosas4087564@gmail.com</a>
+
+        </p>
+  
+        <p><strong>🌐 También puedes encontrarme en:</strong><br>
+          <a href="https://www.linkedin.com/in/laura-rosas-dev" target="_blank" class="contacto-link">LinkedIn</a> |
+          <a href="https://github.com/laurarosas45" target="_blank" class="contacto-link">GitHub</a> |
+        </p>
+      </div>
+
     </div>
   </section>
 
@@ -219,32 +225,28 @@
       en el backend y frontend. 
       Mi objetivo es mostrar mis habilidades en diseño web, programación y experiencia de usuario.
       <p>Al integrarme a tu equipo, aporto soluciones creativas, interfaces modernas y código limpio que mejoran la experiencia del usuario y elevan el valor digital de tu empresa.</p>
+      <div class="contacto-links">
+        <p><strong>📩 Escríbeme directamente a:</strong><br>
+          <a href="mailto:laura.rosas.durrani@gmail.com" class="contacto-link">laura.rosas.durrani@gmail.com</a>
+          <a href="mailto:rosas4087564@gmail.com" class="contacto-link">rosas4087564@gmail.com</a>
+
+        </p>
+  
+        <p><strong>🌐 También puedes encontrarme en:</strong><br>
+          <a href="https://www.linkedin.com/in/laura-rosas-dev" target="_blank" class="contacto-link">LinkedIn</a> |
+          <a href="https://github.com/laurarosas45" target="_blank" class="contacto-link">GitHub</a> |
+        </p>
+      </div>
       <a href="#contacto" @click.prevent="cambiarSeccion('contacto')" class="boton-contacto">Contáctame</a>
 
       
     </section>
     <div class="proposito-transicion">
-      <h3>📜 Del papel al teclado: un ritual de transformación</h3>
-      <p>
-        El papel es íntimo. Es crudo. Es donde se llora, se garabatea, se rompe.  
-        Es el primer testigo, la tinta que no juzga, la página que acoge sin filtros.  
-        Pero hay un momento sagrado en el que ese susurro escrito a mano  
-        merece ser elevado, reescrito, compartido… y allí, aparece la laptop.
-      </p>
-    
-      <p>
-        Teclado no significa frialdad.  
-        Significa **pulso**, estructura, intención.  
-        Es cuando decides que lo que escribiste en lo íntimo  
-        también tiene el derecho de llegar al mundo.  
-        No como un grito, sino como una ofrenda.
-      </p>
-    
-      <p class="proposito-destacado">
-        Aquí celebramos ambos espacios:  
-        la página en blanco que escucha,  
-        y la pantalla que proyecta tu verdad.
-      </p>
+      Este blog fue desarrollado con tecnologías web como HTML, CSS, JavaScript y el framework Vue.js para crear una experiencia interactiva tipo SPA (Single Page Application). 
+      También integré Node.js y Express en el backend para gestionar usuarios, publicaciones, mapas y funciones creativas como retos y comunidad.
+       El blog permite a los usuarios crear una cuenta, escribir textos, guardar su progreso, interactuar con otras personas, participar en retos, usar herramientas creativas basadas en IA y dejar marcas en un mapa de escritores.
+       Todo esto se guarda en un backend real con persistencia de datos.
+
     </div>
     
     <section class="cta-proposito">
