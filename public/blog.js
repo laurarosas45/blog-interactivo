@@ -368,6 +368,12 @@ createApp({
         console.error('Error al cargar publicaciones:', error);
       }
     },
+
+    cambiarAInteracciones() {
+      this.seccion = 'interacciones';
+      this.cargarPublicaciones(); // ✅ aseguramos que se vean
+    },
+    
     
     toggleFavorito(pub) {
       pub.favorito = !pub.favorito;

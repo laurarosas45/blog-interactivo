@@ -420,7 +420,7 @@
         Deja un comentario en lo que leas, marca tus textos favoritos con un ❤️ o guarda publicaciones que te inspiren.
         Esta comunidad crece cuando nos escuchamos.
       </p>
-      <button v-if="usuarioAutenticado"  @click="seccion = 'interacciones'">Explorar interacciones</button>
+      <button v-if="usuarioAutenticado" @click="cambiarAInteracciones()">Explorar interacciones</button>
     </div>
 
     <div class="comunidad-card">
@@ -843,7 +843,7 @@
   <div v-if="publicaciones.length === 0">Aún no hay publicaciones para comentar.</div>
 
   <div v-else>
-    <div v-for="pub in publicaciones" :key="pub.id" class="tarjeta-interaccion">
+    <div v-for="pub in publicaciones" :key="pub.fecha" class="tarjeta-interaccion">
       <p><strong>{{ pub.autor }}</strong> — {{ pub.fecha }}</p>
       <p><em>{{ pub.tipo }}</em></p>
       <p>{{ pub.contenido }}</p>
