@@ -175,6 +175,17 @@ createApp({
     
   },
 
+  watch: {
+    seccion(nuevaSeccion) {
+      if (nuevaSeccion === 'mapa') {
+        this.$nextTick(() => {
+          this.obtenerUbicacion();
+        });
+      }
+    }
+  },
+  
+
   methods: {
     
     enviarMensaje() {
