@@ -322,7 +322,7 @@ createApp({
       console.log('📝 Publicando en interacciones:', nueva);
     
       try {
-        const res = await fetch('http://localhost:3000/api/publicaciones', {
+        const res = await fetch('https://blog-interactivo.onrender.com/api/publicaciones', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(nueva)
