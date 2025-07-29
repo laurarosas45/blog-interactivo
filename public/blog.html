@@ -10,8 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Inter&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="blog.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Inter&display=swap" rel="stylesheet">
-    <!-- Leaflet CSS -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
 </head>
 
@@ -24,8 +23,8 @@
   <div v-if="seccion === 'inicio'">
     
     <header class="menu">
-      <h1 class="menu-little">Mi Diario</h1>
-      <div>
+      <h1 class="menu-logo">Mi DOSIS</h1>
+      <div class="menu-links">
         <a href="#proposito" @click.prevent="cambiarSeccion('proposito')">Propósito</a>
         <a href="#miEspacio" @click.prevent="cambiarSeccion('miEspacio')">Mi Espacio</a>
         <a href="#comunidad" @click.prevent="cambiarSeccion ('comunidad')">Comunidad</a>
@@ -122,9 +121,9 @@
           <a href="#" @click.prevent="cambiarSeccion ('contacto')">Contacto</a>
         </div>
         <div class="footer-redes">
-          <a href="mailto:laura.rosas.durrani@gmail.com"><i class="fa-brands fa-instagram"></i></a>
-          <a href="mailto:laura.rosas.durrani@gmail.com"><i class="fa-brands fa-pinterest"></i></a>
-          <a href="mailto:laura.rosas.durrani@gmail.com"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-pinterest"></i></a>
+          <a href="#"><i class="fa-brands fa-twitter"></i></a>
         </div>
         <p class="footer-frase">“Que siempre encuentres palabras donde el alma necesite descanso.”</p>
         <p class="footer-copy">© 2025 Querido Diario — Todos los derechos reservados</p>
@@ -132,6 +131,9 @@
     </footer>
   </div>
 <!---->
+
+
+
 
 <!-- aca son cada una de la secciones del header "quiero decir " aca cree el contenido por separado de cada uno del menu -->
  <!-- bueno aca van todas las secciones del menu principal NOTA como ya lo hemos dicho aunque se vea el menu y podamos hacer click debemos de rellenar el enlace
@@ -156,7 +158,7 @@
     </div>
   </section>
 
-  <section v-if="seccion === 'contacto'" class="seccion-contacto">
+  <section v-if="seccion === ('contacto')" id="contacto" class="seccion-contacto">
     <div class="contenedor-contacto">
       <h2>Contacto</h2>
       <p>
@@ -214,7 +216,7 @@
       en el backend y frontend. 
       Mi objetivo es mostrar mis habilidades en diseño web, programación y experiencia de usuario.
       <p>Al integrarme a tu equipo, aporto soluciones creativas, interfaces modernas y código limpio que mejoran la experiencia del usuario y elevan el valor digital de tu empresa.</p>
-      <a href="#contacto" @click.prevent="seccion = 'contacto'" class="boton-contacto">Contáctame</a>
+      <a href="#contacto" @click.prevent="cambiarSeccion('contacto')" class="boton-contacto">Contáctame</a>
 
       
     </section>
@@ -319,8 +321,14 @@
       “Hay palabras que no se dicen, pero pesan. Este espacio es para soltarlas y convertirlas en arte.”
     </p>
     <p class="texto">
-      Este vlog nació desde la necesidad de liberar. De transformar lo que duele, lo que inspira y lo que callamos, en palabras. Aquí puedes escribir un cuento, soltar una emoción, compartir un pensamiento o simplemente dejar una huella.
+      Este proyecto forma parte de mi portafolio como desarrolladora web, pero va más allá de lo técnico.
+      Decidí crearlo porque creo en el poder de la escritura como herramienta de sanación, expresión y conexión. Quise unir mis habilidades en programación con mi pasión por las palabras para construir un espacio donde las personas puedan escribir, compartir y sentirse acompañadas.
+      Además de demostrar mis conocimientos en frontend y backend, este blog interactivo refleja lo que más me mueve como creadora: construir tecnología que tenga alma, que inspire, que genere impacto positivo.
+      Aquí combino diseño, desarrollo, emociones y propósito. Este es el tipo de proyectos que me gustaría seguir creando. De transformar lo que inspira  Aquí puedes escribir un cuento, soltar una emoción, compartir un pensamiento o simplemente dejar una huella.
     </p>
+    <p>Al integrarme a tu equipo, aporto soluciones creativas, interfaces modernas y código limpio que mejoran la experiencia del usuario y elevan el valor digital de tu empresa.</p>
+    <a href="#contacto" @click.prevent="cambiarSeccion('contacto')" class="boton-contacto">Contáctame</a>
+
     <div class="botones-inspiracion">
       <button @click="seccion = 'categorias'">Explorar categorías</button>
       <button @click="seccion = 'login'">Iniciar mi viaje</button>
@@ -346,7 +354,7 @@
         Aquí encontrarás todo lo que has escrito: entradas de tu diario personal, cuentos, poemas, pensamientos sueltos y cualquier publicación que hayas creado.
         Puedes regresar, leerlos, editarlos o simplemente recordarte por qué escribiste eso.
       </p>
-      <button v-if="usuarioAutenticado" @click="seccion = 'misEscritos'">Ver escritos</button>
+      <button v-if="usuarioAutenticado"  @click="cambiarSeccion('misEscritos')">Ver escritos</button>
     </div>
 
     <div class="card">
@@ -357,6 +365,13 @@
       <button v-if="usuarioAutenticado" @click="seccion = 'categorias'">Escribir</button>
     </div>
 
+    <div class="card">
+      <h3>💖 Favoritos</h3>
+      <p>
+        Aquí se guardan tus entradas favoritas o aquellas que marcaste porque te inspiraron o te tocaron. Puedes volver a ellas cuando quieras, como una biblioteca emocional y personal.
+      </p>
+      <button v-if="usuarioAutenticado" @click="seccion = 'favoritos'">Ver favoritos</button>
+    </div>
 
     <div class="card">
       <h3>🧠 Inspiración diaria</h3>
@@ -379,19 +394,8 @@
       <p>
         Revisa tu camino como escritora/or. Aquí verás cuántas palabras has escrito, cuántos días has escrito seguido, y si has completado alguno de los retos mensuales o logros personales.
       </p>
-      <button v-if="usuarioAutenticado" @click="seccion = 'progreso'">Ver progreso</button>
+      <button v-if="usuarioAutenticado" @click="cambiarSeccion('progreso')">📊 Progreso</button>
     </div>
-  </div>
-  <!-- ✅ Lista de escritos guardados -->
-  <div v-if="escritosGuardados.length > 0" class="lista-escritos-mi-espacio">
-<h3>📝 Mis escritos guardados:</h3>
-<ul>
-  <li v-for="(item, index) in escritosGuardados" :key="item.id">
-    <strong>#{{ index + 1 }}</strong> 
-    ({{ item.tipo }} – {{ item.fecha }}):<br>
-    {{ item.contenido }}
-  </li>
-</ul>
   </div>
 
   <div class="boton-volver">
@@ -424,7 +428,7 @@
       <p>
         Participa en nuestros retos creativos mensuales. Desde microcuentos hasta reflexiones profundas, cada desafío es una excusa para escribir.
       </p>
-      <button v-if="usuarioAutenticado" @click="seccion = 'retos'">Ver retos</button>
+      <button v-if="usuarioAutenticado"  @click="cambiarSeccion('retos')">Retos</button>
     </div>
 
     <div class="comunidad-card">
@@ -436,6 +440,14 @@
     </div>
     
     <div class="comunidad-card">
+      <h3>📣 Muro comunitario</h3>
+      <p>
+        Escribe cómo te sientes hoy, lanza una pregunta, comparte un pensamiento breve. Este muro es libre y tu voz importa.
+      </p>
+      <button v-if="usuarioAutenticado"  @click="seccion = 'muro'">Ir al muro</button>
+    </div>
+
+    <div class="comunidad-card">
       <h3>🌍 Mapa de escritores</h3>
       <p>
         Mira desde dónde escriben otras personas en el mundo. Deja tu marca y un mensaje al planeta desde tu rincón.
@@ -443,8 +455,8 @@
       <button v-if="usuarioAutenticado" @click="seccion = 'mapa'">Ver el mapa</button>
     </div>
 
-    <div class="boton-volver">
-    </div>
+    <button @click="seccion = 'inicio'">← Regresar al inicio</button>
+
   </div>
 </section>
 
@@ -499,8 +511,18 @@
         </div>
     
       </div>
+      <div v-if="usuarioAutenticado" class="volver-a-perfil">
+        <button @click="cambiarSeccion('perfil')">Ir a mi perfil</button>
+      </div>
+      <button class="btn-volver" @click="seccion = 'inicio'">Volver al Inicio</button>
+
+
 </div>
 <!---->
+
+
+
+
 
 
 <!-- estas son todas las opciones que hay  dentro de la seccion "categorias" de la pagina principal 
@@ -518,7 +540,10 @@
 
     <div class="botones-escritura">
       <button @click="guardarEscrito('cuento')">Publish</button>
-      <button @click="seccion = 'categorias'; categoriaSeleccionada = null">Cancel</button>
+      <button @click="publicarEnInteracciones({ contenido: contenidoEscrito, tipo: 'cuento corto ' })">
+        Publicar en Comunidad
+      </button>
+            <button @click="seccion = 'categorias'; categoriaSeleccionada = null">Cancel</button>
     </div>
 
     <div v-if="escritosGuardados.length > 0">
@@ -539,11 +564,14 @@
     </div>
 
     <div class="area-escritura">
-      <textarea v-model="contenidoEscrito" placeholder="adelante no hay reglas fluye..."></textarea>
+      <textarea v-model="contenidoEscrito" placeholder="Escribe aquí..."></textarea>
     </div>
 
     <div class="botones-escritura">
       <button @click="guardarEscrito('mini-libro')">Publish</button>
+      <button @click="publicarEnInteracciones({ contenido: contenidoEscrito, tipo: 'Mini Libro' })">
+        Publicar en Comunidad
+      </button>
       <button @click="seccion = 'categorias'; categoriaSeleccionada = null">Cancel</button>
     </div>
 
@@ -570,6 +598,10 @@
 
     <div class="botones-escritura">
       <button @click="guardarEscrito('diario-personal')">Publish</button>
+      <button @click="publicarEnInteracciones({ contenido: contenidoEscrito, tipo: 'QueridoDiario' })">
+        Publicar en Comunidad
+      </button>
+
       <button @click="seccion = 'categorias'; categoriaSeleccionada = null">Cancel</button>
     </div>
 
@@ -596,6 +628,9 @@
 
     <div class="botones-escritura">
       <button @click="guardarEscrito('poemas')">Publicar</button>
+      <button @click="publicarEnInteracciones({ contenido: contenidoEscrito, tipo: 'Poemas' })">
+        Publicar en Comunidad
+      </button>
       <button @click="seccion = 'categorias'; categoriaSeleccionada = null">Cancel</button>
     </div>
 
@@ -622,6 +657,10 @@
 
     <div class="botones-escritura">
       <button @click="guardarEscrito('opinion')">publicar</button>
+      <button @click="publicarEnInteracciones({ contenido: contenidoEscrito, tipo: 'opinion' })">
+        Publicar en Comunidad
+      </button>
+
       <button @click="seccion ='categorias';categoriasSeleccionada = null">Cancel</button>
     </div>
 
@@ -648,6 +687,9 @@
 
     <div class="botones-escritura">
       <button @click="guardarEscrito('enseñar-algo')">Publicar</button>
+      <button @click="publicarEnInteracciones({ contenido: contenidoEscrito, tipo: 'EnseñarAlgo' })">
+        Publicar en Comunidad
+      </button>
       <button @click="seccion = 'categorias'; categoriaSeleccionada = null">Cancel</button>
     </div>
 
@@ -662,25 +704,37 @@
   </section>
 <!---->
 
+
+
 <!-- "mis escritos"-->
 <section v-if="seccion === 'misEscritos'" class="pagina-mis-escritos">
   <div class="contenedor-mis-escritos">
     <h2>📚 Mis escritos</h2>
-    <p>Estos son todos los textos que has escrito y guardado:</p>
+    <p>Estos son todos los textos que has escrito en distintas secciones:</p>
 
-    <ul v-if="escritosGuardados.length > 0">
-      <li v-for="(item, index) in escritosGuardados" :key="item.id">
-        <strong>#{{ index + 1 }}</strong> 
-        ({{ item.tipo }} – {{ item.fecha }}):<br>
-        {{ item.contenido }}
-      </li>
-    </ul>
-
-    <p v-else>Aún no has escrito nada. Empieza desde la sección "Categorías".</p>
-
+    <div v-if="todosMisEscritos.length > 0">
+      <div v-for="(escrito, index) in todosMisEscritos" :key="index" class="escrito-guardado">
+        <h4>Escrito #{{ index + 1 }}</h4>
+        <p>{{ escrito.contenido }}</p>
+        <small>🗂️ Origen: {{ escrito.origen }} | 🕒 {{ escrito.fecha }}</small>
+        
+      </div>
+    </div>
+    
+    <div v-else>
+      <p>Aún no has escrito nada. Empieza desde Creativo, Club o Retos.</p>
+    </div>
+    <div v-for="(escrito, index) in escritosGuardados" :key="index" class="escrito-item">
+      <p><strong>Escrito #{{ index + 1 }}</strong></p>
+    
+      
+    </div>
+    
+    
     <button class="btn-volver" @click="seccion = 'miEspacio'">← Volver a Mi Espacio</button>
   </div>
 </section>
+<!---->
 
 <!-- Espacio Creativo -->
 <section v-if="seccion === 'espacio-creativo-detalle' && usuarioAutenticado" class="pagina-creativa-detalle">
@@ -728,34 +782,59 @@
   <div class="botones-escritura">
     <button @click="guardarEscrito(tipoRespuesta)">Guardar</button>
     <button @click="seccion = 'creativo'; contenidoEscrito = ''">Cancelar</button>
-    <button @click="publicarComoPublico">Publicar en Comunidad</button>
+    <button @click="publicarEnInteracciones({ contenido: contenidoEscrito, tipo: 'Creativo' })">Publicar en Comunidad</button>
 
   </div>
 </section>
 <!----->
 
 <!-- Progreso -->
-<section v-if="seccion === 'progreso' && usuarioAutenticado" class="pagina-progreso">
-  <div class="contenedor-progreso">
-    <h2>📈 Tu progreso como escritora/or</h2>
+<section v-if="seccion === 'progreso'" class="progreso">
+  <h2>📊 Mi Progreso</h2>
 
-    <p v-if="escritosGuardados.length === 0">Aún no has guardado ningún escrito.</p>
+  <div class="resumen-progreso">
+    <p><strong>Total de palabras escritas:</strong> {{ totalPalabras }}</p>
+    <p><strong>Días consecutivos escribiendo:</strong> {{ rachaEscritura }} días</p>
+    <p><strong>Total de escritos:</strong> {{ escritosGuardados.length }}</p>
+  </div>
 
-    <ul v-else>
-      <li v-for="(item, index) in escritosGuardados" :key="item.id">
-        <strong>#{{ index + 1 }}</strong> 
-        ({{ item.tipo }} – {{ item.fecha }}):<br>
-        {{ item.contenido }}
+  <div class="metas">
+    <h3>🎯 Mis metas personales</h3>
+  
+    <ul>
+      <li v-for="(meta, index) in metas" :key="index">
+        <strong>{{ meta.texto }}</strong><br>
+        <progress :value="meta.completado" :max="meta.total"></progress>
+        <span>{{ meta.completado }}/{{ meta.total }}</span>
+        <button @click="eliminarMeta(index)">🗑️</button>
       </li>
     </ul>
+  
+    <hr>
+  
+    <h4>➕ Nueva meta</h4>
+    <input v-model="nuevaMeta.texto" placeholder="Escribir X veces por semana">
+    <input type="number" v-model.number="nuevaMeta.total" min="1" placeholder="Cantidad objetivo">
+    <button @click="agregarMeta">Agregar meta</button>
+  </div>
+  
+  <div class="graficos">
+    <h3>📈 Evolución de mi escritura</h3>
+    <canvas id="graficoProgreso" width="400" height="200"></canvas>
+  </div>
 
-    <button class="btn-volver" @click="seccion = 'miEspacio'">← Volver a Mi Espacio</button>
+  <div class="insignias">
+    <h3>🏅 Insignias obtenidas</h3>
+    <ul>
+      <li v-for="insignia in insignias" :key="insignia">✅ {{ insignia }}</li>
+    </ul>
   </div>
 </section>
+<!---->
 
 
 
-<!--seccion por separados de "comunidad"-->
+<!-- seccion de comunidad -->
 
 <!-- interactua con otros-->
 <section v-if="seccion === 'interacciones'" class="pagina-interacciones">
@@ -774,6 +853,14 @@
         
         <input v-model="pub.nuevoComentario" placeholder="Escribe un comentario..." />
         <button @click="comentarPublicacion(pub)">Comentar</button>
+        <!-- Botones de interacción -->
+        <div class="acciones-interaccion">
+          <button @click="darLikeInteracciones(pub)">❤️ {{ pub.likes || 0 }}</button>
+          <button @click="toggleFavorito(pub)">
+            {{ pub.favorito ? '⭐' : '☆' }}
+          </button>
+        </div>
+        
       </div>
 
       <!-- Mostrar comentarios -->
@@ -790,6 +877,7 @@
 
   <button @click="seccion = 'comunidad'">← Volver</button>
 </section>
+
 
 <!--pagina de retos -->
 <section v-if="seccion === 'retos'" class="retos-escritura">
@@ -808,7 +896,7 @@
     <h3>Tu respuesta</h3>
     <textarea v-model="respuestaReto" placeholder="Escribe aquí tu respuesta..."></textarea>
     <button @click="guardarReto('privado')">Guardar como privado</button>
-    <button @click="guardarReto('público')">Compartir con la comunidad</button>
+    <button @click="publicarEnInteracciones({ contenido: respuestaReto, tipo: 'Reto' })">📢 Publicar en Interacciones</button>
   </div>
 
   <hr />
@@ -816,13 +904,22 @@
   <div>
     <h3>Retos completados</h3>
     <div v-if="retosCompletados.length === 0">Aún no has completado retos</div>
-    <ul v-else>
-      <li v-for="(reto, index) in retosCompletados" :key="index">
-        <strong>{{ reto.titulo }}</strong> - {{ reto.fecha }}
+    <div v-else>
+      <div v-for="(reto, index) in retosCompletados" :key="index" class="reto-item">
+        <h4>{{ reto.titulo }}</h4>
+        <p>{{ reto.respuesta }}</p>
+        <small>{{ reto.fecha }}</small>
+    
+        <!-- Botón de favorito -->
+        <button @click="toggleFavorito(reto)">
+          {{ reto.favorito ? '💖 Quitar de favoritos' : '🤍 Añadir a favoritos' }}
+        </button>
+    
+        <!-- Botón para ver más -->
         <button @click="verDetalleReto(index)">Ver</button>
-      </li>
-    </ul>
-  </div>
+      </div>
+    </div>
+      </div>
 
   <div v-if="detalleReto">
     <h3>Detalle del reto</h3>
@@ -833,13 +930,11 @@
   </div>
 </section>
 
-
 <!-- club de escritura -->
 <section v-if="seccion === 'club'" class="club-escritura">
   <h2>📚 Club de Escritura</h2>
   <p>Comparte ideas, frases, críticas y participa en debates literarios.</p>
 
-  <!-- Tema del mes -->
   <div class="club-tema">
     <h3>📌 Tema del mes</h3>
     <p><strong>{{ temaDelMes.titulo }}</strong></p>
@@ -847,61 +942,109 @@
     <blockquote>{{ temaDelMes.frase }}</blockquote>
   </div>
 
-  <!-- Publicar microcrítica -->
   <div class="publicar-critica">
-    <h3>📝 Compartir microcrítica</h3>
-    <textarea v-model="nuevaCritica" placeholder="Escribe tu microcrítica..."></textarea>
-    <button @click="publicarCritica">Publicar</button>
-  </div>
-  
+  <h3>{{ tituloAporteClub }}</h3>
 
+  <label for="tipoAporteClub">¿Qué quieres compartir?</label>
+  <select v-model="tipoAporteClub" id="tipoAporteClub">
+    <option disabled value="">-- Selecciona un tipo de aporte --</option>
+    <option value="critica">Microcrítica</option>
+    <option value="frase">Frase</option>
+    <option value="debate">Debate</option>
+    <option value="opinion">Opinión sobre el tema del mes</option>
+  </select>
+
+  <textarea v-model="nuevaCritica" placeholder="Escribe tu texto..."></textarea>
+
+  <button @click="publicarCritica">Publicar</button>
+</div>
+  
   <div class="club-filtro">
     <label for="filtro">Filtrar por tipo:</label>
     <select v-model="filtroTipo" id="filtro">
       <option value="todos">Todos</option>
-      <option value="microcritica">Microcríticas</option>
+      <option value="critica">Microcríticas</option>
       <option value="frase">Frases</option>
       <option value="debate">Debates</option>
     </select>
   </div>
-  
-  <!-- Lista de críticas -->
-  <div v-for="c in criticasClub" :key="c.id">
-    <p><strong>{{ c.usuario }}:</strong> {{ c.texto }}</p>
-  </div>
-  
+
   <div class="club-listado">
-    <h4>💬 Aportes del club</h4>
-    <div v-for="critica in filteredCriticas" :key="critica.id" class="club-critica">
-      <p>
-        <strong>{{ critica.usuario }}</strong> 
-        <span v-if="insigniasUsuarios[critica.usuario]">– {{ insigniasUsuarios[critica.usuario] }}</span>
-        — {{ critica.fecha }}
-      </p>
-    
-      <div class="reacciones">
-        <button @click="darLike(critica)">❤️ {{ critica.likes || 0 }}</button>
-        <button @click="critica.mostrarRespuestas = !critica.mostrarRespuestas">💬 Comentar</button>
-      </div>
-    
-      <!-- Campo de respuesta -->
-      <div v-if="critica.mostrarRespuestas" class="responder">
-        <input v-model="critica.nuevaRespuesta" placeholder="Escribe una respuesta..." />
-        <button @click="enviarRespuesta(critica)">Enviar</button>
-      </div>
-    
-      <!-- Lista de respuestas -->
-      <div class="respuestas" v-if="critica.respuestas && critica.respuestas.length">
-        <p v-for="(respuesta, i) in critica.respuestas" :key="i">
-          <strong>{{ respuesta.usuario }}:</strong> {{ respuesta.texto }}
-        </p>
-      </div>
+  <h4>💬 Aportes del club</h4>
+  <div v-for="critica in criticasClub"  :key="critica.id" class="club-critica">
+
+    <p>
+      <strong>{{ critica.usuario }}</strong> 
+      <span v-if="insigniasUsuarios[critica.usuario]">– {{ insigniasUsuarios[critica.usuario] }}</span>
+      <span class="fecha">{{ critica.fecha }} - {{ critica.hora }}</span>
+    </p>
+
+    <!-- ✅ AQUÍ SOLO SE MUESTRA LA CRÍTICA DIRECTAMENTE -->
+    <p><strong>{{ critica.usuario }}:</strong> {{ critica.texto }}</p>
+
+    <div class="reacciones">
+      <button @click="darLikeClub(critica.id)">❤️ {{ critica.likes || 0 }}</button>
+      <button @click="critica.mostrarRespuestas = !critica.mostrarRespuestas">💬 Comentar</button>
+      <button @click="toggleFavorito(critica)">
+        {{ critica.favorito ? '⭐ Quitar de Favoritos' : '🤍 Añadir a Favoritos' }}
+      </button>
     </div>
-      </div>
+
+    <!-- Campo de respuesta -->
+    <div v-if="critica.mostrarRespuestas" class="responder">
+      <input v-model="critica.nuevaRespuesta" placeholder="Escribe una respuesta..." />
+      <button @click="enviarRespuesta(critica)">Enviar</button>
+    </div>
+
+    <!-- Lista de respuestas -->
+    <div class="respuestas" v-if="critica.respuestas && critica.respuestas.length">
+      <p v-for="(respuesta, i) in critica.respuestas" :key="i">
+        <strong>{{ respuesta.usuario }}:</strong> {{ respuesta.texto }}
+      </p>
+    </div>
+
+  </div>
+</div>
+
+  
 </section>
 
 
-<!--muro comunitario -->
+
+
+<!-- muro comunitario -->
+<section v-if="seccion === 'muro'" class="muro-comunitario">
+  <div class="muro-formulario">
+    <h2>💬 Comparte algo con la comunidad</h2>
+    <textarea v-model="nuevaPublicacionMuro" placeholder="Escribe una reflexión breve..."></textarea>
+    <button @click="publicarEnMuro">Publicar</button>
+    <button @click="publicarEnInteracciones({ contenido: respuestaReto, tipo: 'MuroComunitario' })">📢 Publicar en Interacciones</button>
+
+  </div>
+
+  <div class="muro-publicaciones">
+    <h3>📚 Publicaciones recientes</h3>
+    <div v-for="pub in muro" :key="pub.id" class="muro-card">
+      <p class="muro-texto"><strong>{{ pub.usuario }}</strong>: {{ pub.texto }}</p>
+
+      <div class="muro-reacciones">
+        <button @click="reaccionarMuro(pub, 'corazon')">❤️ {{ pub.reacciones?.corazon || 0 }}</button>
+        <button @click="reaccionarMuro(pub, 'pensamiento')">💭 {{ pub.reacciones?.pensamiento || 0 }}</button>
+        <button @click="reaccionarMuro(pub, 'compartido')">🔁 {{ pub.reacciones?.compartido || 0 }}</button>
+      </div>
+
+      <div class="muro-respuestas">
+        <div v-for="res in pub.respuestas" class="respuesta">
+          <p><strong>{{ res.usuario }}</strong>: {{ res.texto }}</p>
+        </div>
+        <input v-model="pub.nuevaRespuesta" placeholder="Responder..." />
+        <button @click="responderMuro(pub)">Responder</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- mapa de escritores -->
 <section v-if="seccion === 'mapa'" class="mapa-escritores">
 
   <div v-if="seccion === 'mapa'" class="mapa-contenido">
@@ -965,7 +1108,7 @@
   
 </section>
 
-
+<!---->
 
 
 
@@ -980,7 +1123,7 @@
       <button type="submit">Registrarme</button>
       <p v-if="registro.error" class="error">{{ registro.error }}</p>
     </form>
-    <p>¿Ya tienes cuenta? <a href="#" @click="cambiarSeccion ('login')">Iniciar sesión</a></p>
+    <p>¿Ya tienes cuenta? <a href="#" @click.prevent="cambiarSeccion('login')">Iniciar sesión</a></p>
   </section>
 
   <section v-if="seccion === 'login'" class="pagina-auth">
@@ -991,9 +1134,9 @@
       <button type="submit">Entrar</button>
       <p v-if="login.error" class="error">{{ login.error }}</p>
     </form>
-    <a href="#" @click="changeSection('registro')">Crear una cuenta</a>
+    <p>¿No tienes cuenta? <a href="#" @click.prevent="cambiarSeccion('registro')">Crear una cuenta</a>
+    </p>
   </section>
-
 
   <div v-if="usuarioAutenticado">
    <!-- 🔐 Menú superior para usuarios autenticados -->
@@ -1016,6 +1159,7 @@
        <p>Este es tu espacio personal. Aquí puedes escribir, revisar, conectar y crecer.</p>
      </main>
    </section>
+
    <!---->
    
    <!-- ✅ Sección Perfil del Usuario -->
@@ -1029,14 +1173,41 @@
        </div>
    
        <div class="perfil-bio">
-         <h3>📝 Sobre mí</h3>
-         <textarea placeholder="Escribe una breve biografía sobre ti..." v-model="usuario.bio"></textarea>
-         <button @click="guardarBio">Guardar bio</button>
-       </div>
-       <div class="perfil-estadisticas">
+        <h3>📝 Sobre mí</h3>
+        <textarea placeholder="Escribe una breve biografía sobre ti..." v-model="usuario.bio"></textarea>
+        <button @click="guardarBio">Guardar bio</button>
+      
+        <!-- ✅ Mostrar biografía guardada -->
+        <div v-show="true" class="bio-publicada">
+          <p><strong>Tu biografía:</strong> {{ usuario.bio }}</p>
+      
+          <!-- ✅ Emoción -->
+          <h4>😌 ¿Cómo te sientes hoy?</h4>
+          <select v-model="usuario.estadoEmocional" @change="guardarEstadoEmocional">
+            <option disabled value="">Selecciona una emoción</option>
+            <option value="feliz">😊 Feliz</option>
+            <option value="triste">😢 Triste</option>
+            <option value="cansada">😩 Cansada</option>
+            <option value="emocionada">🤩 Emocionada</option>
+            <option value="ansiosa">😰 Ansiosa</option>
+          </select>
+      
+          <!-- ✅ Mostrar emoción seleccionada -->
+          <p v-if="usuario.estadoEmocional">Estado actual: <strong>{{ usuario.estadoEmocional }}</strong></p>
+        </div>
+      </div>
+             <div class="perfil-estadisticas">
         <p>🔥 Racha actual: <strong>{{ rachaEscritura }}</strong> días seguidos escribiendo</p>
         <p>✍️ Retos completados: <strong>{{ retosCompletados.length }}</strong></p>
       </div>
+
+      <h3>📝 Entradas anteriores</h3>
+<ul>
+  <li v-for="entrada in historialBios" :key="entrada.fecha">
+    <strong>{{ entrada.fecha }}:</strong> {{ entrada.texto }}
+  </li>
+</ul>
+
     
       <div class="perfil-insignias" v-if="insignias.length">
         <h3>🎖 Insignias obtenidas</h3>
@@ -1053,13 +1224,16 @@
 
 
    </div>
-
+<!---->
 </div>
+
+
+
 
 <script src="https://unpkg.com/vue@3" ></script>
 <script src="blog.js"></script>
-<!-- Leaflet JS -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
 

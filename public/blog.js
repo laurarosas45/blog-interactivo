@@ -55,6 +55,18 @@ createApp({
       publicaciones: [], // las publicaciones vendrán del backend
 
 
+      registro: {
+        nombre: '',
+        email: '',
+        password: '',
+        error: ''
+      },
+      usuarioAutenticado: false,
+      usuario: {},
+      
+
+      bioActual: '',
+      historialBios: [],
 
 
 
@@ -76,12 +88,6 @@ createApp({
         estadoEmocional: ''
       },
       
-      registro: {
-        nombre: '',
-        email: '',
-        password: '',
-        error: ''
-      },
       login: {
         email: '',
         password: '',
@@ -266,7 +272,6 @@ createApp({
     
       try {
         const res = await fetch('https://blog-interactivo.onrender.com/api/club', {
-
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(nueva)
@@ -288,9 +293,6 @@ createApp({
         // 🔁 Recargar si hace falta
         await this.obtenerCriticasClub();
     
-
-
-
         // También publicar en interacciones
         this.publicarEnInteracciones({
           contenido: data.texto,
@@ -352,7 +354,7 @@ createApp({
             
     async cargarPublicaciones() {
       try {
-const res = await fetch('https://blog-interactivo.onrender.com/api/publicaciones');
+        const res = await fetch('https://blog-interactivo.onrender.com/api/publicaciones');
         const data = await res.json();
         this.publicaciones = data.map(pub => ({
           ...pub,
@@ -735,7 +737,7 @@ const res = await fetch('https://blog-interactivo.onrender.com/api/publicaciones
     },
     async cargarMuro() {
       try {
-        const res = await fetch('http://localhost:3000/api/muro');
+        const res = await fetch('https://blog-interactivo.onrender.com//api/muro');
         const data = await res.json();
         this.publicacionesMuro = data;
       } catch (err) {
@@ -747,7 +749,7 @@ const res = await fetch('https://blog-interactivo.onrender.com/api/publicaciones
     // Reaccionar (❤️ 💭 🔁)
     async darReaccion(id, tipo) {
       try {
-        await fetch(`https://blog-interactivo.onrender.com/api/muro/${id}/reaccion`, {
+        await fetch(`http://localhost:3000/api/muro/${id}/reaccion`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ tipo })
@@ -764,7 +766,7 @@ const res = await fetch('https://blog-interactivo.onrender.com/api/publicaciones
       if (!texto) return;
   
       try {
-        await fetch(`https://blog-interactivo.onrender.com/api/muro/${id}/responder`, {
+        await fetch(`http://localhost:3000/api/muro/${id}/responder`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -785,7 +787,7 @@ const res = await fetch('https://blog-interactivo.onrender.com/api/publicaciones
     // 📥 Cargar muro
     async cargarMuro() {
   try {
-    const res = await fetch('https://blog-interactivo.onrender.com/api/muro');
+    const res = await fetch('http://localhost:3000/api/muro');
     const data = await res.json();
     this.muro = data;
   } catch (err) {
@@ -802,7 +804,7 @@ const res = await fetch('https://blog-interactivo.onrender.com/api/publicaciones
   };
 
   try {
-    const res = await fetch('https://blog-interactivo.onrender.com/api/muro', {
+    const res = await fetch('http://localhost:3000/api/muro', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(nueva)
@@ -817,7 +819,7 @@ const res = await fetch('https://blog-interactivo.onrender.com/api/publicaciones
 
     async reaccionarMuro(pub, tipo) {
   try {
-    const res = await fetch(`https://blog-interactivo.onrender.com/api/muro/${pub.id}/reaccion`, {
+    const res = await fetch(`http://localhost:3000/api/muro/${pub.id}/reaccion`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ tipo })
@@ -838,7 +840,7 @@ const res = await fetch('https://blog-interactivo.onrender.com/api/publicaciones
   };
 
   try {
-    const res = await fetch(`https://blog-interactivo.onrender.com/api/muro/${pub.id}/responder`, {
+    const res = await fetch(`http://localhost:3000/api/muro/${pub.id}/responder`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(respuesta)
@@ -856,8 +858,8 @@ const res = await fetch('https://blog-interactivo.onrender.com/api/publicaciones
 
     // --- Club de Escritura Methods ---
     darLikeClub(id) {
-      fetch(`https://blog-interactivo.onrender.com/api/club/${critica.id}/like`, {
-        method: 'POST'
+  fetch(`/api/club/${id}/like`, {
+    method: 'POST'
   })
     .then(res => res.json())
     .then(data => {
@@ -878,7 +880,7 @@ const res = await fetch('https://blog-interactivo.onrender.com/api/publicaciones
         texto: critica.nuevaRespuesta.trim()
       };
     
-      fetch(`https://blog-interactivo.onrender.com/api/club/${critica.id}/responder`, {
+      fetch(`http://127.0.0.1:3000/api/club/${critica.id}/responder`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(nueva)
@@ -892,8 +894,8 @@ const res = await fetch('https://blog-interactivo.onrender.com/api/publicaciones
     },
         
     obtenerCriticasClub() {
-      fetch('https://blog-interactivo.onrender.com/api/club')
-      .then(res => res.json())
+      fetch('http://127.0.0.1:3000/api/club')
+        .then(res => res.json())
         .then(data => {
           this.criticasClub = data;
           this.criticasClub = data.map(c => ({
@@ -999,7 +1001,7 @@ const res = await fetch('https://blog-interactivo.onrender.com/api/publicaciones
 
       // Guardar también en backend
       try {
-        const res = await fetch('https://blog-interactivo.onrender.com/api/retos', {
+        const res = await fetch('http://localhost:3000/api/retos', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(retoGuardado)
@@ -1068,7 +1070,7 @@ const res = await fetch('https://blog-interactivo.onrender.com/api/publicaciones
 
       // Save to backend
       try {
-        await fetch(`https://blog-interactivo.onrender.com/api/comentar/${pub.id}`, {
+        await fetch(`http://localhost:3000/api/comentar/${pub.id}`, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ comentario })
@@ -1081,7 +1083,7 @@ const res = await fetch('https://blog-interactivo.onrender.com/api/publicaciones
 
     async cargarRetosCompletados() {
       try {
-        const res = await fetch('https://blog-interactivo.onrender.com/api/retos');
+        const res = await fetch('http://localhost:3000/api/retos');
         const data = await res.json();
         this.retosCompletados = data;
         console.log('✅ Retos cargados del backend:', data);
@@ -1102,38 +1104,49 @@ const res = await fetch('https://blog-interactivo.onrender.com/api/publicaciones
       try {
         const response = await fetch('https://blog-interactivo.onrender.com/api/register', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: {
+            'Content-Type': 'application/json'
+          },
           body: JSON.stringify(this.registro)
         });
+    
         const data = await response.json();
-
+    
         if (response.ok) {
+          // Guardar datos en localStorage
           localStorage.setItem('token', data.token);
-          localStorage.setItem('nombre', data.nombre || 'Mi Usuario');
-          localStorage.setItem('email', this.registro.email); // Use registro.email for the new user
-
+          localStorage.setItem('nombre', data.nombre || this.registro.nombre);
+          localStorage.setItem('email', this.registro.email);
+    
+          // Establecer usuario actual
           this.usuario = {
-            nombre: data.nombre || 'Mi Usuario',
-            email: this.registro.email, // Corrected
-            bio: localStorage.getItem('bio') || ''
+            nombre: data.nombre || this.registro.nombre,
+            email: this.registro.email,
+            bio: ''
           };
-
+    
           this.usuarioAutenticado = true;
           this.seccion = 'perfil';
-          this.login = { email: '', password: '', error: '' }; // Clear login form
-          this.registro = { nombre: '', email: '', password: '', error: '' }; // Clear registration form
+    
+          // Limpiar campos de registro
+          this.registro = {
+            nombre: '',
+            email: '',
+            password: '',
+            error: ''
+          };
         } else {
-          this.registro.error = data.error || 'Error al registrar';
+          this.registro.error = data.mensaje || 'Error al registrarse.';
         }
-      } catch (err) {
-        console.error('Error de conexión al registrar:', err);
+      } catch (error) {
+        console.error('Error al registrar:', error);
         this.registro.error = 'Error de conexión con el servidor.';
       }
     },
-
+    
     async iniciarSesion() {
       try {
-        const response = await fetch('https://blog-interactivo.onrender.com/api/login', {
+        const response = await fetch('http://localhost:3000/api/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(this.login)
@@ -1170,45 +1183,52 @@ const res = await fetch('https://blog-interactivo.onrender.com/api/publicaciones
       window.location.hash = 'inicio'; // Ensure URL hash reflects the change
     },
 
-    guardarBio() {
-      if (!this.usuario || !this.usuario.nombre || !this.usuario.email) {
-        alert('⚠️ No se puede guardar. Faltan datos del usuario.');
-        return;
-      }
+    async guardarBio() {
+      const token = localStorage.getItem('token');
+      const hoy = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
     
-      const datos = {
-        nombre: this.usuario.nombre,
-        email: this.usuario.email,
-        bio: this.usuario.bio,
-        estadoEmocional: this.usuario.estadoEmocional
+      const nuevaEntrada = {
+        fecha: hoy,
+        texto: this.bioActual
       };
     
-      fetch('https://blog-interactivo.onrender.com/api/perfil', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(datos)
-      })
-        .then(res => {
-          if (!res.ok) throw new Error('Respuesta no válida del servidor');
-          return res.json();
-        })
-        .then(data => {
-          alert('✅ Datos guardados correctamente');
-          localStorage.setItem('bio', this.usuario.bio);
-          localStorage.setItem('estadoEmocional', this.usuario.estadoEmocional);
-        })
-        .catch(err => {
-          console.error('❌ Error al guardar:', err);
-          alert('❌ Error al guardar datos');
-        });
-    },
-        
-
-    async guardarEstadoEmocional() {
       try {
         const res = await fetch('https://blog-interactivo.onrender.com/api/perfil', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({ entrada: nuevaEntrada })
+        });
+    
+        const data = await res.json();
+    
+        if (res.ok) {
+          this.historialBios.push(nuevaEntrada); // agregar al historial local
+          this.bioActual = ''; // limpiar para escribir algo nuevo
+          alert('✅ Entrada guardada');
+        } else {
+          alert('❌ Error al guardar: ' + data.error);
+        }
+    
+      } catch (err) {
+        console.error('❌ Error de red:', err);
+        alert('❌ No se pudo conectar con el servidor.');
+      }
+    },
+                    
+
+    async guardarEstadoEmocional() {
+      const token = localStorage.getItem('token');
+    
+      try {
+        const res = await fetch('https://blog-interactivo.onrender.com/api/perfil', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
           body: JSON.stringify(this.usuario)
         });
     
@@ -1224,10 +1244,10 @@ const res = await fetch('https://blog-interactivo.onrender.com/api/publicaciones
         alert('❌ Error al guardar estado emocional');
       }
     },
-    
+        
     async cargarPerfil() {
       try {
-        const res = await fetch('https://blog-interactivo.onrender.com/api/perfil');
+        const res = await fetch('http://localhost:3000/api/perfil');
         const data = await res.json();
         if (data) {
           this.usuario = {
@@ -1240,6 +1260,8 @@ const res = await fetch('https://blog-interactivo.onrender.com/api/publicaciones
       } catch (err) {
         console.error('❌ Error al cargar perfil:', err);
       }
+
+      
     },
     
 
@@ -1279,7 +1301,7 @@ const res = await fetch('https://blog-interactivo.onrender.com/api/publicaciones
 
         console.log({ autor, contenido, tipo, fecha });
 
-        const response = await fetch('https://blog-interactivo.onrender.com/api/publicar', {
+        const response = await fetch('http://localhost:3000/api/publicar', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ autor, contenido, tipo, fecha })
@@ -1302,7 +1324,7 @@ const res = await fetch('https://blog-interactivo.onrender.com/api/publicaciones
 
     async pedirAyudaIA(tipo, entrada = '') {
       try {
-        const response = await fetch('https://blog-interactivo.onrender.com/api/openai/generar', {
+        const response = await fetch('http://localhost:3000/api/openai/generar', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ tipo, entrada })
@@ -1341,7 +1363,7 @@ const res = await fetch('https://blog-interactivo.onrender.com/api/publicaciones
         }
     
     
-        fetch('https://blog-interactivo.onrender.com/api/perfil')
+        fetch('http://localhost:3000/api/perfil')
         .then(res => res.json())
         .then(data => {
           if (data && data.email) {
@@ -1372,7 +1394,7 @@ const res = await fetch('https://blog-interactivo.onrender.com/api/publicaciones
       this.seccion = (nuevaSeccion === '' || nuevaSeccion === '/') ? 'inicio' : nuevaSeccion;
       console.log('Sección actualizada por hashchange:', this.seccion);
   
-      fetch('https://blog-interactivo.onrender.com/api/retos')
+      fetch('http://localhost:3000/api/retos')
       .then(res => res.json())
         .then(data => {
           this.publicaciones = data.map(pub => ({
