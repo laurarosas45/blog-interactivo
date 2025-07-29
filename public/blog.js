@@ -184,7 +184,7 @@ createApp({
       }
     }
   },
-    
+  
   methods: {
     
     enviarMensaje() {
