@@ -184,7 +184,7 @@ createApp({
       }
     }
   },
-  
+    
   methods: {
     
     enviarMensaje() {
@@ -677,23 +677,27 @@ createApp({
       });
     },
     obtenerUbicacion() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(position => {
-          this.coordenadasUsuario = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-          };
+      if (!navigator.geolocation) {
+        alert('La geolocalización no es compatible con este navegador.');
+        return;
+      }
     
-          this.mapa = L.map('mapa').setView(
-            [this.coordenadasUsuario.lat, this.coordenadasUsuario.lng],
-            5
-          );
+      navigator.geolocation.getCurrentPosition(
+        position => {
+          const lat = position.coords.latitude;
+          const lng = position.coords.longitude;
+          this.coordenadasUsuario = { lat, lng };
     
-          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors'
-          }).addTo(this.mapa);
+          // 🌍 Inicializar el mapa en ese punto
+          if (!this.mapa) {
+            this.mapa = L.map('mapa').setView([lat, lng], 5);
     
-          // 👉 Aquí agregas los marcadores de otros escritores:
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+              attribution: '&copy; OpenStreetMap contributors'
+            }).addTo(this.mapa);
+          }
+    
+          // 🔴 Mostrar todas las marcas existentes
           this.mensajesMapa.forEach(m => {
             if (m.lat && m.lng) {
               L.marker([m.lat, m.lng])
@@ -701,12 +705,14 @@ createApp({
                 .bindPopup(`${m.usuario}: "${m.mensaje}"`);
             }
           });
-        });
-      } else {
-        alert('La geolocalización no es compatible con este navegador.');
-      }
+        },
+        error => {
+          alert('No se pudo obtener tu ubicación.');
+          console.error(error);
+        }
+      );
     },
-        
+            
     async publicarMensajeMapa() {
       if (!this.mensajeMapa.trim() || !this.ubicacionMapa) {
         alert('Escribe un mensaje y permite acceder a tu ubicación.');
