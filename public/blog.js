@@ -175,6 +175,16 @@ createApp({
     
   },
 
+  watch: {
+    seccion(nuevaSeccion) {
+      if (nuevaSeccion === 'mapa') {
+        this.$nextTick(() => {
+          this.obtenerUbicacion();
+        });
+      }
+    }
+  },
+  
   methods: {
     
     enviarMensaje() {
@@ -666,28 +676,37 @@ createApp({
         info.open(this.mapa, marker);
       });
     },
+    obtenerUbicacion() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(position => {
+          this.coordenadasUsuario = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
     
-    async obtenerUbicacion() {
-      try {
-        navigator.geolocation.getCurrentPosition(async pos => {
-          const lat = pos.coords.latitude;
-          const lng = pos.coords.longitude;
+          this.mapa = L.map('mapa').setView(
+            [this.coordenadasUsuario.lat, this.coordenadasUsuario.lng],
+            5
+          );
     
-          // Llamada a OpenStreetMap para obtener ciudad y país
-          const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`);
-          const data = await res.json();
-          const ciudad = data.address.city || data.address.town || data.address.village || 'Ciudad desconocida';
-          const pais = data.address.country || 'País desconocido';
+          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+          }).addTo(this.mapa);
     
-          this.ubicacionMapa = { ciudad, pais, lat, lng };
-        }, err => {
-          alert('No se pudo obtener tu ubicación.');
-          console.error(err);
+          // 👉 Aquí agregas los marcadores de otros escritores:
+          this.mensajesMapa.forEach(m => {
+            if (m.lat && m.lng) {
+              L.marker([m.lat, m.lng])
+                .addTo(this.mapa)
+                .bindPopup(`${m.usuario}: "${m.mensaje}"`);
+            }
+          });
         });
-      } catch (error) {
-        console.error('Error al obtener ubicación:', error);
+      } else {
+        alert('La geolocalización no es compatible con este navegador.');
       }
     },
+        
     async publicarMensajeMapa() {
       if (!this.mensajeMapa.trim() || !this.ubicacionMapa) {
         alert('Escribe un mensaje y permite acceder a tu ubicación.');
