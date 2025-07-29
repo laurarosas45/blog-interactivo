@@ -175,17 +175,6 @@ createApp({
     
   },
 
-  watch: {
-    seccion(nuevaSeccion) {
-      if (nuevaSeccion === 'mapa') {
-        this.$nextTick(() => {
-          this.obtenerUbicacion();
-        });
-      }
-    }
-  },
-  
-
   methods: {
     
     enviarMensaje() {
@@ -232,6 +221,7 @@ createApp({
           this.obtenerUbicacion();
         });
       }
+      
     
       window.location.hash = nueva;
     },
@@ -677,25 +667,28 @@ createApp({
         info.open(this.mapa, marker);
       });
     },
-    obtenerUbicacion() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (pos) => {
-            this.coordenadasUsuario = {
-              lat: pos.coords.latitude,
-              lng: pos.coords.longitude,
-            };
-            this.cargarMapa();
-          },
-          (error) => {
-            alert("No se pudo obtener tu ubicación.");
-            console.error("Geolocalización falló:", error);
-          }
-        );
-      } else {
-        alert("Tu navegador no soporta geolocalización.");
+    
+    async obtenerUbicacion() {
+      try {
+        navigator.geolocation.getCurrentPosition(async pos => {
+          const lat = pos.coords.latitude;
+          const lng = pos.coords.longitude;
+    
+          // Llamada a OpenStreetMap para obtener ciudad y país
+          const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`);
+          const data = await res.json();
+          const ciudad = data.address.city || data.address.town || data.address.village || 'Ciudad desconocida';
+          const pais = data.address.country || 'País desconocido';
+    
+          this.ubicacionMapa = { ciudad, pais, lat, lng };
+        }, err => {
+          alert('No se pudo obtener tu ubicación.');
+          console.error(err);
+        });
+      } catch (error) {
+        console.error('Error al obtener ubicación:', error);
       }
-    },        
+    },
     async publicarMensajeMapa() {
       if (!this.mensajeMapa.trim() || !this.ubicacionMapa) {
         alert('Escribe un mensaje y permite acceder a tu ubicación.');
