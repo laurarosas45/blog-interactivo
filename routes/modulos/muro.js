@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 const router = express.Router();
-const archivoMuro = path.join(__dirname, '../../../muro.json');
+const archivoMuro = path.join(__dirname, '../../data/muro.json');
 
 // Asegurar que el archivo exista
 if (!fs.existsSync(archivoMuro)) {
@@ -80,8 +80,8 @@ router.post('/:id/reaccion', (req, res) => {
   const id = req.params.id;
   const { tipo } = req.body;
 
-  const publicaciones = cargarJSON(archivoMuro);
-  const publicacion = publicaciones.find(p => p.id === id);
+  const publicaciones = cargarPublicaciones();
+  const publicacion = publicaciones.find(p => p.id == id);
   if (!publicacion) {
     return res.status(404).json({ error: 'Publicación no encontrada' });
   }
@@ -94,29 +94,10 @@ router.post('/:id/reaccion', (req, res) => {
   if (tipo === 'comentario') publicacion.reacciones.comentario += 1;
   if (tipo === 'compartir') publicacion.reacciones.compartir += 1;
 
-  guardarJSON(archivoMuro, publicaciones);
+  guardarPublicaciones(publicaciones);
   res.json({ mensaje: 'Reacción guardada' });
 });
 
-router.post('/:id/responder', (req, res) => {
-  const id = req.params.id;
-  const { usuario, texto } = req.body;
-
-  const publicaciones = cargarJSON(archivoMuro);
-  const publicacion = publicaciones.find(p => p.id === id);
-  if (!publicacion) {
-    return res.status(404).json({ error: 'Publicación no encontrada' });
-  }
-
-  if (!publicacion.respuestas) {
-    publicacion.respuestas = [];
-  }
-
-  publicacion.respuestas.push({ usuario, texto });
-  guardarJSON(archivoMuro, publicaciones);
-
-  res.json({ mensaje: 'Respuesta agregada' });
-});
 
 
 module.exports = router;

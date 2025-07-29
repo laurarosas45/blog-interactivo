@@ -804,27 +804,36 @@ createApp({
     },
 
     async publicarEnMuro() {
-  if (!this.nuevaPublicacionMuro.trim()) return;
-
-  const nueva = {
-    usuario: this.usuario.nombre || 'Anónimo',
-    texto: this.nuevaPublicacionMuro.trim()
-  };
-
-  try {
-    const res = await fetch('https://blog-interactivo.onrender.com/api/muro', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(nueva)
-    });
-    const pub = await res.json();
-    this.muro.unshift(pub);
-    this.nuevaPublicacionMuro = '';
-  } catch (err) {
-    console.error('❌ Error al publicar en muro:', err);
-  }
+      const texto = this.nuevaPublicacionMuro.trim();
+      if (!texto) return;
+    
+      const nueva = {
+        usuario: this.usuario.nombre || 'Anónimo',
+        texto: texto
+      };
+    
+      try {
+        // 1️⃣ Guardar en el muro normalmente
+        const res = await fetch('https://blog-interactivo.onrender.com/api/muro', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(nueva)
+        });
+        const pub = await res.json();
+        this.muro.unshift(pub);
+        this.nuevaPublicacionMuro = '';
+    
+        // 2️⃣ También guardar en Interacciones
+        await this.publicarEnInteracciones({
+          tipo: 'MuroComunitario',
+          contenido: texto
+        });
+    
+      } catch (err) {
+        console.error('❌ Error al publicar en muro o interacciones:', err);
+      }
     },
-
+    
     async reaccionarMuro(pub, tipo) {
   try {
     const res = await fetch(`https://blog-interactivo.onrender.com/api/muro/${pub.id}/reaccion`, {
