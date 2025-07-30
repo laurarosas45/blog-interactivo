@@ -1314,24 +1314,6 @@ transition: all 0.3s ease;
 background-color: #933b2f;
 }
 
-.boton-general {
-margin-top: 3rem;
-display: flex;
-gap: 1rem;
-justify-content: center;
-flex-wrap: wrap;
-}
-
-.boton-general button {
-padding: 0.6rem 1.5rem;
-border-radius: 100px;
-font-weight: 600;
-font-size: 1rem;
-border: none;
-cursor: pointer;
-transition: all 0.3s ease;
-}
-
 .boton-general .perfil {
 background-color: #b45338;
 color: white;
@@ -1581,13 +1563,6 @@ transition: background 0.3s ease;
 .btn-volver:hover {
 background-color: #7b3f00;
 }
-
-
-
-/* 🌈 Estilos especiales para la sección creativa */
-
-
-
 
 /* seccion de reto creativo /categorias */
 
