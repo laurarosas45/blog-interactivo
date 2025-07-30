@@ -373,14 +373,6 @@
     </div>
 
     <div class="card">
-      <h3>💖 Favoritos</h3>
-      <p>
-        Aquí se guardan tus entradas favoritas o aquellas que marcaste porque te inspiraron o te tocaron. Puedes volver a ellas cuando quieras, como una biblioteca emocional y personal.
-      </p>
-      <button v-if="usuarioAutenticado" @click="seccion = 'favoritos'">Ver favoritos</button>
-    </div>
-
-    <div class="card">
       <h3>🧠 Inspiración diaria</h3>
       <p>
         Si no sabes qué escribir o te sientes bloqueada/o, este espacio te dará una frase, una imagen o una pregunta creativa cada día para ayudarte a fluir con las palabras.
@@ -491,16 +483,7 @@
           <p>Empieza con una frase y deja que tu imaginación tome el control. Sin límites, sin finales predefinidos.</p>
           <button v-if="usuarioAutenticado" @click="abrirEspacioCreativo ('continuar')">Continuar historia</button>
           <p v-if="mensajeUsuario && tipoRespuesta === 'continuar'" class="respuesta-ia">{{ mensajeUsuario }}</p>
-        </div>
-    
-        <!-- Imagen creativa -->
-        <div class="creativo-card">
-          <h3>Escribe desde una imagen</h3>
-          <p>Te mostramos una imagen. ¿Qué historia esconde? Describe, imagina o recuerda.</p>
-          <button v-if="usuarioAutenticado" @click="abrirEspacioCreativo ('imagen')">Ver imagen</button>
-          <p v-if="mensajeUsuario && tipoRespuesta === 'imagen'" class="respuesta-ia">{{ mensajeUsuario }}</p>
-        </div>
-    
+        </div>    
         <!-- Pregunta profunda -->
         <div class="creativo-card">
           <h3>Pregunta profunda</h3>
@@ -1157,7 +1140,6 @@
       <a href="#comunidad" @click.prevent="cambiarSeccion ('comunidad')">🫂 Comunidad</a>
       <a href="#categorias" @click.prevent="seccion = 'categorias'">✍️  Nueva Entrada</a>
       <a href="#categorias" @click.prevent="seccion = 'creativo'">🏁 Retos</a>
-      <a href="#favoritos" @click.prevent="seccion = 'favoritos'">💖 Favoritos</a>
       <a href="#progreso" @click.prevent="seccion = 'progreso'">📈 Progreso</a>
       <a href="#inicio" @click="seccion = 'inicio'"> 🏠 inicio</a>
       <a href="#" @click.prevent="cerrarSesion">🚪 Cerrar sesión</a>
