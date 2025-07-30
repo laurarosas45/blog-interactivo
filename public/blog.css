@@ -1314,6 +1314,24 @@ transition: all 0.3s ease;
 background-color: #933b2f;
 }
 
+.boton-general {
+margin-top: 3rem;
+display: flex;
+gap: 1rem;
+justify-content: center;
+flex-wrap: wrap;
+}
+
+.boton-general button {
+padding: 0.6rem 1.5rem;
+border-radius: 100px;
+font-weight: 600;
+font-size: 1rem;
+border: none;
+cursor: pointer;
+transition: all 0.3s ease;
+}
+
 .boton-general .perfil {
 background-color: #b45338;
 color: white;
@@ -1324,7 +1342,141 @@ background-color: #9334e6;
 color: white;
 }
 
+/* 🌈 Estilos especiales para la sección creativa */
 
+.pagina-creativa-detalle {
+  padding: 2rem;
+  background: linear-gradient(135deg, #fdf6e3, #f0e7ff);
+  font-family: 'Inter', sans-serif;
+  animation: aparecer 0.6s ease-in;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  border-top: 4px dashed #8e44ad;
+  }
+  
+  .creativo-retorno {
+  text-align: left;
+  }
+  
+  .creativo-retorno button {
+  background-color: #8e44ad;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  }
+  
+  .creativo-retorno button:hover {
+  background-color: #732d91;
+  }
+  
+  .respuesta-ia-generada {
+  background-color: #fff3e0;
+  padding: 1rem;
+  border-left: 5px solid #f39c12;
+  border-radius: 8px;
+  font-style: italic;
+  color: #444;
+  }
+  
+  .area-escritura textarea {
+  width: 100%;
+  min-height: 200px;
+  padding: 1rem;
+  border: 2px dashed #d6a2e8;
+  border-radius: 10px;
+  font-size: 1rem;
+  resize: vertical;
+  background-color: #fff;
+  color: #333;
+  }
+  
+  .botones-escritura {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  }
+  
+  .botones-escritura button {
+  padding: 0.7rem 1.4rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.3s ease;
+  }
+  
+  .botones-escritura button:first-child {
+  background-color: #16a085;
+  color: white;
+  }
+  
+  .botones-escritura button:first-child:hover {
+  background-color: #138d75;
+  transform: scale(1.05);
+  }
+  
+  .botones-escritura button:last-child {
+  background-color: #ec7063;
+  color: white;
+  }
+  
+  .botones-escritura button:last-child:hover {
+  background-color: #e74c3c;
+  transform: scale(1.05);
+  }
+  
+  @keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  }
+  
+  
+  .barra-creativa-opciones {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: #fdf1ff;
+  padding: 1rem;
+  border: 2px dashed #d6a2e8;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  }
+  
+  .barra-creativa-opciones select {
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  }
+  
+  .barra-creativa-opciones button {
+  padding: 0.5rem 1rem;
+  background-color: #9b59b6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  }
+  
+  .barra-creativa-opciones button:hover {
+  background-color: #8e44ad;
+  }
+  
+  
 
 
 /*iniciar seccion*/
@@ -1564,6 +1716,11 @@ transition: background 0.3s ease;
 background-color: #7b3f00;
 }
 
+
+
+
+
+
 /* seccion de reto creativo /categorias */
 
 .campo-categoria {
@@ -1576,6 +1733,7 @@ padding: 6px;
 border-radius: 4px;
 border: 1px solid #aaa;
 }
+
 
 
 /* progreso*/
@@ -2013,7 +2171,7 @@ border-radius: 8px;
 cursor: pointer;
 }
 
-/* mapa de escritores */
+/*mapa de escritores*/
 .mapa-container {
   width: 100%;
   min-height: 500px; /* Usamos min-height para evitar conflictos */
@@ -2110,7 +2268,6 @@ text-align: center;
 margin-bottom: 1rem;
 color: #333;
 }
-
 
 /* interactua con otros */
 .pagina-interacciones {
