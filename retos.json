@@ -11,17 +11,7 @@
     "tipoGuardado": "privado",
     "contenido": "hola"
   },
-  {
-    "id": 1,
-    "tipo": "emocional",
-    "nivel": "profundo",
-    "titulo": "Carta sin destinatario",
-    "descripcion": "Escribe una carta que nunca planeas enviar.",
-    "imagen": null,
-    "respuesta": "holll",
-    "fecha": "15/7/2025",
-    "tipoGuardado": "privado"
-  },
+  
   {
     "id": 3,
     "tipo": "flujo",

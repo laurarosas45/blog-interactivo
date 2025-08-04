@@ -2,7 +2,7 @@
   {
     "nombre": "laura rosas",
     "email": "rosas4087564@gmail.com",
-    "password": "Luciernaga.45"
+    "password": "helloworld"
   },
   {
     "id": 1,
@@ -24,10 +24,6 @@
     "nombre": "Laura Test",
     "email": "lauratest@example.com",
     "password": "123456"
-  },
-  {
-    "nombre": "laura rosas",
-    "email": "laura.rosas.durrani@gmail.com",
-    "password": "Luciernaga.45"
   }
+  
 ]
