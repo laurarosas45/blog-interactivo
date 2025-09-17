@@ -5,7 +5,7 @@ createApp({
     return {
       // variables// 
         seccion: 'inicio',
-        filtroTipo: 'todos', // ⬅️ AÑADE ESTO
+        filtroTipo: 'todos', 
 
       nuevaCritica: '',
       tipoAporteClub: '', // Nuevo campo para el selector del club
@@ -61,16 +61,13 @@ createApp({
         password: '',
         error: ''
       },
+      
       usuarioAutenticado: false,
       usuario: {},
       
 
       bioActual: '',
       historialBios: [],
-
-
-
-
 
 
       metas: [
