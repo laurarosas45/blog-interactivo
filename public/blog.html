@@ -25,14 +25,18 @@
    NOTA : se crea por separado igual pero en vuelto en un mismo div para que todas se vean en el inicio -->
   <div v-if="seccion === 'inicio'">
     
-    <header class="menu">
+    <header class="menu menu--inicio">
       <div class="menu-superior">
-        <h1 class="menu-logo">QUERIDO DIARIO</h1>
         <button type="button" class="menu-hamburguesa" aria-label="Abrir menú" @click="menuAbierto = !menuAbierto" :aria-expanded="menuAbierto">
           <span class="hamburguesa-linea"></span>
           <span class="hamburguesa-linea"></span>
           <span class="hamburguesa-linea"></span>
         </button>
+        <div class="menu-logo-centro">
+          <span class="menu-logo-circle">QD</span>
+          <span class="menu-logo-texto">QUERIDO DIARIO</span>
+        </div>
+        <a href="#" class="menu-busqueda" aria-label="Buscar" @click.prevent><i class="fa-solid fa-search"></i></a>
       </div>
       <div class="menu-overlay" :class="{ 'menu-overlay--visible': menuAbierto }" @click="menuAbierto = false" aria-hidden="true"></div>
       <nav class="menu-links" :class="{ 'menu-links--abierto': menuAbierto }" aria-label="Menú principal">

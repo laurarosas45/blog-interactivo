@@ -66,6 +66,43 @@ header{
   margin: 0;
 }
 
+/* Logo centro (círculo + texto) — visible en desktop */
+.menu-logo-centro {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.menu-logo-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #1a1a1a;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  font-family: 'Inter', sans-serif;
+}
+
+.menu-logo-texto {
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: white;
+  font-family: 'Georgia', serif;
+  letter-spacing: 0.02em;
+}
+
+.menu-busqueda {
+  display: none;
+  color: white;
+  font-size: 1.2rem;
+  padding: 8px;
+}
+
 .menu a:not(.btn-outline) {
   color: white;
   text-decoration: none;
@@ -2445,6 +2482,63 @@ background-color: #fbeaea;
   .menu {
     padding: 14px 20px;
     flex-wrap: wrap;
+  }
+
+  /* Section 1 inicio: barra blanca como referencia (Our Planet) */
+  .menu.menu--inicio {
+    position: relative;
+    background: #fff;
+    padding: 14px 20px;
+    min-height: 56px;
+    box-sizing: border-box;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
+  }
+
+  .menu.menu--inicio .menu-hamburguesa {
+    background: transparent;
+    order: 1;
+  }
+
+  .menu.menu--inicio .menu-hamburguesa:hover {
+    background: rgba(0, 0, 0, 0.06);
+  }
+
+  .menu.menu--inicio .hamburguesa-linea {
+    background: #1a1a1a;
+  }
+
+  .menu.menu--inicio .menu-logo-centro {
+    order: 2;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .menu.menu--inicio .menu-logo-circle {
+    width: 36px;
+    height: 36px;
+    font-size: 0.75rem;
+    background: #1a1a1a;
+    color: #fff;
+  }
+
+  .menu.menu--inicio .menu-logo-texto {
+    color: #1a1a1a;
+    font-size: 1.15rem;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .menu.menu--inicio .menu-busqueda {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    order: 3;
+    color: #1a1a1a;
+    font-size: 1.25rem;
+    padding: 10px;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
   }
 
   .menu-superior {
