@@ -34,7 +34,8 @@
           <span class="hamburguesa-linea"></span>
         </button>
       </div>
-      <div class="menu-links" :class="{ 'menu-links--abierto': menuAbierto }">
+      <div class="menu-overlay" :class="{ 'menu-overlay--visible': menuAbierto }" @click="menuAbierto = false" aria-hidden="true"></div>
+      <nav class="menu-links" :class="{ 'menu-links--abierto': menuAbierto }" aria-label="Menú principal">
         <a href="#proposito" @click.prevent="cambiarSeccion('proposito'); menuAbierto = false">Propósito</a>
         <a href="#miEspacio" @click.prevent="cambiarSeccion('miEspacio'); menuAbierto = false">Mi Espacio</a>
         <a href="#comunidad" @click.prevent="cambiarSeccion ('comunidad'); menuAbierto = false">Comunidad</a>
@@ -47,7 +48,7 @@
         <div class="login login--movil">
           <a @click="seccion = 'login'; menuAbierto = false">Iniciar sesión</a>
         </div>
-      </div>
+      </nav>
       <div class="login login--desktop">
         <a @click="seccion = 'login'">Iniciar sesión</a>
       </div>

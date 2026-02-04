@@ -1370,7 +1370,15 @@ createApp({
         console.error('Error calling OpenAI API:', error);
       }
     }
-  },  
+  },
+
+  watch: {
+    menuAbierto(abierto) {
+      if (typeof document !== 'undefined' && window.innerWidth <= 1024) {
+        document.body.classList.toggle('menu-abierto', !!abierto);
+      }
+    }
+  },
 
   mounted() {
         // Verificación de token y datos guardados
