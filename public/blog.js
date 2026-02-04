@@ -5,6 +5,7 @@ createApp({
     return {
       // variables// 
         seccion: 'inicio',
+        menuAbierto: false,
         filtroTipo: 'todos', 
 
       nuevaCritica: '',
@@ -190,6 +191,7 @@ createApp({
     },
     
     cambiarSeccion(nueva) {
+      this.menuAbierto = false;
       this.seccion = nueva;
 
     

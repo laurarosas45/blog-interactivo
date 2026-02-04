@@ -26,20 +26,29 @@
   <div v-if="seccion === 'inicio'">
     
     <header class="menu">
-      <h1 class="menu-logo">QUERIDO DIARIO</h1>
-      <div class="menu-links">
-        <a href="#proposito" @click.prevent="cambiarSeccion('proposito')">Propósito</a>
-        <a href="#miEspacio" @click.prevent="cambiarSeccion('miEspacio')">Mi Espacio</a>
-        <a href="#comunidad" @click.prevent="cambiarSeccion ('comunidad')">Comunidad</a>
-        <a href="#inspiracion" @click.prevent="cambiarSeccion('inspiracion')">Inspiración</a>
-        <a href="#categorias" @click.prevent="cambiarSeccion('categorias')">Categorías</a>
-        <a href="#creativo" @click.prevent="cambiarSeccion('creativo')">Creativo</a>
-        <div v-if="usuarioAutenticado" class="volver-a-perfil">
-          <button @click="cambiarSeccion('perfil')">Ir a mi perfil</button>
-        </div>
-    
+      <div class="menu-superior">
+        <h1 class="menu-logo">QUERIDO DIARIO</h1>
+        <button type="button" class="menu-hamburguesa" aria-label="Abrir menú" @click="menuAbierto = !menuAbierto" :aria-expanded="menuAbierto">
+          <span class="hamburguesa-linea"></span>
+          <span class="hamburguesa-linea"></span>
+          <span class="hamburguesa-linea"></span>
+        </button>
       </div>
-      <div class="login">
+      <div class="menu-links" :class="{ 'menu-links--abierto': menuAbierto }">
+        <a href="#proposito" @click.prevent="cambiarSeccion('proposito'); menuAbierto = false">Propósito</a>
+        <a href="#miEspacio" @click.prevent="cambiarSeccion('miEspacio'); menuAbierto = false">Mi Espacio</a>
+        <a href="#comunidad" @click.prevent="cambiarSeccion ('comunidad'); menuAbierto = false">Comunidad</a>
+        <a href="#inspiracion" @click.prevent="cambiarSeccion('inspiracion'); menuAbierto = false">Inspiración</a>
+        <a href="#categorias" @click.prevent="cambiarSeccion('categorias'); menuAbierto = false">Categorías</a>
+        <a href="#creativo" @click.prevent="cambiarSeccion('creativo'); menuAbierto = false">Creativo</a>
+        <div v-if="usuarioAutenticado" class="volver-a-perfil">
+          <button @click="cambiarSeccion('perfil'); menuAbierto = false">Ir a mi perfil</button>
+        </div>
+        <div class="login login--movil">
+          <a @click="seccion = 'login'; menuAbierto = false">Iniciar sesión</a>
+        </div>
+      </div>
+      <div class="login login--desktop">
         <a @click="seccion = 'login'">Iniciar sesión</a>
       </div>
     </header>
@@ -102,7 +111,7 @@
       </div>
       <div class="contenido-invitacion">
         <div class="video-invitacion">
-          <iframe width="720" height="405" src="https://www.youtube.com/embed/I6mSNMZ0LT8" frameborder="0" allowfullscreen class="video-embed"></iframe>
+          <iframe src="https://www.youtube.com/embed/I6mSNMZ0LT8" frameborder="0" allowfullscreen class="video-embed" title="Video invitación"></iframe>
         </div>
         <div class="texto-invitacion">
           <p>
