@@ -94,6 +94,7 @@ header{
   color: white;
   font-family: 'Georgia', serif;
   letter-spacing: 0.02em;
+  white-space: nowrap;
 }
 
 .menu-busqueda {
@@ -2527,6 +2528,7 @@ background-color: #fbeaea;
     font-size: 1.15rem;
     font-weight: 600;
     font-family: 'Inter', sans-serif;
+    white-space: nowrap;
   }
 
   .menu.menu--inicio .menu-busqueda {
@@ -2617,14 +2619,14 @@ background-color: #fbeaea;
     visibility: visible;
   }
 
-  /* Panel lateral del menú */
+  /* Panel del menú: centrado en la pantalla */
   .menu-links {
     position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: min(320px, 85vw);
+    left: 50%;
+    top: 50%;
+    width: min(320px, 90vw);
     max-width: 320px;
+    max-height: 85vh;
     z-index: 12;
     display: flex;
     flex-direction: column;
@@ -2632,14 +2634,19 @@ background-color: #fbeaea;
     padding: 0;
     margin: 0;
     background: linear-gradient(180deg, #2d2220 0%, #1f1816 100%);
-    box-shadow: -8px 0 32px rgba(0, 0, 0, 0.35);
-    transform: translateX(100%);
-    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+    border-radius: 16px;
+    transform: translate(-50%, -50%) scale(0.95);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, visibility 0.3s ease;
     overflow-y: auto;
   }
 
   .menu-links--abierto {
-    transform: translateX(0);
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    visibility: visible;
   }
 
   .menu-links a {
@@ -3258,6 +3265,10 @@ background-color: #fbeaea;
 @media (max-width: 480px) {
   .menu-logo {
     font-size: 1.15rem;
+  }
+
+  .menu.menu--inicio .menu-logo-texto {
+    font-size: 0.9rem;
   }
 
   .hero {
