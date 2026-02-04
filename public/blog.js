@@ -6,6 +6,7 @@ createApp({
       // variables// 
         seccion: 'inicio',
         menuAbierto: false,
+        perfilMenuAbierto: false,
         filtroTipo: 'todos', 
 
       nuevaCritica: '',

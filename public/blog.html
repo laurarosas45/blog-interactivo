@@ -49,13 +49,10 @@
         <div v-if="usuarioAutenticado" class="volver-a-perfil">
           <button @click="cambiarSeccion('perfil'); menuAbierto = false">Ir a mi perfil</button>
         </div>
-        <div class="login login--movil">
+        <div v-if="!usuarioAutenticado" class="menu-login">
           <a @click="seccion = 'login'; menuAbierto = false">Iniciar sesión</a>
         </div>
       </nav>
-      <div class="login login--desktop">
-        <a @click="seccion = 'login'">Iniciar sesión</a>
-      </div>
     </header>
 
     <main class="main">
@@ -1132,15 +1129,20 @@
   </section>
 
   <div v-if="usuarioAutenticado">
-   <!-- 🔐 Menú superior para usuarios autenticados -->
-    <nav v-if="usuarioAutenticado && seccion === 'perfil'" class="perfil-nav">
-      <a href="#miEspacio" @click.prevent="seccion = 'miEspacio'"> 🌹Mi Espacio</a>
-      <a href="#comunidad" @click.prevent="cambiarSeccion ('comunidad')">🫂 Comunidad</a>
-      <a href="#categorias" @click.prevent="seccion = 'categorias'">✍️  Nueva Entrada</a>
-      <a href="#categorias" @click.prevent="seccion = 'creativo'">🏁 Retos</a>
-      <a href="#progreso" @click.prevent="seccion = 'progreso'">📈 Progreso</a>
-      <a href="#inicio" @click="seccion = 'inicio'"> 🏠 inicio</a>
-      <a href="#" @click.prevent="cerrarSesion">🚪 Cerrar sesión</a>
+   <!-- Menú para usuarios autenticados (perfil y otras secciones) -->
+    <nav v-if="seccion === 'perfil'" class="perfil-nav">
+      <button type="button" class="perfil-nav-toggle" aria-label="Abrir menú" @click="perfilMenuAbierto = !perfilMenuAbierto" :aria-expanded="perfilMenuAbierto">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="perfil-nav-links" :class="{ 'perfil-nav-links--abierto': perfilMenuAbierto }">
+        <a href="#miEspacio" @click.prevent="seccion = 'miEspacio'; perfilMenuAbierto = false">Mi Espacio</a>
+        <a href="#comunidad" @click.prevent="cambiarSeccion('comunidad'); perfilMenuAbierto = false">Comunidad</a>
+        <a href="#categorias" @click.prevent="seccion = 'categorias'; perfilMenuAbierto = false">Nueva Entrada</a>
+        <a href="#creativo" @click.prevent="seccion = 'creativo'; perfilMenuAbierto = false">Retos</a>
+        <a href="#progreso" @click.prevent="seccion = 'progreso'; perfilMenuAbierto = false">Progreso</a>
+        <a href="#inicio" @click="seccion = 'inicio'; perfilMenuAbierto = false">Inicio</a>
+        <a href="#" @click.prevent="cerrarSesion(); perfilMenuAbierto = false">Cerrar sesión</a>
+      </div>
     </nav>
     <!---->
 
