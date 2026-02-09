@@ -26,7 +26,7 @@ header{
   position: absolute;
   top: 0;
   width: 100%;
-  padding: 20px 40px;
+  padding: 20px 48px 20px 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -54,7 +54,7 @@ header{
   .menu {
     justify-content: flex-start;
     gap: 2rem;
-    padding: 20px 24px 20px 24px;
+    padding: 20px 48px 20px 24px;
     flex-wrap: wrap;
   }
   .menu-links {
@@ -857,6 +857,7 @@ padding: 5rem 2rem;
   display: flex;
   justify-content: center;
   margin-top: 3rem;
+  width: 100%;
 }
 
 @keyframes fadeInUp {
@@ -1169,7 +1170,10 @@ text-align: left;
 
 .inspiracion-caja .boton-contacto {
   margin-top: 1rem;
-  display: inline-block;
+  display: block;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .botones-inspiracion {
@@ -1258,6 +1262,29 @@ text-align: center;
 font-size: 1.4rem;
 margin-bottom: 0.8rem;
 color: #814234;
+}
+
+.card--regresar {
+  background: linear-gradient(145deg, #814234, #a05645);
+  color: #fff;
+}
+.card--regresar h3,
+.card--regresar p {
+  color: #fff;
+}
+.card--regresar button {
+  background: rgba(255, 255, 255, 0.95);
+  color: #814234;
+  border: none;
+  padding: 0.6rem 1.4rem;
+  border-radius: 2rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+.card--regresar button:hover {
+  background: #fff;
 }
 
 .card p {
@@ -1426,6 +1453,13 @@ gap: 2rem;
 max-width: 1100px;
 width: 100%;
 justify-items: center;
+}
+
+/* Centrar la card que queda sola en la segunda fila (Escribir sin borrar) */
+.creativo-grid .creativo-card:nth-child(4) {
+  grid-column: 1 / -1;
+  justify-self: center;
+  max-width: 360px;
 }
 
 .creativo-card {
