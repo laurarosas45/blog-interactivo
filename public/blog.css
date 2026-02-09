@@ -60,9 +60,10 @@ header{
   .menu-links {
     flex: 0 1 auto;
     margin-right: 0;
+    margin-left: auto;
   }
   .menu-login {
-    margin-left: auto;
+    margin-left: 0.5rem;
   }
 }
 
@@ -858,6 +859,11 @@ padding: 5rem 2rem;
   justify-content: center;
   margin-top: 3rem;
   width: 100%;
+}
+
+.categorias-lista .boton-volver {
+  grid-column: 1 / -1;
+  justify-content: center;
 }
 
 @keyframes fadeInUp {
