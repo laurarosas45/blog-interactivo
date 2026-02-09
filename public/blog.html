@@ -21,40 +21,40 @@
 
 <div id="app">
 
+  <!-- Nav visible en todas las páginas cuando no has iniciado sesión (y en el resto excepto login/registro) -->
+  <header v-if="seccion !== 'login' && seccion !== 'registro'" class="menu" :class="{ 'menu--inicio': seccion === 'inicio' }">
+    <div class="menu-superior">
+      <button type="button" class="menu-hamburguesa" aria-label="Abrir menú" @click="menuAbierto = !menuAbierto" :aria-expanded="menuAbierto">
+        <span class="hamburguesa-linea"></span>
+        <span class="hamburguesa-linea"></span>
+        <span class="hamburguesa-linea"></span>
+      </button>
+      <div class="menu-logo-centro">
+        <span class="menu-logo-circle">QD</span>
+        <span class="menu-logo-texto">QUERIDO DIARIO</span>
+      </div>
+      <a href="#" class="menu-busqueda" aria-label="Buscar" @click.prevent><i class="fa-solid fa-search"></i></a>
+    </div>
+    <div class="menu-overlay" :class="{ 'menu-overlay--visible': menuAbierto }" @click="menuAbierto = false" aria-hidden="true"></div>
+    <nav class="menu-links" :class="{ 'menu-links--abierto': menuAbierto }" aria-label="Menú principal">
+      <a href="#proposito" @click.prevent="cambiarSeccion('proposito'); menuAbierto = false">Propósito</a>
+      <a href="#miEspacio" @click.prevent="cambiarSeccion('miEspacio'); menuAbierto = false">Mi Espacio</a>
+      <a href="#comunidad" @click.prevent="cambiarSeccion ('comunidad'); menuAbierto = false">Comunidad</a>
+      <a href="#inspiracion" @click.prevent="cambiarSeccion('inspiracion'); menuAbierto = false">Inspiración</a>
+      <a href="#categorias" @click.prevent="cambiarSeccion('categorias'); menuAbierto = false">Categorías</a>
+      <a href="#creativo" @click.prevent="cambiarSeccion('creativo'); menuAbierto = false">Creativo</a>
+      <div v-if="usuarioAutenticado" class="volver-a-perfil">
+        <button @click="cambiarSeccion('perfil'); menuAbierto = false">Ir a mi perfil</button>
+      </div>
+      <div v-if="!usuarioAutenticado" class="menu-login">
+        <a @click="seccion = 'login'; menuAbierto = false">Iniciar sesión</a>
+      </div>
+    </nav>
+  </header>
+
   <!-- estas son todas las secciones que se ven en la pagina pricipal 
    NOTA : se crea por separado igual pero en vuelto en un mismo div para que todas se vean en el inicio -->
   <div v-if="seccion === 'inicio'">
-    
-    <header class="menu menu--inicio">
-      <div class="menu-superior">
-        <button type="button" class="menu-hamburguesa" aria-label="Abrir menú" @click="menuAbierto = !menuAbierto" :aria-expanded="menuAbierto">
-          <span class="hamburguesa-linea"></span>
-          <span class="hamburguesa-linea"></span>
-          <span class="hamburguesa-linea"></span>
-        </button>
-        <div class="menu-logo-centro">
-          <span class="menu-logo-circle">QD</span>
-          <span class="menu-logo-texto">QUERIDO DIARIO</span>
-        </div>
-        <a href="#" class="menu-busqueda" aria-label="Buscar" @click.prevent><i class="fa-solid fa-search"></i></a>
-      </div>
-      <div class="menu-overlay" :class="{ 'menu-overlay--visible': menuAbierto }" @click="menuAbierto = false" aria-hidden="true"></div>
-      <nav class="menu-links" :class="{ 'menu-links--abierto': menuAbierto }" aria-label="Menú principal">
-        <a href="#proposito" @click.prevent="cambiarSeccion('proposito'); menuAbierto = false">Propósito</a>
-        <a href="#miEspacio" @click.prevent="cambiarSeccion('miEspacio'); menuAbierto = false">Mi Espacio</a>
-        <a href="#comunidad" @click.prevent="cambiarSeccion ('comunidad'); menuAbierto = false">Comunidad</a>
-        <a href="#inspiracion" @click.prevent="cambiarSeccion('inspiracion'); menuAbierto = false">Inspiración</a>
-        <a href="#categorias" @click.prevent="cambiarSeccion('categorias'); menuAbierto = false">Categorías</a>
-        <a href="#creativo" @click.prevent="cambiarSeccion('creativo'); menuAbierto = false">Creativo</a>
-        <div v-if="usuarioAutenticado" class="volver-a-perfil">
-          <button @click="cambiarSeccion('perfil'); menuAbierto = false">Ir a mi perfil</button>
-        </div>
-        <div v-if="!usuarioAutenticado" class="menu-login">
-          <a @click="seccion = 'login'; menuAbierto = false">Iniciar sesión</a>
-        </div>
-      </nav>
-    </header>
-
     <main class="main">
       <div class="hero">
         <img src="https://i.pinimg.com/736x/82/59/2d/82592d5d237ab44570d65a40acd9e9b4.jpg" alt="fondo">
@@ -234,13 +234,11 @@
 
       <div class="contacto-links">
         <p><strong>📩 Escríbeme directamente a:</strong><br>
-          <a href="mailto:laura.rosas.durrani@gmail.com" class="contacto-link">laura.rosas.durrani@gmail.com</a> <br>
-          <a href="mailto:rosas4087564@gmail.com" class="contacto-link">rosas4087564@gmail.com</a> <br>
-
+          <a href="mailto:laura.desarrolladora.web25@gmail.com" class="contacto-link">laura.desarrolladora.web25@gmail.com</a>
         </p>
   
         <p><strong>🌐 También puedes encontrarme en:</strong><br>
-          <a href="https://www.linkedin.com/in/laura-rosas-195393280/" target="_blank" class="contacto-link">LinkedIn</a> |
+          <a href="https://www.linkedin.com/in/laura-fernanda-jimenez-rosas-7b5569385/" target="_blank" class="contacto-link">LinkedIn</a> |
           <a href="https://github.com/laurarosas45" target="_blank" class="contacto-link">GitHub</a> |
         </p>
       </div>
@@ -329,25 +327,25 @@
  <section v-if="seccion === 'inspiracion'" class="pagina-inspiracion">
   <div class="inspiracion-hero">
     <h2>Inspírate</h2>
-    <p class="frase">
-      “Hay palabras que no se dicen, pero pesan. Este espacio es para soltarlas y convertirlas en arte.”
-    </p>
-    <p class="texto">
-      Este proyecto forma parte de mi portafolio como desarrolladora web, pero va más allá de lo técnico.
-      Decidí crearlo porque creo en el poder de la escritura como herramienta de sanación, expresión y conexión. Quise unir mis habilidades en programación con mi pasión por las palabras para construir un espacio donde las personas puedan escribir, compartir y sentirse acompañadas.
-      Además de demostrar mis conocimientos en frontend y backend, este blog interactivo refleja lo que más me mueve como creadora: construir tecnología que tenga alma, que inspire, que genere impacto positivo.
-      Aquí combino diseño, desarrollo, emociones y propósito. Este es el tipo de proyectos que me gustaría seguir creando. De transformar lo que inspira  Aquí puedes escribir un cuento, soltar una emoción, compartir un pensamiento o simplemente dejar una huella.
-    </p>
-    <p>Al integrarme a tu equipo, aporto soluciones creativas, interfaces modernas y código limpio que mejoran la experiencia del usuario y elevan el valor digital de tu empresa.</p>
-    <a href="#contacto" @click.prevent="cambiarSeccion('contacto')" class="boton-contacto">Contáctame</a> <br>
-
+    <div class="inspiracion-caja">
+      <p class="frase">
+        “Hay palabras que no se dicen, pero pesan. Este espacio es para soltarlas y convertirlas en arte.”
+      </p>
+      <p class="texto">
+        Este proyecto forma parte de mi portafolio como desarrolladora web, pero va más allá de lo técnico.
+        Decidí crearlo porque creo en el poder de la escritura como herramienta de sanación, expresión y conexión. Quise unir mis habilidades en programación con mi pasión por las palabras para construir un espacio donde las personas puedan escribir, compartir y sentirse acompañadas.
+        Además de demostrar mis conocimientos en frontend y backend, este blog interactivo refleja lo que más me mueve como creadora: construir tecnología que tenga alma, que inspire, que genere impacto positivo.
+        Aquí combino diseño, desarrollo, emociones y propósito. Este es el tipo de proyectos que me gustaría seguir creando. De transformar lo que inspira. Aquí puedes escribir un cuento, soltar una emoción, compartir un pensamiento o simplemente dejar una huella.
+      </p>
+      <p>Al integrarme a tu equipo, aporto soluciones creativas, interfaces modernas y código limpio que mejoran la experiencia del usuario y elevan el valor digital de tu empresa.</p>
+      <a href="#contacto" @click.prevent="cambiarSeccion('contacto')" class="boton-contacto">Contáctame</a>
+    </div>
     <div class="botones-inspiracion">
-      <button @click="seccion = 'categorias'">Explorar categorías</button> <br>
-      <button @click="seccion = 'login'">Iniciar mi viaje</button> <br>
+      <button @click="seccion = 'login'">Iniciar mi viaje</button>
     </div>
   </div>
   <div class="boton-volver">
-    <button @click="seccion = 'inicio'">← Regresar al inicio</button> <br>
+    <button @click="seccion = 'inicio'">← Regresar al inicio</button>
   </div>
 </section>
 
@@ -400,10 +398,11 @@
       </p>
       <button v-if="usuarioAutenticado" @click="cambiarSeccion('progreso')">📊 Progreso</button>
     </div>
-  </div>
 
-  <div class="boton-volver">
-    <button @click="seccion = 'inicio'">← Regresar al inicio</button>
+    <div class="card">
+      <h3>🏠 Regresar</h3>
+      <button @click="seccion = 'inicio'">Volver al inicio</button>
+    </div>
   </div>
 </section>
 

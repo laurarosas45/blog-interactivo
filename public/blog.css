@@ -35,6 +35,20 @@ header{
   box-sizing: border-box;
 }
 
+/* Menú en páginas que no son inicio: fondo claro para que se vea sobre contenido claro */
+.menu:not(.menu--inicio) {
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
+}
+.menu:not(.menu--inicio) .menu-logo-texto,
+.menu:not(.menu--inicio) .menu-links > a {
+  color: #1a1a1a;
+}
+.menu:not(.menu--inicio) .menu-logo-circle {
+  background: #1a1a1a;
+  color: #fff;
+}
+
 /* Vista PC: menú alineado a la izquierda, sin desborde */
 @media (min-width: 1025px) {
   .menu {
@@ -839,6 +853,12 @@ color: #3a2b29;
 padding: 5rem 2rem;
 }
 
+.pagina-categorias .boton-volver {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
 @keyframes fadeInUp {
 from {
   opacity: 0;
@@ -1111,6 +1131,21 @@ color: #a05645;
 margin-bottom: 1rem;
 }
 
+.inspiracion-caja {
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 16px;
+  padding: 2.5rem 2.5rem 2rem;
+  max-width: 720px;
+  margin: 0 auto 2.5rem;
+  box-shadow: 0 8px 32px rgba(160, 86, 69, 0.12);
+  border: 1px solid rgba(160, 86, 69, 0.15);
+  text-align: left;
+}
+
+.inspiracion-caja .frase {
+  margin-top: 0;
+}
+
 .inspiracion-hero .frase {
 font-style: italic;
 font-size: 1.4rem;
@@ -1127,11 +1162,14 @@ text-align: left;
 }
 
 .inspiracion-hero .texto + p,
-.inspiracion-hero p:last-of-type {
+.inspiracion-hero .inspiracion-caja p {
   text-align: left;
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
+  max-width: 100%;
+}
+
+.inspiracion-caja .boton-contacto {
+  margin-top: 1rem;
+  display: inline-block;
 }
 
 .botones-inspiracion {
@@ -2592,6 +2630,10 @@ background-color: #fbeaea;
   }
 
   .menu.menu--inicio .hamburguesa-linea {
+    background: #1a1a1a;
+  }
+
+  .menu:not(.menu--inicio) .hamburguesa-linea {
     background: #1a1a1a;
   }
 
