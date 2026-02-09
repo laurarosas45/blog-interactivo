@@ -1273,6 +1273,11 @@ color: #814234;
 .card--regresar {
   background: linear-gradient(145deg, #814234, #a05645);
   color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 .card--regresar h3,
 .card--regresar p {
@@ -1776,11 +1781,57 @@ color: #4e2b1f;
 max-width: 700px;
 margin: 0 auto;
 background-color: rgba(255, 255, 255, 0.8);
-padding: 2rem 2.5rem;
+padding: 2.25rem 2.75rem;
 border-radius: 20px;
 box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 backdrop-filter: blur(2px);
 margin-top: 0.75rem;
+}
+
+.perfil-container h2 {
+  margin-bottom: 1.25rem;
+}
+
+.perfil-info {
+  margin-bottom: 1.5rem;
+}
+
+.perfil-bio {
+  margin-bottom: 1.5rem;
+}
+
+.perfil-bio h3,
+.perfil-container h3 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.perfil-bio h4 {
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.perfil-bio textarea {
+  margin-bottom: 1rem;
+}
+
+.perfil-bio button {
+  margin-top: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.bio-publicada {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid #e8e0d8;
+}
+
+.bio-publicada p {
+  margin-bottom: 0.75rem;
+}
+
+.perfil-container ul {
+  margin-top: 0.75rem;
 }
 
 
@@ -1795,8 +1846,8 @@ line-height: 1.6;
 width: 100%;
 max-width: 100%;
 box-sizing: border-box;
-min-height: 88px;
-max-height: 160px;
+min-height: 52px;
+max-height: 100px;
 padding: 0.75rem 1rem;
 font-family: 'Inter', sans-serif;
 font-size: 0.95rem;
@@ -1886,8 +1937,9 @@ transform: translateY(-2px);
 }
 .perfil-estadisticas {
 margin-top: 2rem;
+margin-bottom: 1rem;
+padding: 1.25rem 1rem;
 background: #f8f8f8;
-padding: 1rem;
 border-radius: 10px;
 text-align: center;
 }
@@ -3350,8 +3402,8 @@ background-color: #fbeaea;
   }
 
   .perfil-bio textarea {
-    min-height: 80px;
-    max-height: 140px;
+    min-height: 48px;
+    max-height: 90px;
     font-size: 0.95rem;
   }
 
